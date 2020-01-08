@@ -2,7 +2,7 @@ APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:XNdKOi0ldCEwXp0GE43ZxLDKJXkouIRWvz0OnwosRzY=
 APP_DEBUG=true
-APP_URL=http://erp-realestate.herokuapp.com/
+APP_URL=https://erp-realestate.herokuapp.com/
 
 LOG_CHANNEL=stack
 

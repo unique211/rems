@@ -32,12 +32,12 @@
                     <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
-                                {{-- <div class="page-title-icon">
-                                        {{-- <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                                <div class="page-title-icon">
+                                         <i class="fa fa-area-chart icon-gradient bg-mean-fruit">
                                         </i>
-                                    </div> --}}
+                                    </div>
                                 <div>
-                                   Ploat Allocation
+                                   Plot Allocation
                                 </div>
                             </div>
                             <div class="page-title-actions">
@@ -57,13 +57,13 @@
 
 
                     </div>
-                    <div class="row tablehideshow card">
+                    <div class="row tablehideshow card" style="margin-top:-5px;">
 
 
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table id="customermaster"
-                                    class="align-middle mb-0 table table-borderless table-striped table-hover" style="width:100%">
+                                    class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
@@ -140,9 +140,9 @@
 
                                                     <select id="ploats" class="form-control select2">
                                                             <option selected disabled>Select</option>
-                                                            <option value="1">Ploats 1</option>
-                                                            <option value="2">Ploats 2</option>
-                                                            <option value="3">Ploats 3</option>
+                                                            <option value="1">Plots 1</option>
+                                                            <option value="2">Plots 2</option>
+                                                            <option value="3">Plots 3</option>
                                                         </select>
                                             </div>
                                             <div class="form-group col-md-2">
@@ -166,9 +166,9 @@
 
                                                     <select id="agent" class="form-control select2">
                                                             <option selected disabled>Select</option>
-                                                            <option value="1">Ploats 1</option>
-                                                            <option value="2">Ploats 2</option>
-                                                            <option value="3">Ploats 3</option>
+                                                            <option value="1">Agent 1</option>
+                                                            <option value="2">Agent 2</option>
+                                                            <option value="3">Agent 3</option>
                                                         </select>
                                             </div>
                                             <div class="form-group col-md-2">
@@ -394,5 +394,5 @@ headers: {
 
 
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/plotallocation.js') }}">
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/plotallocation.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

@@ -32,10 +32,10 @@
                     <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
-                                {{-- <div class="page-title-icon">
-                                        {{-- <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                                <div class="page-title-icon">
+                                         <i class="pe-7s-display2 icon-gradient bg-mean-fruit">
                                         </i>
-                                    </div> --}}
+                                    </div>
                                 <div>
                                     Site Master
                                 </div>
@@ -63,7 +63,7 @@
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table id="customermaster"
-                                    class="align-middle mb-0 table table-borderless table-striped table-hover" style="width:100%">
+                                    class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
@@ -256,5 +256,5 @@ headers: {
 
 
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/sitemaster.js') }}">
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/sitemaster.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

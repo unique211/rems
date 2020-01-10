@@ -12,10 +12,17 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('loginnew');
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
+});
+
+Route::get('/logout', function (Request $request) {
+
+
+        return redirect('/');
+
 });
 
 Route::post('login_check', 'LoginController@check_login');
@@ -24,6 +31,9 @@ Route::resource('agent', 'Agentmastercontroller');
 Route::resource('sitemaster', 'Sitemastercontroller');
 Route::resource('ploatallocation', 'Ploateallocationcontroller');
 Route::resource('agentcommission', 'Agentcommissioncotroller');
+Route::resource('rolemanagement', 'Rolemanagementcontroller');
+
+Route::resource('employ', 'Employmaster');
 
 Route::match(['get','post'], 'uploadingfile', 'Customermasetcontroller@uploadingfile');
 

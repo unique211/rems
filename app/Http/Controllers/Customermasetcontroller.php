@@ -11,7 +11,7 @@ class Customermasetcontroller extends Controller
     function index(Request $request)
     {
 
-
+       // $title['activemenu'] = "c";
         return view('customermaster');
     }
     function uploadingfile(Request $request){

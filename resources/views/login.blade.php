@@ -85,7 +85,7 @@ var redirect="{{ url('dashboard') }}";
 
 </script>
 
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/login.js') }}">
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/login.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>
 </body>
 </html>

@@ -33,11 +33,11 @@
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
-                                         <i class="fa fa-user-circle-o icon-gradient bg-mean-fruit">
+                                         <i class="fa fa-user-circle icon-gradient bg-mean-fruit">
                                         </i>
                                     </div>
                                 <div>
-                                    Agent Master
+                                    Employ Master
                                 </div>
                             </div>
                             <div class="page-title-actions">
@@ -70,19 +70,19 @@
                                             <th>First  Name</th>
                                             <th>Last  Name</th>
                                             <th class="text-center">Email</th>
-                                            <th class="text-center">City</th>
-                                            <th class="text-center">State</th>
+                                            <th class="text-center">Mobile NO</th>
+
                                             <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                             <tr>
                                                     <th class="text-center">1</th>
-                                                    <th>Agent 1</th>
-                                                    <th>Agent</th>
-                                                    <th class="text-center">agent@gmail.com</th>
-                                                    <th class="text-center">Rajkot</th>
-                                                    <th class="text-center">Gujrat</th>
+                                                    <th>Employ  1</th>
+                                                    <th>Employ</th>
+                                                    <th class="text-center">Employ@gmail.com</th>
+                                                    <th class="text-center">9874563210</th>
+
                                                     <td><button  class="edit btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>
                                                 </tr>
 
@@ -142,7 +142,7 @@
 
                                                     <div class="card-header"  align="right">
 
-                                                        <button id="editperson" class=" btn btn-info">Edit</button>
+                                                        <button id="editperson" class="btn btn-info">Edit</button>
 
                                                     </div>
                                                     <div class="card-content">
@@ -153,7 +153,7 @@
                                                            <div class="card-content-languages">
                                                     <div class="card-content-languages-group"></div>
                                                             <div class="card-content-languages-group">
-                                                               <table class="table table-hover" width="100%">
+                                                               <table class="table table-hover table-striped table-bordered dataTable dtr-inline" width="100%">
 
                                                                 <tbody><tr>
                                                                     <th>First Name</th>
@@ -170,42 +170,13 @@
                                                                     <td class="lbldata"><label id="elable">Email</label></td>
                                                                     <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email"> </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <th >Payment</th>
-                                                                    <td colspan="2"><div class="progress-wrapper">
 
-                                                                            <div class="progress progress-sm">
-                                                                              <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 74%;">
-                                                                                <span class="progress-value">74%</span>
-                                                                              </div>
-                                                                            </div>
-                                                                          </div></td>
-                                                                </tr>
-                                                                <tr>
-                                                                        <th colspan="3">Address</th>
 
-                                                                    </tr>
-                                                                 <tr>
-                                                                    <th>City</th>
-
-                                                                    <td class="lbldata"><label id="clable">City</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="city" name="city" placeholder="City"> </td>
-                                                                </tr>
                                                                 <tr>
-                                                                        <th>State</th>
-                                                                        <td class="lbldata"><label id="slable">State</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="state" name="state" placeholder="State"> </td>
+                                                                        <th>Mobile No</th>
+                                                                        <td class="lbldata"><label id="pinlable">7896541230</label></td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="mobileno" name="mobileno" placeholder="Mobile No"> </td>
                                                                 </tr>
-                                                                <tr>
-                                                                        <th>Contry</th>
-                                                                        <td class="lbldata"><label id="conlable">Contry</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry"> </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Pin code</th>
-                                                                    <td class="lbldata"><label id="pinlable">Pin Code</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="pincode" name="pincode" placeholder="Pincode"> </td>
-                                                            </tr>
                                                             <tr>
                                                                     <th ></th>
                                                                     <td ></td>
@@ -229,7 +200,7 @@
                                 <div class="col-lg-8">
                                     <div class="card card-small mb-4">
                                         <div class="card-header border-bottom">
-                                            <h6 class="m-0">Bank Detalis</h6>
+                                            <h6 class="m-0">Usre Detalis</h6>
                                         </div>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item p-3">
@@ -242,32 +213,29 @@
 
 
                                                             <div class="form-row">
-                                                                <div class="form-group col-md-12">
-                                                                    <label for="feEmailAddress">Bank Name</label>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="feEmailAddress">User Name</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="bankname" name="bankname" placeholder="Bank Name"
+                                                                        id="username" name="username" placeholder="User Name"
                                                                         >
                                                                 </div>
-                                                                <div class="form-group col-md-12">
-                                                                    <label for="fePassword">Branch</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="branch" name="branch" placeholder="Branch">
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="feEmailAddress">Password</label>
+                                                                        <input type="password" class="form-control"
+                                                                            id="password" name="password" placeholder="Password"
+                                                                            >
+                                                                    </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="fePassword">Role</label>
+                                                                    <select id="role" name="role" class="form-control select2">
+                                                                            <option selected disabled>Select</option>
+                                                                            <option value="1">Admin</option>
+                                                                            <option value="2">User</option>
+
+                                                                        </select>
                                                                 </div>
-                                                                <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">Account No</label>
-                                                                        <input type="text" class="form-control"
-                                                                        id="accno" name="accno" placeholder="Account No">
-                                                                  </div>
-                                                                  <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">IFSC Code</label>
-                                                                        <input type="text" class="form-control"
-                                                                        id="ifsccode" name="ifsccode" placeholder="IFSC Code">
-                                                                  </div>
-                                                                  <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">Account Holder Name</label>
-                                                                        <input type="text" class="form-control"
-                                                                        id="accountholder" name="accountholder" placeholder="Account Holder Name">
-                                                                  </div>
+
+
                                                                     <div class="form-group col-md-12" align="right">
                                                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                                                     </button>

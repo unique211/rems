@@ -63,7 +63,7 @@
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table id="customermaster"
-                                    class="align-middle mb-0 table table-borderless table-striped table-hover" style="width:100%">
+                                    class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
@@ -153,7 +153,7 @@
                                                            <div class="card-content-languages">
                                                     <div class="card-content-languages-group"></div>
                                                             <div class="card-content-languages-group">
-                                                               <table class="table table-hover" width="100%">
+                                                               <table class="table table-hover table-striped table-bordered dataTable dtr-inline" width="100%">
 
                                                                 <tbody><tr>
                                                                     <th>First Name</th>

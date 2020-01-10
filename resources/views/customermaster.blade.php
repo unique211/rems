@@ -60,10 +60,10 @@
                     <div class="row tablehideshow card">
 
 
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table id="customermaster"
-                                    class="align-middle mb-0 table table-borderless table-striped table-hover" style="width:100%">
+                                <table style="width: 100%;" id="customermaster"
+                                class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>

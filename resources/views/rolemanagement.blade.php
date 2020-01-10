@@ -183,12 +183,13 @@
                                                                     <td><input type="checkbox" name="sitedel" id="sitedel"></td>
                                                              </tr>
                                                              <tr>
-                                                                    <td><input type="checkbox" name="site" id="site">Employ</td>
+                                                                    <td><input type="checkbox" name="site" id="site">Right Management</td>
                                                                     <td> <input type="checkbox" name="siteview" id="siteview"></td>
                                                                     <td><input type="checkbox" name="sitecreate" id="sitecreate"></td>
                                                                     <td><input type="checkbox" name="siteedit" id="siteedit"></td>
                                                                     <td><input type="checkbox" name="sitedel" id="sitedel"></td>
                                                              </tr>
+
 
                                                     </tbody>
                                             </table>

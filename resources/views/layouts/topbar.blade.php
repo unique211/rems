@@ -36,26 +36,26 @@
                 <div class="app-header-left">
                     <div class="search-wrapper">
                         <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
+                            {{-- <input type="text" class="search-input" placeholder="Type to search">
+                            <button class="search-icon"><span></span></button> --}}
                         </div>
                         <button class="close"></button>
                     </div>
                     <ul class="header-menu nav">
                         <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
+                            {{-- <a href="javascript:void(0);" class="nav-link">
                                 <i class="nav-link-icon fa fa-database"> </i> Statistics
-                            </a>
+                            </a> --}}
                         </li>
                         <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
+                            {{-- <a href="javascript:void(0);" class="nav-link">
                                 <i class="nav-link-icon fa fa-edit"></i> Projects
-                            </a>
+                            </a> --}}
                         </li>
                         <li class="dropdown nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
+                            {{-- <a href="javascript:void(0);" class="nav-link">
                                 <i class="nav-link-icon fa fa-cog"></i> Settings
-                            </a>
+                            </a> --}}
                         </li>
                     </ul>
                 </div>
@@ -65,7 +65,7 @@
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left">
                                     <div class="btn-group">
-                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                        {{-- for profile <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
                                             <img width="42" class="rounded-circle" src="resources/sass/images/avatars/1.jpg" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
@@ -77,21 +77,28 @@
                                             <button type="button" tabindex="0" class="dropdown-item">Actions</button>
                                             <div tabindex="-1" class="dropdown-divider"></div>
                                             <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading">
+                                    {{-- <div class="widget-heading">
                                         Alina Mclourd
                                     </div>
                                     <div class="widget-subheading">
                                         VP People Manager
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
+                                    {{-- <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
                                         <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                                    </button>
+                                    </button> --}}
+
+                                    <a tabindex="-1"
+            style="height:30px; width:30px; margin-top:10px;padding-top:6px;padding-left:5px;margin-right:10px; margin-left:20px"
+            class="main-link btn-danger btn-sm" href="{{ url('/logout') }}" data-toggle="tooltip" title="Logout!">
+            <i class="fa fa-power-off fa-sm txt-white"></i>
+
+        </a>
                                 </div>
                             </div>
                         </div>

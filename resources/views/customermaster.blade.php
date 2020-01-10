@@ -32,10 +32,10 @@
                     <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
-                                {{-- <div class="page-title-icon">
-                                        {{-- <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                                <div class="page-title-icon">
+                                         <i class="fa fa-user icon-gradient bg-mean-fruit">
                                         </i>
-                                    </div> --}}
+                                    </div>
                                 <div>
                                     Customer Master
                                 </div>
@@ -142,7 +142,7 @@
 
                                                     <div class="card-header pull-right"   >
 
-                                                        <button class="btn-info" id="editperson" style="align: right;">Edit</button>
+                                                        <button class="btn btn-info" id="editperson" style="align: right;">Edit</button>
 
                                                     </div>
                                                     <div class="card-content">
@@ -361,5 +361,5 @@ headers: {
 
 
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/customer.js') }}">
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/customer.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

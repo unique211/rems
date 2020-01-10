@@ -33,11 +33,11 @@
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
-                                         <i class="pe-7s-display2 icon-gradient bg-mean-fruit">
+                                         <i class="fa fa-user-circle icon-gradient bg-mean-fruit">
                                         </i>
                                     </div>
                                 <div>
-                                    Site Master
+                                    Employ Master
                                 </div>
                             </div>
                             <div class="page-title-actions">
@@ -67,20 +67,21 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
-                                            <th>Site  Name</th>
-                                            <th>Area  Name</th>
-                                            <th class="text-center">Total No Of Ploats</th>
-                                            <th class="text-center">Total Area Of Ploats</th>
-                                     <th class="text-center">Actions</th>
+                                            <th>First  Name</th>
+                                            <th>Last  Name</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Mobile NO</th>
+
+                                            <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                             <tr>
                                                     <th class="text-center">1</th>
-                                                    <th>Site 1</th>
-                                                    <th>Area 1</th>
-                                                    <th class="text-center">5</th>
-                                                    <th class="text-center">10</th>
+                                                    <th>Employ  1</th>
+                                                    <th>Employ</th>
+                                                    <th class="text-center">Employ@gmail.com</th>
+                                                    <th class="text-center">9874563210</th>
 
                                                     <td><button  class="edit btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>
                                                 </tr>
@@ -93,85 +94,9 @@
                         </div>
                     </div>
 
-                    <div class="row formhideshow card" style="display:none;">
+                    <div class="row formhideshow" style="display:none;">
                         <div class="col-md-12">
-                            <div class="row card">
-                                    <div class="card-header border-bottom">
-                                            <h6 class="m-0">Site Master</h6>
-                                        </div>
-
-                                    <div class="form-row">
-
-                                            <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Site Name</label>
-
-                                                </div>
-                                            <div class="form-group col-md-4">
-
-                                                <input type="text" class="form-control"
-                                                    id="sitename" name="sitename" placeholder="Site Name"
-                                                    >
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress">Area Name</label>
-
-                                                </div>
-                                            <div class="form-group col-md-4">
-
-                                                    <input type="text" class="form-control"
-                                                        id="areaname" name="areaname" placeholder="Area Name"
-                                                        >
-                                                </div>
-                                    </div>
-                                    <div class="form-row">
-                                            <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Total No Of Ploats</label>
-
-                                                </div>
-                                            <div class="form-group col-md-4">
-
-                                                <input type="number" class="form-control"
-                                                    id="noofploats" name="noofploats" placeholder="Total No Of Ploats"
-                                                    >
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress">Total Area Of Ploats</label>
-
-                                                </div>
-
-                                            <div class="form-group col-md-4">
-
-                                                    <input type="number" class="form-control"
-                                                        id="totalarea" name="totalarea" placeholder="Total Area Of Ploats"
-                                                        >
-                                                </div>
-                                    </div>
-                                    <div class="card-header border-bottom">
-                                            <h6 class="m-0">Plot Detalis</h6>
-                                        </div>
-                                    <div class="form-row">
-                                        <input type="hidden" id="doc_row_id" name="doc_row_id" value="0">
-                                            <table  class="table table-bordered table-striped" id="docupload">
-                                                    <thead>
-                                                        <tr>
-                                                          <th>SR No</th>
-                                                          <th>Plot No</th>
-                                                          <th>Area(in sqft)</th>
-                                                          <th>Cost</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="ploattabletbody">
-
-
-                                                    </tbody>
-                                            </table>
-                                    </div>
-                                    <div class="form-group col-md-12" align="right">
-                                            <button type="submit"  id="btnsavedata" class="btn btn-success">Save
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger">Delete
-                                                            </button>
-                                        </div>
+                            <div class="row">
 
                                         {{-- <div class="col-sm-12 col-md-6 col-xl-4">
                                                 <div class="card-shadow-primary card-border mb-3 profile-responsive card">
@@ -213,7 +138,122 @@
                                                     </ul>
                                                 </div>
                                             </div> --}}
+                                            <div class="col-md-4 card">
 
+                                                    <div class="card-header"  align="right">
+
+                                                        <button id="editperson" class="btn btn-info">Edit</button>
+
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="card-content-member">
+                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img class="rounded-circle" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
+
+                                                           </div>
+                                                           <div class="card-content-languages">
+                                                    <div class="card-content-languages-group"></div>
+                                                            <div class="card-content-languages-group">
+                                                               <table class="table table-hover" width="100%">
+
+                                                                <tbody><tr>
+                                                                    <th>First Name</th>
+                                                                    <td class="lbldata"><label id="flable">Sagar</label> </td>
+                                                                    <td class="edittb"><input  class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname"> </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Last Name</th>
+                                                                    <td class="lbldata"><label id="llable">Sagar</label></td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname"> </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Email</th>
+                                                                    <td class="lbldata"><label id="elable">Email</label></td>
+                                                                    <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email"> </td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                        <th>Mobile No</th>
+                                                                        <td class="lbldata"><label id="pinlable">7896541230</label></td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="mobileno" name="mobileno" placeholder="Mobile No"> </td>
+                                                                </tr>
+                                                            <tr>
+                                                                    <th ></th>
+                                                                    <td ></td>
+                                                                    <td  class="edittb"><input class="btn btn-success" type="button" id="btnsave" name="btnsave" value="Ok"></td>
+                                                            </tr>
+                                                        </tbody></table>
+
+                                                    </div>
+
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="card-footer-stats">
+                                                    <div>
+                                                        <p></p><span class="stats-small"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            </div>
+
+                                <div class="col-lg-8">
+                                    <div class="card card-small mb-4">
+                                        <div class="card-header border-bottom">
+                                            <h6 class="m-0">Usre Detalis</h6>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item p-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <form>
+
+
+
+
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="feEmailAddress">User Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="username" name="username" placeholder="User Name"
+                                                                        >
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="feEmailAddress">Password</label>
+                                                                        <input type="password" class="form-control"
+                                                                            id="password" name="password" placeholder="Password"
+                                                                            >
+                                                                    </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="fePassword">Role</label>
+                                                                    <select id="role" name="role" class="form-control select2">
+                                                                            <option selected disabled>Select</option>
+                                                                            <option value="1">Admin</option>
+                                                                            <option value="2">User</option>
+
+                                                                        </select>
+                                                                </div>
+
+
+                                                                    <div class="form-group col-md-12" align="right">
+                                                                            <button type="submit"  id="btnsavedata" class="btn btn-success">Save
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-danger">Delete
+                                                                                            </button>
+                                                                        </div>
+                                                            </div>
+
+
+
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -256,5 +296,5 @@ headers: {
 
 
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/sitemaster.js') }}"></script>
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/agentmaster.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

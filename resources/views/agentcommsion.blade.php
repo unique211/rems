@@ -1,5 +1,5 @@
 @include('layouts.header')
-
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('/resources/sass/css/main.css') }}" />
 <body>
 
 
@@ -32,10 +32,10 @@
                     <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
-                                {{-- <div class="page-title-icon">
-                                        {{-- <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                                <div class="page-title-icon">
+                                       <i class="fa fa-dollar icon-gradient bg-mean-fruit">
                                         </i>
-                                    </div> --}}
+                                    </div>
                                 <div>
                                    Agent Commission
                                 </div>
@@ -244,5 +244,5 @@ headers: {
 
 
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/plotallocation.js') }}">
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/plotallocation.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

@@ -43,14 +43,14 @@
             </li>
             <li class="app-sidebar__heading">Master</li>
             <li>
-                    <a href="{{ url('customer') }}">
-                        <i class="metismenu-icon pe-7s-display2"></i>
+                    <a href="{{ url('customer') }}" >
+                        <i class="metismenu-icon fa fa-user"  ></i>
                         Customer
                     </a>
                 </li>
                 <li>
-                        <a href="{{ url('agent') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
+                        <a href="{{ url('agent') }}" >
+                            <i class="metismenu-icon fa fa-user-circle-o" ></i>
                             Agent
                         </a>
                     </li>
@@ -58,22 +58,34 @@
 
             <li>
                 <a href="{{ url('sitemaster') }}">
-                    <i class="metismenu-icon pe-7s-display2"></i>
+                    <i class="metismenu-icon pe-7s-display2"  ></i>
                     Site Master
                 </a>
             </li>
             <li>
                     <a href="{{ url('ploatallocation') }}">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Ploat Allocation
+                        <i class="metismenu-icon fa fa-area-chart "></i>
+                        Plot Allocation
                     </a>
                 </li>
                 <li>
                         <a href="{{ url('agentcommission') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
+                            <i class="metismenu-icon  fa fa-dollar" ></i>
                             Agent Commission
                         </a>
                     </li>
+                    <li>
+                            <a href="{{ url('employ') }}">
+                                <i class="metismenu-icon  fa fa-user-circle" ></i>
+                                Employ
+                            </a>
+                        </li>
+                        <li>
+                                <a href="{{ url('rolemanagement') }}">
+                                    <i class="metismenu-icon fa fa-id-card" ></i>
+                                    Rights Management
+                                </a>
+                            </li>
             {{-- <li class="app-sidebar__heading">Widgets</li>
             <li>
                 <a href="dashboard-boxes.html">

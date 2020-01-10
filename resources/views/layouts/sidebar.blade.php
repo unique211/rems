@@ -77,7 +77,7 @@
                     <li>
                             <a href="{{ url('employ') }}">
                                 <i class="metismenu-icon  fa fa-user-circle" ></i>
-                                Employ
+                                Employee
                             </a>
                         </li>
                         <li>

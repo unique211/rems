@@ -120,7 +120,7 @@
                                     </div>
 
 
-                                    <div class="form-row">
+                                    <div class="card">
                                         <input type="hidden" id="doc_row_id" name="doc_row_id" value="0">
                                             <table  class="table table-bordered table-striped" id="docupload">
                                                     <thead>
@@ -134,13 +134,11 @@
                                                     </thead>
                                                     <tbody id="paymenttabletbody">
                                                             <tr>
-                                                                    <th><input type="checkbox" name="master" id="master"> Master</th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
+                                                                    <th  bgcolor="#00FF00" colspan="6" ><input type="checkbox" name="master" id="master"> Master</th>
+
                                                              </tr>
                                                              <tr>
+
                                                                     <td><input type="checkbox" class="allsel" name="customer" id="customer">Customer</td>
                                                                     <td> <input type="checkbox"  class="allsel"  name="cview" id="cview"></td>
                                                                     <td><input type="checkbox" class="allsel"  name="crview" id="crview"></td>

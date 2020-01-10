@@ -37,7 +37,7 @@
                                         </i>
                                     </div>
                                 <div>
-                                    Employ Master
+                                     Employee Master
                                 </div>
                             </div>
                             <div class="page-title-actions">

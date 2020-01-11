@@ -1,7 +1,9 @@
 @include('layouts.header')
 
 <body>
-
+        <style>
+.tab-content > .tab-pane:not(.active) { display: block; height: 0; overflow-y: hidden; }
+            </style>
 
 
     {{-- START PAGE CONTAINER --}}
@@ -61,8 +63,8 @@
 
 
                         <div class="col-sm-12">
-                            <div class="table-responsive">
-                                <table style="width: 100%;" id="customermaster"
+                            <div class="table-responsive" id="show_master">
+                                {{-- <table style="width: 100%;" id="customermaster"
                                 class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info" style="width:100%">
                                     <thead>
                                         <tr>
@@ -87,7 +89,7 @@
                                                 </tr>
 
                                     </tbody>
-                                </table>
+                                </table> --}}
                             </div>
 
 
@@ -96,7 +98,9 @@
 
                     <div class="row formhideshow" style="display:none;">
                         <div class="col-md-12">
+                                <form id="customr_form" name="customr_form">
                             <div class="row">
+
 
                                         {{-- <div class="col-sm-12 col-md-6 col-xl-4">
                                                 <div class="card-shadow-primary card-border mb-3 profile-responsive card">
@@ -138,6 +142,7 @@
                                                     </ul>
                                                 </div>
                                             </div> --}}
+
                                             <div class="col-md-4 card">
 
                                                     <div class="card-header pull-right"   >
@@ -145,14 +150,17 @@
                                                         <button class="btn btn-info" id="editperson" style="align: right;">Edit</button>
 
                                                     </div>
+
+
                                                     <div class="card-content">
                                                         <div class="card-content-member">
-                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img class="rounded-circle" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
+                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img class="rounded-circle imgupload" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
 
                                                            </div>
                                                            <div class="card-content-languages">
                                                     <div class="card-content-languages-group"></div>
                                                             <div class="card-content-languages-group">
+
                                                                <table class="table table-hover" width="100%">
 
                                                                 <tbody><tr>
@@ -163,7 +171,7 @@
                                                                 <tr>
                                                                     <th>Last Name</th>
                                                                     <td class="lbldata"><label id="llable">Sagar</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="lastname" name="lastname" placeholder="Firstname"> </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Email</th>
@@ -240,7 +248,7 @@
                                                                 <div class="form-row">
                                                                     <input type="hidden" id="doc_row_id" name="doc_row_id" value="0">
                                                                     <input type="hidden" id="doc_save_update" name="doc_save_update" value="">
-                                                                        <table class="table table-hover" width="100%">
+                                                                        <table id="documenttb" class="table table-hover" width="100%">
                                                                           <thead>
                                                                                 <tr> <th>Document Tyepe</th>
                                                                                     <th>Document File</th>
@@ -248,17 +256,18 @@
 
                                                                           </thead>
                                                                           <tbody id="doctbody">
-                                                                            <tr>
+                                                                            {{-- <tr>
                                                                                 <td>Pancard</td>
                                                                                 <td>abc.png</td>
                                                                                 <td><button  class="doc_edit_data1 btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>
 
-                                                                            </tr>
+                                                                            </tr> --}}
                                                                           </tbody>
 
                                                                         </table>
                                                                 </div>
                                                             <div class="form-row">
+                                                                <form id="document_detalis" name="document_detalis">
                                                                 <div class="form-group col-md-4">
                                                                     <label for="feFirstName">Document Tyepe</label>
                                                                     <select id="doctype" class="form-control select2">
@@ -270,7 +279,7 @@
                                                                 </div>
                                                                 <div class="form-group col-md-4">
                                                                     <label for="feLastName">Document File</label>
-                                                                    <input type="file" id="file" name="file"
+                                                                    <input type="file" id="upload" name="upload"
                                                                         class="form-control">
                                                                     <div id="msgid"></div>
                                                                     <input type="hidden" id="filehidden1"
@@ -280,6 +289,7 @@
                                                                         <br>
                                                                         <input style="margin-top:10px;" class="btn btn-success" type="button" id="btnupload" name="btnupload" value="Upload">
                                                                     </div>
+                                                                </form>
                                                             </div>
 
                                                             <div class="card-header border-bottom">
@@ -304,6 +314,7 @@
                                                                     <div class="form-group col-md-12" align="right">
                                                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                                                     </button>
+                                                                                    <input type="hidden" id="save_update" name="save_update" value="">
                                                                                     <button type="button" class="btn btn-danger">Delete
                                                                                             </button>
                                                                         </div>
@@ -319,7 +330,29 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div id="accessModal1" class="card-content modal fade " role="dialog">
+                                        <form action="">
+                                        <div class="modal-dialog ">
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">Upload Image</h4>
+                                            </div>
+
+                                            <div class="modal-footer">
+
+
+                                               <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+                                            </div>
+                                          </div>
+
+                                        </div></form>
+                                      </div>
+
                             </div>
+
+                        </form>
                         </div>
                     </div>
 
@@ -357,9 +390,29 @@ headers: {
 
 });
     $('#customermaster').DataTable({});
-    var profileupload="{{url('uploadingfile')}}";
+    var doc_token="{{csrf_token()}}";
+    var profileimgupload="{{url('uploadingfile')}}";
+    var add_data="{{route('customer.store') }}";
+    var getalldata="{{url('getallcustomer')}}";
+    var editurl="{{url('editcustomer')}}";
+    var editdocurl="{{url('editdoccustomer')}}";
+    var delete_data="{{url('deletecustomer')}}"
+//     function setFocusMapCenter() {
+//     var mapObj = $('#map').vectorMap('get', 'mapObject'),
+//         center = mapObj.pointToLatLng(mapObj.width / 2, mapObj.height / 2);
 
+//     var config = {
+//         animate: true,
+//         lat: center.lat,
+//         lng: center.lng,
+//         scale: 1
+//     }
 
+//     mapObj.setFocus(config)
+// }
 </script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/customer.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>
+

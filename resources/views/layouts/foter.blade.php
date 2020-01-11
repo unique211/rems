@@ -35,6 +35,7 @@
         </div>
     </div>
 </div>
+
 <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
 
@@ -66,8 +67,16 @@
 </script>
 <script src="{{ URL::asset('resources/datatable/datatables-responsive/js/responsive.bootstrap.js') }}">
 </script>
-<script src="{{ URL::asset('resources/sass/select2/select2.full.min.js') }}">
-</script>
+<script src="{{ URL::asset('resources/sass/select2/select2.full.min.js') }}"></script>
+
+// <!-- Sweet Alert -->
+<script type='text/javascript' src="{{ URL::asset('/resources/sass/sweetalert/sweetalert.min.js',true)}}"></script>
+
+// <!-- tost msg -->
+<script type='text/javascript' src="{{ URL::asset('/resources/sass/toastr/toastr.min.js',true)}}"></script>
+
+<script type='text/javascript' src="{{ URL::asset('/resources/sass/toastr/tost.js',true)}}"></script>
+
 
 
 

@@ -26,7 +26,13 @@ Route::get('/logout', function (Request $request) {
 });
 
 Route::post('login_check', 'LoginController@check_login');
+
 Route::resource('customer', 'Customermasetcontroller');
+Route::get('getallcustomer', 'Customermasetcontroller@getallcustomer');
+Route::post('editcustomer', 'Customermasetcontroller@editcustomer');
+Route::post('editdoccustomer', 'Customermasetcontroller@editdoccustomer');
+Route::get('deletecustomer/{id}', 'Customermasetcontroller@deletecustomer');
+
 Route::resource('agent', 'Agentmastercontroller');
 Route::resource('sitemaster', 'Sitemastercontroller');
 Route::resource('ploatallocation', 'Ploateallocationcontroller');

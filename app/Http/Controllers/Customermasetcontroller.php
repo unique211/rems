@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Redirect, Response;
+use Illuminate\Support\Facades\DB;
+use App\Customermodel;
 class Customermasetcontroller extends Controller
 {
     //
 
-    function index(Request $request)
+    public function index(Request $request)
     {
 
        // $title['activemenu'] = "c";
         return view('customermaster');
     }
-    function uploadingfile(Request $request){
+   public function uploadingfile(Request $request){
 
-        dd($request);
+
         $extension = $request->file('file')->getClientOriginalExtension();
 
         $dir = 'uploads/';
@@ -29,4 +31,76 @@ class Customermasetcontroller extends Controller
         return $filename;
 
     }
+    public function store(Request $request)//For insert or Update Record Of class Master --
+    {
+        $ID = $request->save_update;
+
+        if($ID >0){
+            DB::table('customrt_doc')->where('customer_id', $ID)->delete();
+        }
+
+            $customer   =   Customermodel::updateOrCreate(
+
+                ['id' => $ID],
+                [
+                    'first_name'        =>  $request->firstname,
+                    'last_name'        =>  $request->lastname,
+                    'email'        =>  $request->email,
+                    'city'        =>  $request->city,
+                    'state'        =>  $request->state,
+                    'contry'        =>  $request->contry,
+                    'pincode'        =>  $request->pincode,
+                    'relativename'        =>  $request->relativenm,
+                    'mobileno'        =>  $request->mobileno,
+                    'address'        =>  $request->address,
+                    'status'        => 1,
+                    'user_id'        => 1,
+                ]
+
+            );
+            $ref_id = $customer->id;
+            $urdata = $request->studejsonObj;
+
+            foreach ($urdata as $value) {
+
+
+                $u_rights = array(
+                    'customer_id' => $ref_id,
+                    'customer_doc' => $value["doctype"],
+                    'file' => $value["file"],
+
+                );
+
+                    $result =  DB::table('customrt_doc')
+                    ->Insert($u_rights);
+            }
+
+            $urdata = $request->studejsonObj;
+
+            return $ref_id;
+
+    }
+   public function getallcustomer(){
+        $data = DB::table('customer_master')->get();
+
+
+        return response()->json($data);
+    }
+    public function editcustomer(Request $request){
+        $data = DB::table('customer_master')->where('id',$request->id)->get();
+
+
+        return response()->json($data);
+    }
+    public function editdoccustomer(Request $request){
+        $data = DB::table('customrt_doc')->where('customer_id',$request->id)->get();
+
+
+        return response()->json($data);
+    }
+    public function deletecustomer($id){
+        $customer = Customermodel::where('id', $id)->delete();
+        return Response::json($customer);
+    }
+
 }

@@ -10,8 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <!--
     =========================================================
     * ArchitectUI HTML Theme Dashboard - v1.0.0
@@ -29,5 +30,9 @@
 
   <link rel="stylesheet" href="{{ URL::asset('resources/sass/select2/select2.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Sweetalert -->
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('/resources/sass/sweetalert/sweetalert.css',true) }}" />
 
+   {{--  tost msg  --}}
+   <link href="{{ URL::asset('/resources/sass/toastr/toastr.min.css',true) }}" rel="stylesheet">
 </head>

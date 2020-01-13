@@ -153,6 +153,39 @@ $(document).ready(function() {
 
 
 
+    $('#uploadimg').change(function() {
+
+        if ($(this).val() != '') {
+            profileupload1(this);
+
+        }
+    });
+
+    function profileupload1(img) {
+
+
+        var form_data = new FormData();
+        form_data.append('file', img.files[0]);
+        // form_data.append('_token', '{{csrf_token()}}');
+
+        $.ajax({
+            url: profileimgupload1,
+            data: form_data,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            success: function(data) {
+
+
+                $('#doc_msgid').html(data);
+                $('#doc_file_hidden').val(data);
+                $('#infoimages').attr('src', imgurl + '/profile/' + data);
+            }
+        });
+    }
+
+
+
     $('#upload').change(function() {
 
         if ($(this).val() != '') {
@@ -202,7 +235,7 @@ $(document).ready(function() {
     $(document).on('click', ".imgupload", function(e) {
         e.preventDefault();
 
-        $('#accessModal1').modal('show');
+        $('#myModal').modal('show');
     });
 
     $(document).on('submit', '#customr_form', function(e) {
@@ -219,8 +252,9 @@ $(document).ready(function() {
         var relativenm = $('#relativenm').val();
         var mobileno = $('#mobileno').val();
         var address = $('#address').val();
-
+        var profileimg = $('#doc_file_hidden').val();
         var save_update = $('#save_update').val();
+
 
         studejsonObj = [];
 
@@ -228,47 +262,53 @@ $(document).ready(function() {
         var l1 = $('table#documenttb').find('tbody').find('tr');
         var r = l1.length;
 
-        for (var i = 0; i < r; i++) {
+        if (r > 0) {
+
+            for (var i = 0; i < r; i++) {
 
 
-            student = {}
-            var doctype = $(l1[i]).find('td:eq(0)').html();
+                student = {}
+                var doctype = $(l1[i]).find('td:eq(0)').html();
 
-            var file = $(l1[i]).find('td:eq(2)').html();
+                var file = $(l1[i]).find('td:eq(2)').html();
 
-            student["doctype"] = doctype;
-            student["file"] = file;
-            studejsonObj.push(student);
-        }
-
-        $.ajax({
-            data: {
-                studejsonObj: studejsonObj,
-                firstname: firstname,
-                lastname: lastname,
-                email: email,
-                city: city,
-                state: state,
-                contry: contry,
-                pincode: pincode,
-                address: address,
-                mobileno: mobileno,
-                relativenm: relativenm,
-                save_update: save_update,
-
-            },
-            url: add_data,
-            type: "POST",
-            dataType: 'json',
-            // async: false,
-            success: function(data) {
-                form_clear();
-
-                successTost("Opration Save Success fully!!!");
-                $('.closehideshow').trigger('click');
-                datashow();
+                student["doctype"] = doctype;
+                student["file"] = file;
+                studejsonObj.push(student);
             }
-        });
+
+            $.ajax({
+                data: {
+                    studejsonObj: studejsonObj,
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    city: city,
+                    state: state,
+                    contry: contry,
+                    pincode: pincode,
+                    address: address,
+                    mobileno: mobileno,
+                    relativenm: relativenm,
+                    save_update: save_update,
+                    profileimg: profileimg,
+
+                },
+                url: add_data,
+                type: "POST",
+                dataType: 'json',
+                // async: false,
+                success: function(data) {
+                    form_clear();
+
+                    successTost("Opration Save Success fully!!!");
+                    $('.closehideshow').trigger('click');
+                    datashow();
+                }
+            });
+        } else {
+            swal("Atleast One Document Required !!!");
+        }
     });
     datashow();
 
@@ -355,6 +395,11 @@ $(document).ready(function() {
                 $('#relativenm').val(data[0].relativename);
                 $('#mobileno').val(data[0].mobileno);
                 $('#address').val(data[0].address);
+                if (data[0].cust_profile != null) {
+                    $('#doc_msgid').html(data[0].cust_profile);
+                    $('#doc_file_hidden').val(data[0].cust_profile);
+                    $('#infoimages').attr('src', imgurl + '/profile/' + data[0].cust_profile);
+                }
             }
         });
         $.ajax({
@@ -400,6 +445,7 @@ $(document).ready(function() {
         $('#relativenm').val('');
         $('#mobileno').val('');
         $('#address').val('');
+        $("#doctbody").html('');
 
         $('#save_update').val('');
     }

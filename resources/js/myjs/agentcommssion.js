@@ -104,77 +104,9 @@ $(document).ready(function() {
     $('.neftinfo').hide();
 
 
-    //for getting all Customer
-    getallcustomer();
-
-    function getallcustomer() {
-        $.ajax({
-            url: "getdropcustomer",
-            type: "GET",
-
-            contentType: false,
-            cache: false,
-            processData: false,
-            dataType: "json",
-            success: function(data) {
-
-                html = '';
-                var name = '';
-
-                html += '<option selected disabled value="" >Select</option>';
-
-                for (i = 0; i < data.length; i++) {
-                    var id = '';
-
-                    name = data[i].first_name + "" + data[i].last_name;
-                    id = data[i].id;
 
 
 
-                    html += '<option value="' + id + '">' + name + '</option>';
-                }
-                $('#customername').html(html);
-
-            }
-        });
-    }
-
-    getallsites();
-
-    function getallsites() {
-        $.ajax({
-            url: "getdropsites",
-            type: "GET",
-
-            contentType: false,
-            cache: false,
-            processData: false,
-            dataType: "json",
-            success: function(data) {
-
-
-                html = '';
-                var name = '';
-
-                html += '<option selected disabled value="" >Select</option>';
-
-
-
-                for (i = 0; i < data.length; i++) {
-                    var id = '';
-
-                    name = data[i].site_name;
-                    id = data[i].id;
-
-
-
-                    html += '<option value="' + id + '">' + name + '</option>';
-                }
-                $('#sitename').html(html);
-
-            }
-        });
-    }
 
     getallagent();
 
@@ -207,11 +139,28 @@ $(document).ready(function() {
 
                     html += '<option value="' + id + '">' + name + '</option>';
                 }
-                $('#agent').html(html);
+                $('#agentname').html(html);
 
             }
         });
     }
+
+    $(document).on('change', "#agentname", function(e) {
+        e.preventDefault();
+        var id = $(this).val();
+
+        $.ajax({
+            data: {
+                id: id,
+                saveid: saveid,
+            },
+            url: getagentsite,
+            type: "POST",
+            dataType: 'json',
+            // async: false,
+            success: function(data) {}
+        });
+    });
 
     $(document).on('change', "#sitename", function(e) {
         e.preventDefault();
@@ -366,7 +315,7 @@ $(document).ready(function() {
 
     });
 
-    datashow()
+    // datashow()
 
     function datashow() {
         $.ajax({

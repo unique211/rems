@@ -35,4 +35,9 @@
 
    {{--  tost msg  --}}
    <link href="{{ URL::asset('/resources/sass/toastr/toastr.min.css',true) }}" rel="stylesheet">
+
+ <!-- datepicker -->
+ <link rel="stylesheet" type="text/css"
+ href="{{ URL::asset('/resources/sass/datepicker/bootstrap-datepicker3.min.css',true) }}" />
+
 </head>

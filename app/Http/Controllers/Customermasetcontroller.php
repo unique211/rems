@@ -53,6 +53,7 @@ class Customermasetcontroller extends Controller
                     'relativename'        =>  $request->relativenm,
                     'mobileno'        =>  $request->mobileno,
                     'address'        =>  $request->address,
+                    'cust_profile'        =>  $request->profileimg,
                     'status'        => 1,
                     'user_id'        => 1,
                 ]
@@ -100,7 +101,19 @@ class Customermasetcontroller extends Controller
     }
     public function deletecustomer($id){
         $customer = Customermodel::where('id', $id)->delete();
+        DB::table('customrt_doc')->where('customer_id', $id)->delete();
         return Response::json($customer);
     }
+    public function uploadingcustfile(Request $request){
+        $extension = $request->file('file')->getClientOriginalExtension();
 
+        $dir = 'profile/';
+        $filename = uniqid() . '_' . time() . '.' . $extension;
+
+       // echo  dd($filename);
+        $request->file('file')->move($dir, $filename);
+
+
+        return $filename;
+    }
 }

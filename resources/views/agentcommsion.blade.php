@@ -96,6 +96,7 @@
 
                     <div class="row formhideshow card" style="display:none;">
                         <div class="col-md-12">
+                            <form id="agent_commssion" name="agent_commssion">
                             <div class="row card">
                                     <div class="card-header border-bottom">
                                             <h6 class="m-0">Agent Commission
@@ -110,7 +111,7 @@
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="customername" class="form-control select2">
+                                                    <select id="agentname" class="form-control select2">
                                                             <option selected disabled>Select</option>
                                                             <option value="1">Customer 1</option>
                                                             <option value="2">Customer 2</option>
@@ -202,6 +203,7 @@
 
 
                             </div>
+                        </form>
                         </div>
                     </div>
 
@@ -241,8 +243,10 @@ headers: {
     $('#customermaster').DataTable({});
 
     var profileupload="{{url('uploadingfile')}}";
+    var getallsitename="{{url('getdropagent')}}";
+    var getallsite="{{url('getagentsite')}}";
 
 
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/plotallocation.js') }}"></script>
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/agentcommssion.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

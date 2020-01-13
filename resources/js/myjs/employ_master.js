@@ -12,6 +12,8 @@ $(document).ready(function() {
         $('#editperson').hide();
         $('.edittb').show();
         $('.lbldata').hide();
+        $('#passhide').show();
+        $('#password').prop('required', true);
 
     });
     /*---------login-----------------*/
@@ -26,6 +28,8 @@ $(document).ready(function() {
         $('#editperson').hide();
         $('.edittb').show();
         $('.lbldata').hide();
+        $('#passhide').show();
+        $('#password').prop('required', true);
 
 
     });
@@ -47,25 +51,21 @@ $(document).ready(function() {
     });
 
     //for submit event
-    $(document).on('submit', '#agent_form', function(e) {
+    $(document).on('submit', '#employee_form', function(e) {
         e.preventDefault();
 
 
         var firstname = $('#firstname').val();
         var lastname = $('#lastname').val();
         var email = $('#email').val();
-        var city = $('#city').val();
-        var state = $('#state').val();
-        var contry = $('#contry').val();
-        var pincode = $('#pincode').val();
-        var bankname = $('#bankname').val();
-        var branch = $('#branch').val();
-        var accno = $('#accno').val();
-        var ifsccode = $('#ifsccode').val();
-        var accountholder = $('#accountholder').val();
-        var profileimg = $('#file_hidden').val();
+        var mobileno = $('#mobileno').val();
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var role = $('#role').val();
+        var profilepic = $('#file_hidden').val();
 
         var save_update = $('#save_update').val();
+        alert(save_update);
 
         $.ajax({
             data: {
@@ -73,20 +73,16 @@ $(document).ready(function() {
                 firstname: firstname,
                 lastname: lastname,
                 email: email,
-                city: city,
-                state: state,
-                contry: contry,
-                pincode: pincode,
+                profilepic: profilepic,
+                mobileno: mobileno,
+                username: username,
+                password: password,
 
-                bankname: bankname,
-                branch: branch,
-                accno: accno,
-                ifsccode: ifsccode,
+                role: role,
                 save_update: save_update,
-                profileimg: profileimg,
-                accountholder: accountholder,
+
             },
-            url: add_data,
+            url: adddata,
             type: "POST",
             dataType: 'json',
             // async: false,
@@ -127,8 +123,9 @@ $(document).ready(function() {
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >First Name</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;"  >Last Name</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Email</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >City</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px; " >State</th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Mobile NO</th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px; " >Role</th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Role</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Action</th>' +
                     '</tr>' +
                     '</thead>' +
@@ -138,11 +135,12 @@ $(document).ready(function() {
                     sr = sr + 1;
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
-                        '<td  id="first_name_' + data[i].id + '">' + data[i].first_name + '</td>' +
+                        '<td  id="first_name_' + data[i].id + '">' + data[i].firstname + '</td>' +
                         '<td  id="lastname_' + data[i].id + '">' + data[i].last_name + '</td>' +
                         '<td id="email_' + data[i].id + '">' + data[i].email + '</td>' +
-                        '<td id="city_' + data[i].id + '">' + data[i].city + '</td>' +
-                        '<td id="state_' + data[i].id + '">' + data[i].state + '</td>' +
+                        '<td id="mobile_no_' + data[i].id + '">' + data[i].mobile_no + '</td>' +
+                        '<td id="role_' + data[i].id + '">' + data[i].role + '</td>' +
+                        '<td style="display:none;" id="profilepic_' + data[i].id + '">' + data[i].profile_pic + '</td>' +
                         '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
                         data[i].id +
                         '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
@@ -189,7 +187,7 @@ $(document).ready(function() {
         var form_data = new FormData();
         form_data.append('file', img.files[0]);
         // form_data.append('_token', '{{csrf_token()}}');
-        //alert(img);
+
         $.ajax({
             url: profileupload1,
             data: form_data,
@@ -228,6 +226,30 @@ $(document).ready(function() {
         $('.btnhideshow').trigger('click');
         var id = $(this).attr("id");
         $('#save_update').val(id);
+        var first_name = $('#first_name_' + id).html();
+        var lastname = $('#lastname_' + id).html();
+        var email = $('#email_' + id).html();
+        var mobile_no_ = $('#mobile_no_' + id).html();
+        var role_ = $('#role_' + id).html();
+        var profilepic_ = $('#profilepic_' + id).html();
+
+
+        $('#firstname').val(first_name);
+        $('#lastname').val(lastname);
+        $('#email').val(email);
+        $('#mobileno').val(mobile_no_);
+
+        $('#role').val(role_).trigger('change');
+
+
+        if (profilepic_ != "null") {
+            $('#msgid').html(profilepic_);
+            $('#file_hidden').val(profilepic_);
+            $('#infoimages').attr('src', imgurl + '/profile/' + profilepic_);
+
+        }
+
+
         $.ajax({
             data: {
                 id: id,
@@ -238,26 +260,10 @@ $(document).ready(function() {
             dataType: 'json',
             // async: false,
             success: function(data) {
-
-                $('#firstname').val(data[0].first_name);
-                $('#lastname').val(data[0].last_name);
-                $('#email').val(data[0].email);
-                $('#city').val(data[0].city);
-                $('#state').val(data[0].state);
-                $('#contry').val(data[0].contry);
-                $('#pincode').val(data[0].pincode);
-                $('#bankname').val(data[0].bankname);
-                $('#branch').val(data[0].branch_name);
-                $('#accno').val(data[0].account_no);
-                $('#ifsccode').val(data[0].ifsc_code);
-                $('#accountholder').val(data[0].account_holder_name);
-                if (data[0].profilepicture != null) {
-                    $('#msgid').html(data[0].profilepicture);
-                    $('#file_hidden').val(data[0].profilepicture);
-                    $('#infoimages').attr('src', imgurl + '/profile/' + data[0].profilepicture);
-
-                }
-
+                alert(data[0].user_name);
+                $('#username').val(data[0].user_name);
+                $('#passhide').hide();
+                $('#password').prop('required', false);
 
             }
         });

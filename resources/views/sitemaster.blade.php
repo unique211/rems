@@ -61,7 +61,7 @@
 
 
                         <div class="col-md-12">
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="show_master">
                                 <table id="customermaster"
                                     class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
@@ -94,13 +94,15 @@
                     </div>
 
                     <div class="row formhideshow card" style="display:none;">
+                            <form id="site_master_form" name="site_master_form">
                         <div class="col-md-12">
+
                             <div class="row card">
                                     <div class="card-header border-bottom">
                                             <h6 class="m-0">Site Master</h6>
                                         </div>
 
-                                    <div class="form-row">
+                                    <div class="form-row" style="margin-top:10px;">
 
                                             <div class="form-group col-md-2">
                                                     <label style="margin-left:10%;" for="feEmailAddress">Site Name</label>
@@ -125,7 +127,7 @@
                                     </div>
                                     <div class="form-row">
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Total No Of Ploats</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Total No Of Plots</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
@@ -135,7 +137,7 @@
                                                     >
                                             </div>
                                             <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress">Total Area Of Ploats</label>
+                                                    <label for="feEmailAddress">Total Area Of Plots</label>
 
                                                 </div>
 
@@ -169,6 +171,7 @@
                                     <div class="form-group col-md-12" align="right">
                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                     </button>
+                                                    <input type="hidden" id="save_update" name="save_update" value="">
                                                     <button type="button" class="btn btn-danger">Delete
                                                             </button>
                                         </div>
@@ -216,6 +219,7 @@
 
                             </div>
                         </div>
+                            </form>
                     </div>
 
 
@@ -253,6 +257,10 @@ headers: {
 });
     $('#customermaster').DataTable({});
     var profileupload="{{url('uploadingfile')}}";
+    var getalldata="{{url('getallsites')}}";
+    var editploaturl="{{url('editplotsdetalis')}}";
+    var delete_data="{{url('deletesite')}}";
+    var add_data="{{route('sitemaster.store') }}";
 
 
 </script>

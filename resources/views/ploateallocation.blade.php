@@ -61,7 +61,7 @@
 
 
                         <div class="col-md-12">
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="show_master">
                                 <table id="customermaster"
                                     class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
@@ -70,7 +70,7 @@
                                             <th>Customer  Name</th>
                                             <th>Site  Name</th>
                                             <th class="text-center">Plot</th>
-                                            <th class="text-center"> Area Of Ploats</th>
+                                            <th class="text-center"> Amount</th>
                                             <th class="text-center"> Agent</th>
                                      <th class="text-center">Actions</th>
                                         </tr>
@@ -97,20 +97,21 @@
 
                     <div class="row formhideshow card" style="display:none;">
                         <div class="col-md-12">
+                            <form id="ploat_allocation_form" name="ploat_allocation_form">
                             <div class="row card">
                                     <div class="card-header border-bottom">
                                             <h6 class="m-0">Plot Allocation</h6>
                                         </div>
 
-                                    <div class="form-row">
+                                    <div class="form-row" style="margin-top:5px;">
 
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Customer Name</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Customer Name*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="customername" class="form-control select2">
+                                                    <select id="customername" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
                                                             <option value="1">Customer 1</option>
                                                             <option value="2">Customer 2</option>
@@ -118,12 +119,12 @@
                                                         </select>
                                             </div>
                                             <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress">Site Name</label>
+                                                    <label for="feEmailAddress">Site Name*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="sitename" class="form-control select2">
+                                                    <select id="sitename" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
                                                             <option value="1">Site 1</option>
                                                             <option value="2">Site 2</option>
@@ -133,12 +134,12 @@
                                     </div>
                                     <div class="form-row">
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress"> Ploats</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress"> Plot*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="ploats" class="form-control select2">
+                                                    <select id="ploats" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
                                                             <option value="1">Plots 1</option>
                                                             <option value="2">Plots 2</option>
@@ -146,7 +147,7 @@
                                                         </select>
                                             </div>
                                             <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress"> Area Of Ploats(in Sqft)</label>
+                                                    <label for="feEmailAddress"> Area Of Plot(in Sq.ft.)</label>
 
                                                 </div>
 
@@ -158,26 +159,86 @@
                                                 </div>
                                     </div>
                                     <div class="form-row">
+
+
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress"> Agent</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Amount</label>
+
+                                                </div>
+
+                                            <div class="form-group col-md-4">
+
+                                                    <input type="number" class="form-control"
+                                                        id="amount" name="amount" placeholder="Total Area Of Ploats"
+                                                        >
+                                                </div>
+                                            <div class="form-group col-md-2">
+                                                    <label  for="feEmailAddress"> Agent*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="agent" class="form-control select2">
+                                                    <select id="agent" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
                                                             <option value="1">Agent 1</option>
                                                             <option value="2">Agent 2</option>
                                                             <option value="3">Agent 3</option>
                                                         </select>
                                             </div>
+
+                                    </div>
+                                    <div class="card-header border-bottom">
+                                            <h6 class="m-0">Payment Detalis</h6>
+                                        </div>
+
+                                        <div class="form-row" style="margin-top:5px;">
+
+
+                                                <div class="form-group col-md-2">
+                                                        <label style="margin-left:10%;" for="feEmailAddress">Opening Balance*</label>
+
+                                                    </div>
+
+                                                <div class="form-group col-md-4">
+
+                                                        <input type="number" class="form-control"
+                                                            id="openingbalance" name="openingbalance" placeholder="Opening Balance"
+                                                            required>
+                                                    </div>
+                                                <div class="form-group col-md-2">
+                                                        <label  for="feEmailAddress">Pay Amount*</label>
+
+                                                    </div>
+                                                <div class="form-group col-md-4">
+
+                                                        <input type="number" class="form-control"
+                                                            id="payamount" name="payamount" placeholder="Pay Amount" required>
+                                                </div>
+
+                                        </div>
+                                        <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                        <label style="margin-left:10%;" for="feEmailAddress">Remain Amount*</label>
+
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                            <input type="number" class="form-control"
+                                                            id="remainamt" name="remainamt" placeholder="Remain Amount"
+                                                            required>
+
+                                                    </div>
+
+                                        </div>
+
+
+                                    <div class="form-row">
                                             <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress">Payment Mode</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Payment Mode*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="paymentmode" class="form-control select2">
+                                                    <select id="paymentmode" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
                                                             <option selected value="Cash">Cash</option>
                                                             <option value="Cheque">Cheque</option>
@@ -186,7 +247,17 @@
                                                             <option value="Other">Other </option>
                                                         </select>
                                             </div>
+                                            <div class="form-group col-md-2">
+                                                    <label  for="feEmailAddress">Remark</label>
+
+                                                </div>
+                                            <div class="form-group col-md-4">
+                                                <textarea id="remark" name="remark" class="form-control"></textarea>
+
+                                            </div>
+
                                     </div>
+
 
 
                                     <div class="form-row chequeinfo">
@@ -227,9 +298,9 @@
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <div class='input-group datetimepicker' id='datetimepicker2'>
+                                                    <div class='input-group date' id='datetimepicker2'>
                                                             <input type='text' class="form-control" style="width:100%"
-                                                                id="checktime" name="checktime" required />
+                                                                id="checktime" name="checktime"  />
                                                             <div class="input-group-addon">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
                                                             </div>
@@ -258,23 +329,13 @@
                                             <div class="form-group col-md-4">
 
                                                     <input type="text" class="form-control"
-                                                    id="accountno" name="accountno" placeholder="Transation Note"
+                                                    id="tnote" name="tnote" placeholder="Transation Note"
                                                     >
                                             </div>
 
                                     </div>
-                                    <div class="form-row cashinfo">
-                                            <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Remark</label>
 
-                                                </div>
-                                            <div class="form-group col-md-4">
-                                                <textarea id="remark" name="remark" class="form-control"></textarea>
-
-                                            </div>
-
-                                    </div>
-                                    <div class="card-header border-bottom">
+                                    <div class="card-header border-bottom" >
                                             <h6 class="m-0">Payment History</h6>
                                         </div>
                                     <div class="form-row">
@@ -305,6 +366,7 @@
                                     <div class="form-group col-md-12" align="right">
                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                     </button>
+                                                    <input type="hidden" id="save_update" name="save_update" value="">
                                                     <button type="button" class="btn btn-danger">Delete
                                                             </button>
                                         </div>
@@ -353,6 +415,7 @@
                                             </div> --}}
 
                             </div>
+                        </form>
                         </div>
                     </div>
 
@@ -389,9 +452,23 @@ headers: {
 
 
 });
+
+$('.date').datepicker({
+'todayHighlight': true,
+format: 'dd/mm/yyyy',
+autoclose: true,
+});
+var date = new Date();
+date = date.toString('dd/MM/yyyy');
+$('#checktime').val(date);
+
     $('#customermaster').DataTable({});
     var profileupload="{{url('uploadingfile')}}";
-
+    var getsiteploat="{{url('getsiteplots')}}";
+    var getploatamtsqft="{{url('getploatamtsqftdata')}}";
+    var add_data="{{route('ploatallocation.store')}}";
+    var getalldata="{{url('getallploatallocation')}}";
+    var editurl="{{url('getpaymenthistory')}}";
 
 </script>
 <script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/plotallocation.js') }}"></script>

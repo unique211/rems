@@ -61,7 +61,7 @@
 
 
                         <div class="col-md-12">
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="show_master">
                                 <table id="customermaster"
                                     class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
@@ -96,6 +96,7 @@
 
                     <div class="row formhideshow" style="display:none;">
                         <div class="col-md-12">
+                            <form id="employee_form" name="employee_form">
                             <div class="row">
 
                                         {{-- <div class="col-sm-12 col-md-6 col-xl-4">
@@ -147,7 +148,7 @@
                                                     </div>
                                                     <div class="card-content">
                                                         <div class="card-content-member">
-                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img class="rounded-circle" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
+                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img id="infoimages" class="rounded-circle" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
 
                                                            </div>
                                                            <div class="card-content-languages">
@@ -155,32 +156,42 @@
                                                             <div class="card-content-languages-group">
                                                                <table class="table table-hover table-striped table-bordered dataTable dtr-inline" width="100%">
 
-                                                                <tbody><tr>
-                                                                    <th>First Name</th>
+                                                                <tbody>
+                                                                        <tr>
+                                                                                <th>Upload Images</th>
+                                                                                <td class="lbldata"><label id="flable">Sagar</label> </td>
+                                                                                <td class="edittb"><input	 class="form-control input-sm " type="file" id="docupload" name="docupload" >
+                                                                                    <input type="hidden" id="file_hidden" value="">
+                                                                                    <div id="msgid"></div>
+                                                                                </td>
+                                                                            </tr>
+                                                                    <tr>
+                                                                    <th>First Name*</th>
                                                                     <td class="lbldata"><label id="flable">Sagar</label> </td>
-                                                                    <td class="edittb"><input  class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname"> </td>
+                                                                    <td class="edittb"><input  class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname" required> </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Last Name</th>
                                                                     <td class="lbldata"><label id="llable">Sagar</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="lastname" name="lastname" placeholder="Lastname" required> </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Email</th>
                                                                     <td class="lbldata"><label id="elable">Email</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email" required> </td>
                                                                 </tr>
 
 
                                                                 <tr>
                                                                         <th>Mobile No</th>
                                                                         <td class="lbldata"><label id="pinlable">7896541230</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="mobileno" name="mobileno" placeholder="Mobile No"> </td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="mobileno" name="mobileno" placeholder="Mobile No" required> </td>
                                                                 </tr>
                                                             <tr>
                                                                     <th ></th>
                                                                     <td ></td>
-                                                                    <td  class="edittb"><input class="btn btn-success" type="button" id="btnsave" name="btnsave" value="Ok"></td>
+                                                                    <td ></td>
+                                                                    {{-- <td  class="edittb"><input class="btn btn-success" type="button" id="btnsave" name="btnsave" value="Ok"></td> --}}
                                                             </tr>
                                                         </tbody></table>
 
@@ -206,10 +217,6 @@
                                             <li class="list-group-item p-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <form>
-
-
-
 
 
                                                             <div class="form-row">
@@ -217,17 +224,17 @@
                                                                     <label for="feEmailAddress">User Name</label>
                                                                     <input type="text" class="form-control"
                                                                         id="username" name="username" placeholder="User Name"
-                                                                        >
+                                                                        required>
                                                                 </div>
-                                                                <div class="form-group col-md-6">
+                                                                <div class="form-group col-md-6" id="passhide">
                                                                         <label for="feEmailAddress">Password</label>
                                                                         <input type="password" class="form-control"
                                                                             id="password" name="password" placeholder="Password"
-                                                                            >
+                                                                            required >
                                                                     </div>
                                                                 <div class="form-group col-md-6">
                                                                     <label for="fePassword">Role</label>
-                                                                    <select id="role" name="role" class="form-control select2">
+                                                                    <select id="role" name="role" class="form-control select2" required>
                                                                             <option selected disabled>Select</option>
                                                                             <option value="1">Admin</option>
                                                                             <option value="2">User</option>
@@ -237,8 +244,10 @@
 
 
                                                                     <div class="form-group col-md-12" align="right">
+
                                                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                                                     </button>
+                                                                                    <input type="hidden" name="save_update" id="save_update">
                                                                                     <button type="button" class="btn btn-danger">Delete
                                                                                             </button>
                                                                         </div>
@@ -247,7 +256,6 @@
 
 
 
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </li>
@@ -255,6 +263,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
                         </div>
                     </div>
 
@@ -292,9 +301,12 @@ headers: {
 
 });
     $('#customermaster').DataTable({});
-    var profileupload="{{url('uploadingfile')}}";
-
-
+    var profileupload1="{{url('uploadingcustfile')}}";
+    var adddata="{{route('employ.store')}}";
+    var imgurl="<?php  echo url('/') ?>";
+    var getalldata="{{url('getallemployee')}}";
+    var editurl="{{url('editlogin')}}";
+    var delete_data="{{url('deleteemp')}}";
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/agentmaster.js') }}"></script>
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/employ_master.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

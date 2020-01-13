@@ -61,7 +61,7 @@
 
 
                         <div class="col-md-12">
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="show_master">
                                 <table id="customermaster"
                                     class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
@@ -96,6 +96,7 @@
 
                     <div class="row formhideshow" style="display:none;">
                         <div class="col-md-12">
+                            <form id="agent_form" name="agent_form">
                             <div class="row">
 
                                         {{-- <div class="col-sm-12 col-md-6 col-xl-4">
@@ -147,7 +148,7 @@
                                                     </div>
                                                     <div class="card-content">
                                                         <div class="card-content-member">
-                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img class="rounded-circle" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
+                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img id="infoimages" class="rounded-circle" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
 
                                                            </div>
                                                            <div class="card-content-languages">
@@ -155,20 +156,30 @@
                                                             <div class="card-content-languages-group">
                                                                <table class="table table-hover" width="100%">
 
-                                                                <tbody><tr>
-                                                                    <th>First Name</th>
+                                                                <tbody>
+                                                                        <tr>
+                                                                                <th>Upload Images</th>
+                                                                                <td class="lbldata"><label id="uploadimg">Upload Img*</label> </td>
+                                                                                <td class="edittb"><input	form="document_data" class="form-control input-sm " type="file" id="docupload" name="docupload" >
+                                                                                    <input type="hidden" id="file_hidden" value="">
+                                                                                    <div id="msgid"></div>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                    <tr>
+                                                                    <th>First Name*</th>
                                                                     <td class="lbldata"><label id="flable">Sagar</label> </td>
-                                                                    <td class="edittb"><input  class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname"> </td>
+                                                                    <td class="edittb"><input  class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Last Name</th>
+                                                                    <th>Last Name*</th>
                                                                     <td class="lbldata"><label id="llable">Sagar</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="lastname" name="lastname" placeholder="Last name" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Email</th>
+                                                                    <th>Email*</th>
                                                                     <td class="lbldata"><label id="elable">Email</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email" required> </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th >Payment</th>
@@ -188,28 +199,29 @@
                                                                  <tr>
                                                                     <th>City</th>
 
-                                                                    <td class="lbldata"><label id="clable">City</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="city" name="city" placeholder="City"> </td>
+                                                                    <td class="lbldata"><label id="clable">City*</label></td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="city" name="city" placeholder="City" required> </td>
                                                                 </tr>
                                                                 <tr>
                                                                         <th>State</th>
-                                                                        <td class="lbldata"><label id="slable">State</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="state" name="state" placeholder="State"> </td>
+                                                                        <td class="lbldata"><label id="slable">State*</label></td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="state" name="state" placeholder="State" required> </td>
                                                                 </tr>
                                                                 <tr>
                                                                         <th>Contry</th>
-                                                                        <td class="lbldata"><label id="conlable">Contry</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry"> </td>
+                                                                        <td class="lbldata"><label id="conlable">Contry*</label></td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry" required> </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Pin code</th>
-                                                                    <td class="lbldata"><label id="pinlable">Pin Code</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="pincode" name="pincode" placeholder="Pincode"> </td>
+                                                                    <td class="lbldata"><label id="pinlable">Pin Code*</label></td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="pincode" name="pincode" placeholder="Pincode" required> </td>
                                                             </tr>
                                                             <tr>
                                                                     <th ></th>
                                                                     <td ></td>
-                                                                    <td  class="edittb"><input class="btn btn-success" type="button" id="btnsave" name="btnsave" value="Ok"></td>
+                                                                    <td ></td>
+                                                                    {{-- <td  class="edittb"><input class="btn btn-success" type="button" id="btnsave" name="btnsave" value="Ok"></td> --}}
                                                             </tr>
                                                         </tbody></table>
 
@@ -235,42 +247,40 @@
                                             <li class="list-group-item p-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <form>
-
-
 
 
 
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-12">
-                                                                    <label for="feEmailAddress">Bank Name</label>
+                                                                    <label for="feEmailAddress">Bank Name*</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="bankname" name="bankname" placeholder="Bank Name"
+                                                                        id="bankname" name="bankname" placeholder="Bank Name" required
                                                                         >
                                                                 </div>
                                                                 <div class="form-group col-md-12">
-                                                                    <label for="fePassword">Branch</label>
+                                                                    <label for="fePassword">Branch*</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="branch" name="branch" placeholder="Branch">
+                                                                        id="branch" name="branch" placeholder="Branch" required>
                                                                 </div>
                                                                 <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">Account No</label>
+                                                                        <label for="feInputAddress">Account No*</label>
                                                                         <input type="text" class="form-control"
-                                                                        id="accno" name="accno" placeholder="Account No">
+                                                                        id="accno" name="accno" placeholder="Account No" required>
                                                                   </div>
                                                                   <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">IFSC Code</label>
+                                                                        <label for="feInputAddress">IFSC Code*</label>
                                                                         <input type="text" class="form-control"
-                                                                        id="ifsccode" name="ifsccode" placeholder="IFSC Code">
+                                                                        id="ifsccode" name="ifsccode" placeholder="IFSC Code" required>
                                                                   </div>
                                                                   <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">Account Holder Name</label>
+                                                                        <label for="feInputAddress">Account Holder Name*</label>
                                                                         <input type="text" class="form-control"
-                                                                        id="accountholder" name="accountholder" placeholder="Account Holder Name">
+                                                                        id="accountholder" name="accountholder" placeholder="Account Holder Name" required>
                                                                   </div>
                                                                     <div class="form-group col-md-12" align="right">
                                                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                                                     </button>
+                                                                                    <input type="hidden" id="save_update" name="save_update" value="">
                                                                                     <button type="button" class="btn btn-danger">Delete
                                                                                             </button>
                                                                         </div>
@@ -279,7 +289,7 @@
 
 
 
-                                                        </form>
+
                                                     </div>
                                                 </div>
                                             </li>
@@ -287,6 +297,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
                         </div>
                     </div>
 
@@ -324,7 +335,13 @@ headers: {
 
 });
     $('#customermaster').DataTable({});
-    var profileupload="{{url('uploadingfile')}}";
+    var add_data="{{route('agent.store') }}";
+    var profileupload1="{{url('uplaodprofieagent')}}";
+    var getalldata="{{url('getallagent')}}";
+    var editurl="{{url('editagent')}}";
+    var delete_data="{{url('deleteagent')}}";
+    var imgurl="<?php  echo url('/') ?>";
+
 
 
 </script>

@@ -10,6 +10,6 @@ class Customermodel extends Model
 
     protected $table = "customer_master";
     protected $fillable = [
-        'first_name', 'last_name','email','city','user_id','state','contry','pincode','relativename','mobileno','address',
+        'first_name', 'last_name','email','city','user_id','state','contry','pincode','relativename','mobileno','address','cust_profile'
     ];
 }

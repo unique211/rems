@@ -78,6 +78,18 @@
 <script type='text/javascript' src="{{ URL::asset('/resources/sass/toastr/tost.js',true)}}"></script>
 
 
+{{-- datepicker --}}
+<script type='text/javascript' src="{{ URL::asset('/resources/sass/datepicker/bootstrap-datepicker.js',true) }}"></script>
+
+{{-- new datetime --}}
+<script type='text/javascript' src="{{ URL::asset('/resources/sass/js/moment.js',true)}}"></script>
+
+<script type='text/javascript' src="{{ URL::asset('/resources/sass/js/bootstrap-datetimepicker.min.js',true) }}"></script>
+<script src="{{ URL::asset('/resources/sass/js/bootstrap-datetimepicker.js',true) }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.js" type="text/javascript">
+</script>
+<!-- date formate file -->
+<script type='text/javascript' src="{{ URL::asset('/resources/js/date.js',true)}}"></script>
 
 
 

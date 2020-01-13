@@ -154,7 +154,7 @@
 
                                                     <div class="card-content">
                                                         <div class="card-content-member">
-                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img class="rounded-circle imgupload" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
+                                                                <div class="avatar-icon rounded mx-auto" align="center"> <img  id="infoimages" class="rounded-circle imgupload" src="https://saleserpnew.bdtask.com/saleserp_v9.3-demo/my-assets/image/employee/83b8682a418e6863d79ffab99a6227c0.jpg" class="img-circle" width="100px;" height="100px;"></div>
 
                                                            </div>
                                                            <div class="card-content-languages">
@@ -163,20 +163,30 @@
 
                                                                <table class="table table-hover" width="100%">
 
-                                                                <tbody><tr>
-                                                                    <th>First Name</th>
+                                                                <tbody>
+                                                                    <tr>
+                                                                            <th>Upload Img*</th>
+                                                                        <td class="lbldata"><label id="uploadpic">Upload Img*</label> </td>
+                                                                        <td class="edittb"><input	 class="form-control input-sm " type="file" id="uploadimg" name="uploadimg" >
+                                                                            <input type="hidden" id="doc_file_hidden" value="">
+                                                                            <div id="doc_msgid"></div>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                    <th>First Name*</th>
                                                                     <td class="lbldata"><label id="flable">Sagar</label> </td>
-                                                                    <td class="edittb"><input  class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname"> </td>
+                                                                    <td class="edittb"><input  class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Last Name</th>
+                                                                    <th>Last Name*</th>
                                                                     <td class="lbldata"><label id="llable">Sagar</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="lastname" name="lastname" placeholder="Firstname"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="lastname" name="lastname" placeholder="Lastname" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Email</th>
+                                                                    <th>Email*</th>
                                                                     <td class="lbldata"><label id="elable">Email</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email" required> </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th >Payment</th>
@@ -194,25 +204,25 @@
 
                                                                     </tr>
                                                                  <tr>
-                                                                    <th>City</th>
+                                                                    <th>City*</th>
 
                                                                     <td class="lbldata"><label id="clable">City</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="city" name="city" placeholder="City"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="city" name="city" placeholder="City" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                        <th>State</th>
+                                                                        <th>State*</th>
                                                                         <td class="lbldata"><label id="slable">State</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="state" name="state" placeholder="State"> </td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="state" name="state" placeholder="State" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                        <th>Contry</th>
+                                                                        <th>Contry*</th>
                                                                         <td class="lbldata"><label id="conlable">Contry</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry"> </td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Pin code</th>
+                                                                    <th>Pin code*</th>
                                                                     <td class="lbldata"><label id="pinlable">Pin Code</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="pincode" name="pincode" placeholder="Pincode"> </td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="pincode" name="pincode" placeholder="Pincode" required> </td>
                                                             </tr>
                                                             <tr>
                                                                     <th ></th>
@@ -330,30 +340,78 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div id="accessModal1" class="card-content modal fade " role="dialog">
-                                        <form action="">
-                                        <div class="modal-dialog ">
-                                          <!-- Modal content-->
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                              <h4 class="modal-title">Upload Image</h4>
-                                            </div>
 
-                                            <div class="modal-footer">
-
-
-                                               <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
-                                            </div>
-                                          </div>
-
-                                        </div></form>
-                                      </div>
 
                             </div>
 
                         </form>
                         </div>
+                        <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Add Document</h4>
+                                        </div>
+                                        <div class="modal-body" style="width:100%">
+                                        <form id="document_data" method="post"></form>
+                                            <div class="col-lg-12">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Type OF Document*</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div class="form-group">
+                                                        <select form="document_data" class="form-control input-sm placeholdesize" id="type_document" required>
+                                                            <option value="" selected disabled>--Select--</option>
+                                                            <option value="1">Invoice Copy</option>
+                                                            <option value="2">Challan Copy</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div class="form-group">
+                                                        <input type="text" form="document_data" class="form-control" id="des" name="des" placeholder="Descrption"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>File Name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div class="form-group">
+                                                    <div id="add_file">
+                                                            <input	form="document_data" class="form-control input-sm " type="file" id="docupload" name="docupload" required>
+                                                    </div>
+                                                        <input type="hidden" id="file_hidden" value="">
+                                                        <div id="msg"></div>
+                                                    </div>
+                                                </div>
+                                            </div><br>
+                                            <br><br>
+                                            <br><br>
+                                            </div>
+                                            <br>  <br>  <br>  <br>
+                                            <div class="modal-footer">
+                                                <input type="hidden" id="doc_row_id" value="0">
+                                                <input type="hidden" id="doc_save_update" value="">
+                                                <input type="submit" form="document_data" name="btnsave" id="btnsave" value="Save" class="btn btn-success"/>
+                                            <button type="button" class="btn btn-dangar" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
 
 
@@ -392,11 +450,13 @@ headers: {
     $('#customermaster').DataTable({});
     var doc_token="{{csrf_token()}}";
     var profileimgupload="{{url('uploadingfile')}}";
+    var profileimgupload1="{{url('uploadingcustfile')}}";
     var add_data="{{route('customer.store') }}";
     var getalldata="{{url('getallcustomer')}}";
     var editurl="{{url('editcustomer')}}";
     var editdocurl="{{url('editdoccustomer')}}";
-    var delete_data="{{url('deletecustomer')}}"
+    var delete_data="{{url('deletecustomer')}}";
+    var imgurl="<?php  echo url('/') ?>";
 //     function setFocusMapCenter() {
 //     var mapObj = $('#map').vectorMap('get', 'mapObject'),
 //         center = mapObj.pointToLatLng(mapObj.width / 2, mapObj.height / 2);

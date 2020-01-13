@@ -159,6 +159,10 @@ $(document).ready(function() {
     $(document).on('blur', "#noofploats", function(e) {
         e.preventDefault();
         var noofploats = $('#noofploats').val();
+        // var l1 = $('table#docupload').find('tbody').find('tr');
+        // var r = l1.length;
+
+
         if (noofploats > 0) {
             $('#doc_row_id').val(0);
             for (i = 0; i < noofploats; i++) {
@@ -217,4 +221,254 @@ $(document).ready(function() {
 
     });
 
+    //for submit event
+    $(document).on('submit', '#site_master_form', function(e) {
+        e.preventDefault();
+
+        var flag = 0;
+
+        var sitename = $('#sitename').val();
+        var areaname = $('#areaname').val();
+        var noofploats = $('#noofploats').val();
+        var totalarea = $('#totalarea').val();
+        var save_update = $('#save_update').val();
+
+        studejsonObj = [];
+        $(".proffinfodata").each(function() {
+            var id1 = $(this).attr('id');
+            console.log(id1);
+
+            id1 = id1.split("_");
+
+
+            student = {};
+
+            var ploatno = $('#ploatno_' + id1[1]).val();
+            var areainsqft = $('#areainsqft_' + id1[1]).val();
+            var cost = $('#cost_' + id1[1]).val();
+
+            if (ploatno != "" && areainsqft != "" && cost != "") {
+
+                student["ploatno"] = ploatno;
+                student["areainsqft"] = areainsqft;
+                student["cost"] = cost;
+
+                for (var i = 0; i < studejsonObj.length; i++) {
+
+
+                    // if (mobile == studejsonObj[i].mobile || email == studejsonObj[i].email || landline == studejsonObj[i].landline) {
+                    //     flag = 1;
+
+                    // }
+                    if (ploatno == studejsonObj[i].ploatno) {
+                        flag = 1;
+
+                    }
+                }
+            } else {
+                swal('Plot No And Area(in sqft) And Cost Is Required!!');
+                flag = 1;
+            }
+
+            if (flag == 1) {
+
+
+            } else {
+                studejsonObj.push(student);
+            }
+        });
+        if (flag == 0) {
+            $.ajax({
+                data: {
+                    studejsonObj: studejsonObj,
+                    sitename: sitename,
+                    areaname: areaname,
+                    noofploats: noofploats,
+                    totalarea: totalarea,
+                    save_update: save_update,
+
+                },
+                url: add_data,
+                type: "POST",
+                dataType: 'json',
+                // async: false,
+                success: function(data) {
+
+                    form_clear();
+                    successTost("Opration Save Success fully!!!");
+                    $('.closehideshow').trigger('click');
+                    datashow();
+                }
+            });
+        } else {
+            swal('Plot No Already Existes !!');
+        }
+    });
+
+    function form_clear() {
+        $('#ploattabletbody').html('');
+        $('#sitename').val('');
+        $('#areaname').val('');
+        $('#noofploats').val('');
+        $('#totalarea').val('');
+        $('#save_update').val('');
+    }
+
+    datashow();
+
+
+    function datashow() {
+
+
+        $.ajax({
+            url: getalldata,
+            type: "GET",
+            //   data: new FormData(this),
+            data: {
+
+            },
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: "json",
+            success: function(data) {
+
+                var html = '';
+                var sr = 0;
+                html += '<table id="myTable" class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" ># </th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Site Name</th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;"  >Area Name</th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Total No Of Plots</th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Total Area Of Plots</th>' +
+
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Action</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>';
+
+                for (var i = 0; i < data.length; i++) {
+                    sr = sr + 1;
+                    html += '<tr>' +
+                        '<td id="id_' + data[i].id + '">' + sr + '</td>' +
+                        '<td  id="site_name_' + data[i].id + '">' + data[i].site_name + '</td>' +
+                        '<td  id="area_name_' + data[i].id + '">' + data[i].area_name + '</td>' +
+                        '<td id="total_ploat_' + data[i].id + '">' + data[i].total_ploat + '</td>' +
+                        '<td id="total_areaof_ploats_' + data[i].id + '">' + data[i].total_areaof_ploats + '</td>' +
+                        '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                        data[i].id +
+                        '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
+                        data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '</tr>';
+
+                }
+                $('#show_master').html(html);
+                $('#myTable').DataTable({});
+
+            }
+        });
+    }
+    $(document).on('click', ".edit_data", function(e) {
+        e.preventDefault();
+
+        $('.btnhideshow').trigger('click');
+
+        var id = $(this).attr("id");
+        $('#save_update').val(id);
+
+        var sitename = $('#site_name_' + id).html();
+        var area_name = $('#area_name_' + id).html();
+        var total_ploat = $('#total_ploat_' + id).html();
+        var total_areaof_ploats = $('#total_areaof_ploats_' + id).html();
+
+        $('#sitename').val(sitename);
+        $('#areaname').val(area_name);
+        $('#noofploats').val(total_ploat);
+        $('#totalarea').val(total_areaof_ploats);
+
+        $.ajax({
+            data: {
+                id: id,
+
+            },
+            url: editploaturl,
+            type: "POST",
+            dataType: 'json',
+            // async: false,
+            success: function(data) {
+                var row_id = 0;
+                for (i = 0; i < data.length; i++) {
+                    row_id = row_id + 1;
+
+                    var html = '<tr  class="proffinfodata"  id="proffinfo_' + row_id + '" >' +
+                        '<td>' + row_id + '</td>' +
+
+                        '<td>' +
+                        '<input type="text" id="ploatno_' + row_id + '" name="ploatno_' + row_id + '" value="' + data[i].plots_no + '" class="form-control" placeholder="Plot No">' +
+
+                        '</td>' +
+
+                        '<td>' +
+                        '<input type="number" id="areainsqft_' + row_id + '" name="areainsqft_' + row_id + '" value="' + data[i].area_insqft + '"  class="areainsqf form-control" placeholder="Area (in sqft)">' +
+                        '</td>' +
+
+                        '<td>' +
+                        '<input type="number" id="cost_' + row_id + '" name="cost_' + row_id + '" value="' + data[i].cost + '" class="form-control" placeholder="Cost">' +
+
+                        '</td>' +
+
+
+                        '</tr>';
+
+                    $('#ploattabletbody').append(html);
+                    $('#doc_row_id').val(row_id);
+
+                }
+            }
+        });
+    });
+
+    //Delete  Button Code Strat  Here------
+
+    $(document).on('click', '.delete_data', function() {
+        var id1 = $(this).attr('id');
+
+        if (id1 != "") {
+            swal({
+                    title: "Are you sure to delete ?",
+                    text: "You will not be able to recover this Data !!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it !!",
+                    closeOnConfirm: false
+                },
+                function() {
+                    $.ajax({
+                        type: "GET",
+                        url: delete_data + '/' + id1,
+                        success: function(data) {
+
+                            if (data == true) {
+                                swal("Deleted !!", "Hey, your Data has been deleted !!", "success");
+                                $('.closehideshow').trigger('click');
+                                $('#save_update').val("");
+                                datashow(); //call function show all data
+                            } else {
+                                errorTost("Data Delete Failed");
+                            }
+
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+
+
+                    return false;
+                });
+        }
+    });
 });

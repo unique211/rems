@@ -2,7 +2,13 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/resources/sass/css/main.css') }}" />
 <body>
 
+    <style>
+        .main_menu {
+            font-weight: bold;
+            background: #00FF00;
 
+        }
+        </style>
 
     {{-- START PAGE CONTAINER --}}
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -18,6 +24,10 @@
         {{-- PAGE CONTENT --}}
 
 
+        <?php
+        $editright=0;
+        $deleteright=0;
+        ?>
 
 
 
@@ -26,6 +36,18 @@
         <div class="app-main">
             @include('layouts.sidebar')
 
+            @if(is_null($sidebar))
+
+            @else
+
+
+            @foreach($sidebar as $val)
+            @if(($val->menuid==2  && $val->submenuid==7) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
+            <?php
+
+            $editright=$val->editright;
+        $deleteright=$val->deleteright;
+                  ?>
 
             <div class="app-main__outer">
                 <div class="app-main__inner ">
@@ -46,32 +68,32 @@
                                             <i class="fa fa-star"></i>
                                         </button> --}}
                                 <div class="page-title-actions">
-                                    {{-- <button class="btn btn-success  btnhideshow"
+                                        @if($val->createright==1)
+                                    <button class="btn btn-success  btnhideshow"
                                         style="background-color:#00B050;">
                                         Add Detail</button>
                                         <button class="btn btn-danger  closehideshow"
                                         style="display:none;">
-                                        Close</button> --}}
+                                        Close</button>
+                                        @endif
                                 </div>
                             </div>
                         </div>
 
 
                     </div>
-                    {{-- <div class="row tablehideshow card">
+                    <div class="row tablehideshow card">
 
 
                         <div class="col-md-12" style="width:100%">
-                            <div class="table-responsive" >
+                            <div class="table-responsive" id="show_master" >
                                 <table id="customermaster"
                                     class="align-middle mb-0 table table-borderless table-striped table-hover" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
-                                            <th>  Rol  Name</th>
-                                            <th>Site  Name</th>
-                                            <th class="text-center">Plot</th>
-                                            <th class="text-center">Amount</th>
+                                            <th>  Role  Name</th>
+
 
                                      <th class="text-center">Actions</th>
                                         </tr>
@@ -80,9 +102,7 @@
                                             <tr>
                                                     <th class="text-center">1</th>
                                                     <th>Agent 1</th>
-                                                    <th>Site 1</th>
-                                                    <th class="text-center">Plot 1</th>
-                                                    <th class="text-center">100</th>
+
 
                                                     <td><button  class="edit btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>
                                                 </tr>
@@ -93,10 +113,11 @@
 
 
                         </div>
-                    </div> --}}
+                    </div>
 
-                    <div class="row formhideshow card" >
+                    <div class="row formhideshow card" style="display:none;" >
                         <div class="col-md-12">
+                                <form id="rightmanagement_form" name="rightmanagement_form">
                             <div class="row card">
                                     <div class="card-header border-bottom">
                                             <h6 class="m-0">Right Management
@@ -132,7 +153,7 @@
                                                           <th>Delete</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="paymenttabletbody">
+                                                    <tbody id="tbd_user_rights">
                                                             <tr>
                                                                     <th  bgcolor="#00FF00" colspan="6" ><input type="checkbox" name="master" id="master"> Master</th>
 
@@ -198,6 +219,7 @@
                                     <div class="form-group col-md-12" align="right">
                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                     </button>
+                                                    <input type="hidden" id="save_update" name="save_update">
                                                     <button type="button" class="btn btn-danger">Delete
                                                             </button>
                                         </div>
@@ -205,6 +227,7 @@
 
 
                             </div>
+                                </form>
                         </div>
                     </div>
 
@@ -216,7 +239,10 @@
                 @include('layouts.foter')
 
             </div>
+            @endif
 
+            @endforeach
+            @endif
         </div>
     </div>
     {{-- END PAGE CONTAINER --}}
@@ -244,8 +270,13 @@ headers: {
     $('#customermaster').DataTable({});
 
     var profileupload="{{url('uploadingfile')}}";
-
-
+    var getallmenudata="{{url('get_menu')}}";
+    var add_data="{{route('rolemanagement.store') }}";
+    var getalldata="{{url('getallrole')}}";
+    var geturight="{{url('getuserright')}}";
+    var editrt="<?php  echo $editright; ?>";
+    var delrt="<?php  echo $deleteright; ?>";
+    var delete_data="{{url('deleterole')}}";
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/plotallocation.js') }}"></script>
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/rolemanage.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

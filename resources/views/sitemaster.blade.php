@@ -18,14 +18,28 @@
         {{-- PAGE CONTENT --}}
 
 
-
+        <?php
+        $editright=0;
+        $deleteright=0;
+        ?>
 
 
 
 
         <div class="app-main">
             @include('layouts.sidebar')
+            @if(is_null($sidebar))
 
+            @else
+
+
+            @foreach($sidebar as $val)
+            @if(($val->menuid==2  && $val->submenuid==3) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
+            <?php
+
+            $editright=$val->editright;
+        $deleteright=$val->deleteright;
+                  ?>
 
             <div class="app-main__outer">
                 <div class="app-main__inner ">
@@ -45,12 +59,15 @@
                                             data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
                                             <i class="fa fa-star"></i>
                                         </button> --}}
-                                <div class="page-title-actions"> <button class="btn btn-success  btnhideshow"
+                                <div class="page-title-actions">
+                                        @if($val->createright==1)
+                                    <button class="btn btn-success  btnhideshow"
                                         style="background-color:#00B050;">
                                         Add Detail</button>
                                         <button class="btn btn-danger  closehideshow"
                                         style="display:none;">
                                         Close</button>
+                                        @endif
                                 </div>
                             </div>
                         </div>
@@ -230,6 +247,10 @@
                 @include('layouts.foter')
 
             </div>
+            @endif
+
+            @endforeach
+            @endif
 
         </div>
     </div>
@@ -261,6 +282,9 @@ headers: {
     var editploaturl="{{url('editplotsdetalis')}}";
     var delete_data="{{url('deletesite')}}";
     var add_data="{{route('sitemaster.store') }}";
+
+    var editrt="<?php  echo $editright; ?>";
+    var delrt="<?php  echo $deleteright; ?>";
 
 
 </script>

@@ -358,6 +358,10 @@ $(document).ready(function() {
 
                 successTost("Opration Save Success fully!!!");
                 $('.closehideshow').trigger('click');
+                if (editrt == 1) {
+                    $('.formhideshow').hide();
+                    $('.tablehideshow').show();
+                }
                 datashow();
                 form_clear();
             }
@@ -426,10 +430,20 @@ $(document).ready(function() {
 
 
 
-                        '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
-                        data[i].id +
-                        '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
-                        data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                            data[i].id +
+                            '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;';
+                    }
+                    if (delrt == 1) {
+                        html += '<button name = "delete" value = "Delete" class = "delete_data btn btn-xs btn-danger" id = ' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
+                        // <button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                        // data[i].id +
+                        // '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
+                        // data[i].id + '><i class="fa fa-trash"></i></button></td>' +
                         '</tr>';
 
                 }
@@ -447,6 +461,10 @@ $(document).ready(function() {
         e.preventDefault();
 
         $('.btnhideshow').trigger('click');
+        if (editrt == 1) {
+            $('.formhideshow').show();
+            $('.tablehideshow').hide();
+        }
 
         var id = $(this).attr("id");
         $('#save_update').val(id);
@@ -542,6 +560,48 @@ $(document).ready(function() {
         $('#tnote').val('');
 
     }
+
+    //Delete  Button Code Strat  Here------
+
+    $(document).on('click', '.delete_data', function() {
+        var id1 = $(this).attr('id');
+
+        if (id1 != "") {
+            swal({
+                    title: "Are you sure to delete ?",
+                    text: "You will not be able to recover this Data !!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it !!",
+                    closeOnConfirm: false
+                },
+                function() {
+                    $.ajax({
+                        type: "GET",
+                        url: delete_data + '/' + id1,
+                        success: function(data) {
+
+                            if (data == true) {
+                                swal("Deleted !!", "Hey, your Data has been deleted !!", "success");
+                                $('.closehideshow').trigger('click');
+                                $('#save_update').val("");
+                                datashow(); //call function show all data
+                            } else {
+                                errorTost("Data Delete Failed");
+                            }
+
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+
+
+                    return false;
+                });
+        }
+    });
 
 
 

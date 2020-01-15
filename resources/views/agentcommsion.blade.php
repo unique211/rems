@@ -26,7 +26,13 @@
         <div class="app-main">
             @include('layouts.sidebar')
 
+            @if(is_null($sidebar))
 
+            @else
+
+
+            @foreach($sidebar as $val)
+            @if(($val->menuid==2  && $val->submenuid==5) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
             <div class="app-main__outer">
                 <div class="app-main__inner ">
                     <div class="app-page-title">
@@ -45,12 +51,13 @@
                                             data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
                                             <i class="fa fa-star"></i>
                                         </button> --}}
-                                <div class="page-title-actions"> <button class="btn btn-success  btnhideshow"
+                                <div class="page-title-actions">
+                                    {{-- <button class="btn btn-success  btnhideshow"
                                         style="background-color:#00B050;">
                                         Add Detail</button>
                                         <button class="btn btn-danger  closehideshow"
                                         style="display:none;">
-                                        Close</button>
+                                        Close</button> --}}
                                 </div>
                             </div>
                         </div>
@@ -61,8 +68,8 @@
 
 
                         <div class="col-md-12" style="width:100%">
-                            <div class="table-responsive" >
-                                <table id="customermaster"
+                            <div class="table-responsive" id="show_master">
+                                {{-- <table id="customermaster"
                                     class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
                                         <tr>
@@ -87,14 +94,14 @@
                                                 </tr>
 
                                     </tbody>
-                                </table>
+                                </table> --}}
                             </div>
 
 
                         </div>
                     </div>
 
-                    <div class="row formhideshow card" style="display:none;">
+                    <div class="row formhideshow card">
                         <div class="col-md-12">
                             <form id="agent_commssion" name="agent_commssion">
                             <div class="row card">
@@ -106,12 +113,12 @@
                                     <div class="form-row">
 
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Agent Name</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Agent Name*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="agentname" class="form-control select2">
+                                                    <select id="agentname" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
                                                             <option value="1">Customer 1</option>
                                                             <option value="2">Customer 2</option>
@@ -119,12 +126,12 @@
                                                         </select>
                                             </div>
                                             <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress">Site Name</label>
+                                                    <label for="feEmailAddress">Site Name*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="sitename" class="form-control select2">
+                                                    <select id="sitename" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
                                                             <option value="1">Site 1</option>
                                                             <option value="2">Site 2</option>
@@ -136,12 +143,12 @@
 
                                     <div class="form-row">
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress"> Ploats</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress"> Ploats*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
-                                                    <select id="ploats" class="form-control select2">
+                                                    <select id="ploats" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
                                                             <option value="1">Ploats 1</option>
                                                             <option value="2">Ploats 2</option>
@@ -149,15 +156,36 @@
                                                         </select>
                                             </div>
                                             <div class="form-group col-md-2">
-                                                    <input type="radio" id="credit" name="amtinfo" value="credit"> Credit
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Opening Balance</label>
+
+                                                </div>
+
+                                                    <div class="form-group col-md-4">
+                                                            <input class="form-control" type="number" id="openingbalance" name="openingbalance" value="Amount">
+
+                                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+
+                                            <div class="form-group col-md-2">
+                                                    <input  style="margin-left:10%;" class="crradio" type="radio" id="credit" name="amtinfo" value="cr"> Credit
 
                                                 </div>
                                                 <div class="form-group col-md-2">
-                                                        <input type="radio" name="debit" value="amtinfo"> Debit
+                                                        <input type="radio" id="debit" class="crradio" name="amtinfo" value="dr"> Debit
 
                                                     </div>
                                                     <div class="form-group col-md-2">
-                                                            <input class="form-control" type="number" id="amt" name="amt" value="Amount">
+                                                            <input class="form-control amtdata"  type="number" id="amt" name="amt" value="Amount">
+
+                                                        </div>
+                                                        <div class="form-group col-md-2">
+                                                                <label style="margin-left:10%;" for="feEmailAddress">Ramain Amount*</label>
+
+                                                            </div>
+                                                        <div class="form-group col-md-4">
+                                                                <input class="form-control" type="number" id="remainamt" name="remainamt" value="Amount">
 
                                                         </div>
 
@@ -176,16 +204,17 @@
                                                           <th>Amount</th>
                                                           <th>Credit/Debit</th>
                                                           <th>Remain</th>
+                                                          <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="paymenttabletbody">
-                                                            <tr>
+                                                            {{-- <tr>
                                                                     <th>10/01/2020</th>
                                                                     <th>100</th>
                                                                     <th>50</th>
                                                                     <th>Credit</th>
                                                                     <th>50</th>
-                                                                  </tr>
+                                                                  </tr> --}}
 
                                                     </tbody>
                                             </table>
@@ -196,6 +225,7 @@
                                     <div class="form-group col-md-12" align="right">
                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                     </button>
+                                                    <input type="hidden" name="save_update" id="save_update" value="">
                                                     <button type="button" class="btn btn-danger">Delete
                                                             </button>
                                         </div>
@@ -215,9 +245,14 @@
                 @include('layouts.foter')
 
             </div>
+            @endif
+
+                            @endforeach
+                            @endif
 
         </div>
     </div>
+
     {{-- END PAGE CONTAINER --}}
 
 
@@ -229,6 +264,7 @@
 </body>
 
 </html>
+
 <script>
       $(document).ready(function () {
 
@@ -245,7 +281,11 @@ headers: {
     var profileupload="{{url('uploadingfile')}}";
     var getallsitename="{{url('getdropagent')}}";
     var getallsite="{{url('getagentsite')}}";
-
+    var getsiteploat="{{url('getagentsiteploat')}}"
+    var add_data="{{route('agentcommission.store') }}";
+    var getalldata="{{url('getagentcommssioninfo')}}";
+    var getcommssioninfo="{{url('getagentallcommssion')}}";
+    var getcommssiondata="{{url('getagenthistory')}}";
 
 </script>
 <script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/agentcommssion.js') }}"></script>

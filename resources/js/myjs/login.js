@@ -21,9 +21,10 @@ $(document).ready(function() {
                 if (data == 1 || data == "1") {
 
                     location.href = redirect;
+                    successTost("Login SuccessFully !!!");
                     //  location.href = baseurl + "Welcome/dashboard";
                 } else {
-
+                    successTost("Invalid Username Or Password !!!");
                 }
 
             },

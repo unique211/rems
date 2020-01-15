@@ -14,7 +14,8 @@ class Customermasetcontroller extends Controller
     {
 
        // $title['activemenu'] = "c";
-        return view('customermaster');
+       $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        return view('customermaster',$data);
     }
    public function uploadingfile(Request $request){
 

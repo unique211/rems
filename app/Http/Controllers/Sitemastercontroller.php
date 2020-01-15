@@ -13,8 +13,8 @@ class Sitemastercontroller extends Controller
    public  function index(Request $request)
     {
 
-
-        return view('sitemaster');
+        $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        return view('sitemaster',$data);
     }
 
     public function store(Request $request)//For insert or Update Record Of class Master --

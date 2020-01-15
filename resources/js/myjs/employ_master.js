@@ -65,7 +65,7 @@ $(document).ready(function() {
         var profilepic = $('#file_hidden').val();
 
         var save_update = $('#save_update').val();
-        alert(save_update);
+
 
         $.ajax({
             data: {
@@ -91,6 +91,10 @@ $(document).ready(function() {
 
                 successTost("Opration Save Success fully!!!");
                 $('.closehideshow').trigger('click');
+                if (editrt == 1) {
+                    $('.formhideshow').hide();
+                    $('.tablehideshow').show();
+                }
                 datashow();
             }
         });
@@ -141,10 +145,20 @@ $(document).ready(function() {
                         '<td id="mobile_no_' + data[i].id + '">' + data[i].mobile_no + '</td>' +
                         '<td id="role_' + data[i].id + '">' + data[i].role + '</td>' +
                         '<td style="display:none;" id="profilepic_' + data[i].id + '">' + data[i].profile_pic + '</td>' +
-                        '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
-                        data[i].id +
-                        '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
-                        data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    // <button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                    // data[i].id +
+                    // '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
+                    // data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                    if (editrt == 1) {
+                        html += '<button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                            data[i].id +
+                            '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;';
+                    }
+                    if (delrt == 1) {
+                        html += '<button name = "delete" value = "Delete" class = "delete_data btn btn-xs btn-danger" id = ' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }
@@ -225,6 +239,10 @@ $(document).ready(function() {
 
         $('.btnhideshow').trigger('click');
         var id = $(this).attr("id");
+        if (editrt == 1) {
+            $('.formhideshow').show();
+            $('.tablehideshow').hide();
+        }
         $('#save_update').val(id);
         var first_name = $('#first_name_' + id).html();
         var lastname = $('#lastname_' + id).html();
@@ -260,7 +278,7 @@ $(document).ready(function() {
             dataType: 'json',
             // async: false,
             success: function(data) {
-                alert(data[0].user_name);
+
                 $('#username').val(data[0].user_name);
                 $('#passhide').hide();
                 $('#password').prop('required', false);
@@ -310,6 +328,42 @@ $(document).ready(function() {
                 });
         }
     });
+    getallrole();
+
+    function getallrole() {
+        $.ajax({
+            url: "getdroprole",
+            type: "GET",
+
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: "json",
+            success: function(data) {
+
+
+                html = '';
+                var name = '';
+
+                html += '<option selected disabled value="" >Select</option>';
+                //html += '<option   value="0" >N/A</option>';
+
+
+                for (i = 0; i < data.length; i++) {
+                    var id = '';
+
+                    name = data[i].rolename;
+                    id = data[i].id;
+
+
+
+                    html += '<option value="' + id + '">' + name + '</option>';
+                }
+                $('#role').html(html);
+
+            }
+        });
+    }
 
 
 });

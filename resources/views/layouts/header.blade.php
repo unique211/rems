@@ -31,13 +31,13 @@
   <link rel="stylesheet" href="{{ URL::asset('resources/sass/select2/select2.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Sweetalert -->
-  <link rel="stylesheet" type="text/css" href="{{ URL::asset('/resources/sass/sweetalert/sweetalert.css',true) }}" />
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('/resources/sass/sweetalert/sweetalert.css') }}" />
 
    {{--  tost msg  --}}
-   <link href="{{ URL::asset('/resources/sass/toastr/toastr.min.css',true) }}" rel="stylesheet">
+   <link href="{{ URL::asset('/resources/sass/toastr/toastr.min.css') }}" rel="stylesheet">
 
  <!-- datepicker -->
  <link rel="stylesheet" type="text/css"
- href="{{ URL::asset('/resources/sass/datepicker/bootstrap-datepicker3.min.css',true) }}" />
+ href="{{ URL::asset('/resources/sass/datepicker/bootstrap-datepicker3.min.css') }}" />
 
 </head>

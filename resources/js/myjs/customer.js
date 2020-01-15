@@ -303,6 +303,10 @@ $(document).ready(function() {
 
                     successTost("Opration Save Success fully!!!");
                     $('.closehideshow').trigger('click');
+                    if (editrt == 1) {
+                        $('.formhideshow').hide();
+                        $('.tablehideshow').show();
+                    }
                     datashow();
                 }
             });
@@ -353,10 +357,16 @@ $(document).ready(function() {
                         '<td id="email_' + data[i].id + '">' + data[i].email + '</td>' +
                         '<td id="city_' + data[i].id + '">' + data[i].city + '</td>' +
                         '<td id="state_' + data[i].id + '">' + data[i].state + '</td>' +
-                        '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
-                        data[i].id +
-                        '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
-                        data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                            data[i].id +
+                            '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;';
+                    }
+                    if (delrt == 1) {
+                        html += '<button name = "delete" value = "Delete" class = "delete_data btn btn-xs btn-danger" id = ' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }
@@ -373,6 +383,10 @@ $(document).ready(function() {
 
         $('.btnhideshow').trigger('click');
         var id = $(this).attr("id");
+        if (editrt == 1) {
+            $('.formhideshow').show();
+            $('.tablehideshow').hide();
+        }
         $('#save_update').val(id);
         $.ajax({
             data: {

@@ -12,8 +12,8 @@ class Ploateallocationcontroller extends Controller
     //
   public  function index(Request $request)
     {
-
-        return view('ploateallocation');
+        $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        return view('ploateallocation',$data);
     }
     public function getdropcustomer(){
         $data = DB::table('customer_master')->get();
@@ -195,6 +195,11 @@ class Ploateallocationcontroller extends Controller
     public function getpaymenthistory(Request $request){
         $data3 = DB::table('customer_payment')->where('p_a_id', $request->id)->get();
         return response()->json($data3);
+    }
+    public function deleteploatalocate($id){
+        DB::table('customer_payment')->where('p_a_id', $id)->get();
+        $data = DB::table('ploaalocation_master')->where('id',$id)->delete();
+        return $data;
     }
 
 }

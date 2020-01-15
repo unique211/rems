@@ -297,6 +297,10 @@ $(document).ready(function() {
                     form_clear();
                     successTost("Opration Save Success fully!!!");
                     $('.closehideshow').trigger('click');
+                    if (editrt == 1) {
+                        $('.formhideshow').hide();
+                        $('.tablehideshow').show();
+                    }
                     datashow();
                 }
             });
@@ -357,10 +361,17 @@ $(document).ready(function() {
                         '<td  id="area_name_' + data[i].id + '">' + data[i].area_name + '</td>' +
                         '<td id="total_ploat_' + data[i].id + '">' + data[i].total_ploat + '</td>' +
                         '<td id="total_areaof_ploats_' + data[i].id + '">' + data[i].total_areaof_ploats + '</td>' +
-                        '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
-                        data[i].id +
-                        '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
-                        data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+
+                    if (editrt == 1) {
+                        html += '<button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                            data[i].id +
+                            '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;';
+                    }
+                    if (delrt == 1) {
+                        html += '<button name = "delete" value = "Delete" class = "delete_data btn btn-xs btn-danger" id = ' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }
@@ -374,6 +385,11 @@ $(document).ready(function() {
         e.preventDefault();
 
         $('.btnhideshow').trigger('click');
+
+        if (editrt == 1) {
+            $('.formhideshow').show();
+            $('.tablehideshow').hide();
+        }
 
         var id = $(this).attr("id");
         $('#save_update').val(id);

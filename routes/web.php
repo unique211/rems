@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('loginnew');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// });
 
 Route::get('/logout', function (Request $request) {
 
@@ -26,6 +26,9 @@ Route::get('/logout', function (Request $request) {
 });
 
 Route::post('login_check', 'LoginController@check_login');
+
+
+Route::resource('dashboard', 'DashboardController');
 
 Route::resource('customer', 'Customermasetcontroller');
 Route::get('getallcustomer', 'Customermasetcontroller@getallcustomer');
@@ -60,22 +63,36 @@ Route::post('getsiteplots', 'Ploateallocationcontroller@getsiteplots');
 Route::post('getploatamtsqftdata', 'Ploateallocationcontroller@getploatamtsqftdata');
 Route::post('getpaymenthistory', 'Ploateallocationcontroller@getpaymenthistory');
 Route::get('getallploatallocation', 'Ploateallocationcontroller@getallploatallocation');
+Route::get('deleteploatalocate/{id}', 'Ploateallocationcontroller@deleteploatalocate');
 
 Route::resource('ploatallocation', 'Ploateallocationcontroller');
 
 Route::resource('agentcommission', 'Agentcommissioncotroller');
 Route::get('getdropagentcommission', 'Agentcommissioncotroller@getdropagentcommission');
+Route::get('getagentcommssioninfo', 'Agentcommissioncotroller@getagentcommssioninfo');
 Route::post('getagentsite', 'Agentcommissioncotroller@getagentsite');
+Route::post('getagentsiteploat', 'Agentcommissioncotroller@getagentsiteploat');
+Route::post('getagentallcommssion', 'Agentcommissioncotroller@getagentallcommssion');
+Route::post('getagenthistory', 'Agentcommissioncotroller@getagenthistory');
 
 
 
+
+//for rolemanagement
 
 Route::resource('rolemanagement', 'Rolemanagementcontroller');
+Route::get('get_menu', 'Rolemanagementcontroller@getallmenu');
+Route::get('getallrole', 'Rolemanagementcontroller@getallrole');
+Route::get('deleterole/{id}', 'Rolemanagementcontroller@deleterole');
+Route::post('getuserright', 'Rolemanagementcontroller@getuserright');
+
+
 
 Route::resource('employ', 'Employmaster');
 Route::get('getallemployee', 'Employmaster@getallemployee');
 Route::get('deleteemp/{id}', 'Employmaster@deleteemp');
 Route::post('editlogin', 'Employmaster@editlogin');
+Route::get('getdroprole', 'Employmaster@getdroprole');
 
 
 Route::match(['get','post'], 'uploadingfile', 'Customermasetcontroller@uploadingfile');

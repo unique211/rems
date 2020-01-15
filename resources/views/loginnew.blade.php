@@ -17,7 +17,8 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/resources/sass/css/login.css') }}" />
-
+{{--  tost msg  --}}
+<link href="{{ URL::asset('/resources/sass/toastr/toastr.min.css') }}" rel="stylesheet">
 <body>
 
     <div class="app-container app-theme-white body-tabs-shadow">
@@ -83,7 +84,7 @@
                                 <form class="" id="login_form" name="login_form" >
                                     <div class="form-row">
                                         <div class="col-md-6">
-                                            <div class="position-relative form-group"><label for="exampleEmail" class="">Email</label><input name="email" id="exampleEmail" placeholder="Email here..." type="email" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail" class="">User Name</label><input id="username" name="username" id="exampleEmail" placeholder="User Name here.." type="text" class="form-control"></div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group"><label for="examplePassword" class="">Password</label><input name="password" id="examplePassword" placeholder="Password here..." type="password" class="form-control"></div>
@@ -106,7 +107,10 @@
         </div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+{{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> --}}
+{{-- //-- Jquery -- --}}
+<script type='text/javascript' src="{{ URL::asset('/resources/js/jquery-1.10.2.min.js') }}">
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -127,5 +131,9 @@ var redirect="{{ url('dashboard') }}";
 <script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/login.js') }}"></script>
 
 </body>
+ <!-- tost msg -->
+<script type='text/javascript' src="{{ URL::asset('/resources/sass/toastr/toastr.min.js')}}"></script>
+
+<script type='text/javascript' src="{{ URL::asset('/resources/sass/toastr/tost.js')}}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>
 </html>

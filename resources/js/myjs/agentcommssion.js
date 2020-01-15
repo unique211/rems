@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     var plotid = 0;
+    var siteid = 0;
 
     /*---------btnhideshow-----------------*/
     $(document).on("click", ".btnhideshow", function(e) {
@@ -126,7 +127,7 @@ $(document).ready(function() {
                 var name = '';
 
                 html += '<option selected disabled value="" >Select</option>';
-                html += '<option   value="0" >N/A</option>';
+                //html += '<option   value="0" >N/A</option>';
 
 
                 for (i = 0; i < data.length; i++) {
@@ -148,84 +149,216 @@ $(document).ready(function() {
     $(document).on('change', "#agentname", function(e) {
         e.preventDefault();
         var id = $(this).val();
+        var saveid = $('#save_update').val();
 
-        $.ajax({
-            data: {
-                id: id,
-                saveid: saveid,
-            },
-            url: getagentsite,
-            type: "POST",
-            dataType: 'json',
-            // async: false,
-            success: function(data) {}
-        });
+        if (id > 0) {
+
+            $.ajax({
+                data: {
+                    id: id,
+
+                },
+                url: getallsite,
+                type: "POST",
+                dataType: 'json',
+                // async: false,
+                success: function(data) {
+
+
+                    var html = '';
+                    if (data.length > 0) {
+                        var name = '';
+
+                        html += '<option selected disabled value="" >Select</option>';
+                        //html += '<option   value="0" >N/A</option>';
+
+
+                        for (i = 0; i < data.length; i++) {
+                            var id = '';
+
+                            name = data[i].site_name;
+                            id = data[i].id;
+
+
+
+                            html += '<option value="' + id + '">' + name + '</option>';
+                        }
+                        $('#sitename').html(html);
+
+                    } else {
+                        swal("This Agent Not Allocate Site !!!");
+                    }
+                }
+            });
+            if (saveid > 0) {
+
+                $('#sitename').val(siteid).trigger('change');
+            }
+        }
     });
 
     $(document).on('change', "#sitename", function(e) {
         e.preventDefault();
         var id = $(this).val();
+        var agent = $('#agentname').val();
         var saveid = $('#save_update').val();
-        $.ajax({
-            data: {
-                id: id,
-                saveid: saveid,
-            },
-            url: getsiteploat,
-            type: "POST",
-            dataType: 'json',
-            // async: false,
-            success: function(data) {
-                html = '';
-                var name = '';
+        if (id > 0) {
+            $.ajax({
+                data: {
+                    id: id,
+                    agent: agent,
+                },
+                url: getsiteploat,
+                type: "POST",
+                dataType: 'json',
+                // async: false,
+                success: function(data) {
+                    html = '';
+                    if (data.length > 0) {
+                        var name = '';
 
 
-                html += '<option selected disabled value="" >Select</option>';
+                        html += '<option selected disabled value="" >Select</option>';
 
-                for (i = 0; i < data.length; i++) {
-                    var id = '';
+                        for (i = 0; i < data.length; i++) {
+                            var id = '';
 
-                    name = data[i].plots_no;
-                    id = data[i].id;
+                            name = data[i].plots_no;
+                            id = data[i].id;
 
 
 
-                    html += '<option value="' + id + '">' + name + '</option>';
+                            html += '<option value="' + id + '">' + name + '</option>';
+                        }
+                        $('#ploats').html(html);
+                        if (saveid > 0) {
+                            $('#ploats').val(plotid).trigger('change');
+                        }
+
+                    } else {
+                        swal("This Site  Not Allocate Plot To This Agent !!!");
+                    }
                 }
-                $('#ploats').html(html);
-                if (saveid > 0) {
-                    $('#ploats').val(plotid).trigger('change');
-                }
-
-            }
-        });
+            });
+        }
 
     });
 
     $(document).on('change', "#ploats", function(e) {
         e.preventDefault();
         var id = $(this).val();
+        var agent = $('#agentname').val();
+        var sitename = $('#sitename').val();
 
         var saveid = $('#save_update').val();
+
         $.ajax({
             data: {
                 id: id,
-
+                agent: agent,
+                sitename: sitename,
             },
-            url: getploatamtsqft,
+            url: getcommssioninfo,
             type: "POST",
             dataType: 'json',
             // async: false,
             success: function(data) {
 
-                $('#amount').val(data[0].cost);
-                $('#totalarea').val(data[0].area_insqft);
 
-                if (saveid == "") {
-                    $('#openingbalance').val(data[0].cost);
-                }
+
+
+                $('#openingbalance').val(data);
+
             }
         });
+
+        getcommsioninformation();
+
+
+    });
+
+    function getcommsioninformation() {
+        var id = $('#ploats').val();
+        var agent = $('#agentname').val();
+        var sitename = $('#sitename').val();
+
+        $.ajax({
+            data: {
+                id: id,
+                agent: agent,
+                sitename: sitename,
+            },
+            url: getcommssiondata,
+            type: "POST",
+            dataType: 'json',
+            // async: false,
+            success: function(data) {
+
+                var html = '';
+                var remain = 0;
+                var opening = 0;
+                var credit = '';
+                $('#paymenttabletbody').html('');
+
+                for (var i = 0; i < data.length; i++) {
+
+                    if (data[i].amtinfo == "cr") {
+                        remain = parseFloat(opening) + parseFloat(data[i].amount);
+                        credit = 'Credit';
+                    } else {
+                        remain = parseFloat(opening) - parseFloat(data[i].amount);
+                        credit = 'Debit';
+                    }
+
+                    html = '<tr>' +
+                        '<td id="id_' + data[i].id + '">' + data[i].created_at + '</td>' +
+                        '<td  id="opening_' + data[i].id + '">' + opening + '</td>' +
+
+                        '<td  id="acamount_' + data[i].id + '">' + data[i].amount + '</td>' +
+                        '<td id="creditamt_' + data[i].id + '">' + credit + '</td>' +
+                        '<td id="remainamt_' + data[i].id + '">' + remain + '</td>' +
+                        '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                        data[i].id +
+                        '><i class="fa fa-edit"></i></button>&nbsp;</td>' +
+                        '</tr>';
+
+                    opening = remain;
+
+                    $('#paymenttabletbody').append(html);
+
+                }
+
+
+
+
+            }
+        });
+
+    }
+
+    $(document).on('click', ".edit_data", function(e) {
+        e.preventDefault();
+
+        $('.btnhideshow').trigger('click');
+
+        var id = $(this).attr("id");
+        $('#save_update').val(id);
+
+        var opening_ = $('#opening_' + id).html();
+        var acamount_ = $('#acamount_' + id).html();
+        var remainamt_ = $('#remainamt_' + id).html();
+        var amtinfo_ = $('#creditamt_' + id).html();
+
+
+        if (amtinfo_ == "Credit") {
+            $("#credit").prop("checked", true);
+        } else {
+            $("#debit").prop("checked", true);
+        }
+        $('#openingbalance').val(opening_);
+        $('#amt').val(acamount_);
+        $('#remainamt').val(remainamt_);
+
     });
 
     $(document).on('blur', "#payamount", function(e) {
@@ -240,63 +373,66 @@ $(document).ready(function() {
         $('#remainamt').val(remainamt);
     });
 
+    $(document).on('change', ".crradio", function(e) {
+        e.preventDefault();
+        var crdr = $('input[name=amtinfo]:checked').val();
+
+        var openingbalance = $('#openingbalance').val();
+        var amt = $('#amt').val();
+        var remain = 0;
+        if (amt > 0 && openingbalance > 0)
+            if (crdr == "Credit") {
+                remain = parseFloat(openingbalance) + parseFloat(amt);
+            } else {
+                remain = parseFloat(openingbalance) - parseFloat(amt);
+            }
+        $('#remainamt').val(remain);
+    });
+
+    $(document).on('blur', ".amtdata", function(e) {
+        e.preventDefault();
+        var crdr = $('input[name=amtinfo]:checked').val();
+
+        var openingbalance = $('#openingbalance').val();
+        var amt = $('#amt').val();
+        var remain = 0;
+        if (amt > 0 && openingbalance > 0)
+            if (crdr == "cr") {
+                remain = parseFloat(openingbalance) + parseFloat(amt);
+            } else {
+                remain = parseFloat(openingbalance) - parseFloat(amt);
+            }
+        $('#remainamt').val(remain);
+    });
+
     //for submite event of ploat allocation
 
-    $(document).on('submit', '#ploat_allocation_form', function(e) {
+    $(document).on('submit', '#agent_commssion', function(e) {
         e.preventDefault();
 
-        var customername = $('#customername').val();
+        var agentname = $('#agentname').val();
         var sitename = $('#sitename').val();
-        var totalarea = $('#totalarea').val();
-        var amount = $('#amount').val();
         var ploats = $('#ploats').val();
-        var agent = $('#agent').val();
+        var amount = $('#amt').val();
         var openingbalance = $('#openingbalance').val();
 
-        var payamount = $('#payamount').val();
-        var remainamt = $('#remainamt').val();
-        var paymentmode = $('#paymentmode').val();
-        var remark = $('#remark').val();
-        var bankname = $('#bankname').val();
-        var branch = $('#branch').val();
-        var chequeno = $('#chequeno').val();
-        var checktime = $('#checktime').val();
-        var accountno = $('#accountno').val();
-        var tnote = $('#tnote').val();
+        var crdr = $('input[name=amtinfo]:checked').val();
+
 
 
         var save_update = $('#save_update').val();
-
-        if (checktime != "") {
-            var tdateAr = checktime.split('/');
-            checktime = tdateAr[2] + '-' + tdateAr[1] + '-' + tdateAr[0];
-        }
-
-
-
-
 
         $.ajax({
             data: {
 
                 save_update: save_update,
-                customername: customername,
+                agentname: agentname,
                 sitename: sitename,
-                totalarea: totalarea,
                 amount: amount,
+                crdr: crdr,
                 ploats: ploats,
-                agent: agent,
                 openingbalance: openingbalance,
-                payamount: payamount,
-                remainamt: remainamt,
-                paymentmode: paymentmode,
-                remark: remark,
-                bankname: bankname,
-                branch: branch,
-                chequeno: chequeno,
-                checktime: checktime,
-                accountno: accountno,
-                tnote: tnote,
+
             },
             url: add_data,
             type: "POST",
@@ -304,10 +440,10 @@ $(document).ready(function() {
             // async: false,
             success: function(data) {
 
-
+                getcommsioninformation();
                 successTost("Opration Save Success fully!!!");
-                $('.closehideshow').trigger('click');
-                datashow();
+
+
                 form_clear();
             }
         });
@@ -337,40 +473,38 @@ $(document).ready(function() {
                     '<thead>' +
                     '<tr>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" ># </th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Customer  Name</th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Agent Name</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;"  >Site  Name</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Plot</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Amount</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px; " >Agent</th>' +
+
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Agent</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Agent</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Agent</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Agent</th>' +
+
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Credit</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Action</th>' +
                     '</tr>' +
                     '</thead>' +
                     '<tbody>';
                 for (var i = 0; i < data.length; i++) {
                     sr = sr + 1;
-                    if (data[i].agent_name == "" && data[i].agent_lastname == "") {
-                        agent = "N/A";
-                    } else {
-                        agent = data[i].agent_name + "" + data[i].agent_lastname;
-                    }
+
 
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
-                        '<td  id="c_name_' + data[i].id + '">' + data[i].c_name + "" + data[i].c_lastanme + '</td>' +
+                        '<td  id="c_name_' + data[i].id + '">' + data[i].firstname + "" + data[i].lastname + '</td>' +
 
-                        '<td  id="lastname_' + data[i].id + '">' + data[i].s_name + '</td>' +
-                        '<td id="email_' + data[i].id + '">' + data[i].ploat_name + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].amt + '</td>' +
-                        '<td id="agent_name_' + data[i].id + '">' + agent + '</td>' +
+                        '<td  id="lastname_' + data[i].id + '">' + data[i].site_name + '</td>' +
+                        '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].amount + '</td>' +
 
-                        '<td style="display:none;" id="c_id' + data[i].id + '">' + data[i].c_id + '</td>' +
-                        '<td style="display:none;" id="s_id' + data[i].id + '">' + data[i].s_id + '</td>' +
-                        '<td style="display:none;" id="ploat_id' + data[i].id + '">' + data[i].ploat_id + '</td>' +
-                        '<td style="display:none;" id="agent_id' + data[i].id + '">' + data[i].agent_id + '</td>' +
+
+                        '<td style="display:none;" id="agent_id_' + data[i].id + '">' + data[i].agent_id + '</td>' +
+                        '<td style="display:none;" id="site_id_' + data[i].id + '">' + data[i].site_id + '</td>' +
+                        '<td style="display:none;" id="ploats_id_' + data[i].id + '">' + data[i].ploats_id + '</td>' +
+                        '<td style="display:none;" id="amtinfo_' + data[i].id + '">' + data[i].amtinfo + '</td>' +
+
 
 
 
@@ -392,82 +526,7 @@ $(document).ready(function() {
 
     //fpr edit
 
-    $(document).on('click', ".edit_data", function(e) {
-        e.preventDefault();
 
-        $('.btnhideshow').trigger('click');
-
-        var id = $(this).attr("id");
-        $('#save_update').val(id);
-
-        var c_id = $('#c_id' + id).html();
-        var s_id = $('#s_id' + id).html();
-        var ploat_id = $('#ploat_id' + id).html();
-        var agent_id = $('#agent_id' + id).html();
-        var amt_ = $('#amt_' + id).html();
-
-        plotid = ploat_id;
-
-
-        $('#customername').val(c_id).trigger('change');
-
-        $('#sitename').val(s_id).trigger('change');
-        // $('#totalarea').val().trigger('change');
-        $('#amount').val(amt_);
-
-        $('#agent').val(agent_id).trigger('change');
-
-
-        $.ajax({
-            data: {
-                id: id,
-
-            },
-            url: editurl,
-            type: "POST",
-            dataType: 'json',
-            // async: false,
-            success: function(data) {
-                $('#paymenttabletbody').html('');
-                var sumofamt = 0;
-                var intial = amt_;
-                var paidamt = 0;
-                var remainamt = 0;
-                var html = '';
-
-                for (var i = 0; i < data.length; i++) {
-                    var date = data[i].create_at;
-                    var fdateslt = date.split('-');
-                    var time = fdateslt[2].split(' ');
-                    var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
-
-                    paidamt = data[i].amount;
-                    sumofamt = parseFloat(sumofamt) + parseFloat(paidamt);
-                    var remainamt = parseFloat(intial) - parseFloat(paidamt);
-                    html += '<tr>' +
-                        '<td id="id_' + data[i].id + '">' + checkouttime + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].payment_mode + '</td>' +
-                        '<td  id="c_name_' + data[i].id + '">' + intial + '</td>' +
-
-                        '<td  id="lastname_' + data[i].id + '">' + paidamt + '</td>' +
-                        '<td id="email_' + data[i].id + '">' + remainamt + '</td>' +
-
-                        '</tr>';
-
-                    intial = parseFloat(intial) - parseFloat(paidamt);
-                    $('#openingbalance').val(intial);
-                }
-                $('#paymenttabletbody').html(html);
-
-
-            }
-        });
-
-
-
-
-
-    });
 
     function form_clear() {
         $('#save_update').val('');

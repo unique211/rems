@@ -14,8 +14,8 @@ class Employmaster extends Controller
     function index(Request $request)
     {
 
-
-        return view('employmaster');
+        $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        return view('employmaster',$data);
     }
     public function store(Request $request)
     {
@@ -137,6 +137,10 @@ class Employmaster extends Controller
          DB::table('login_master')->where('e_id',$id)->delete();
 
 
+        return response()->json($data);
+    }
+    public function getdroprole(){
+        $data = DB::table('role_master')->get();
         return response()->json($data);
     }
 }

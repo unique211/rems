@@ -71,7 +71,7 @@
                                         @if($val->createright==1)
                                     <button class="btn btn-success  btnhideshow"
                                         style="background-color:#00B050;">
-                                        Add Detail</button>
+                                        <i class="fa fa-plus"></i> Add Right</button>
                                         <button class="btn btn-danger  closehideshow"
                                         style="display:none;">
                                         Close</button>
@@ -124,16 +124,16 @@
                                                 </h6>
                                         </div>
 
-                                    <div class="form-row">
+                                    <div class="form-row" style="margin-top:5px;">
                                             <br>
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Role Name</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Role Name*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
                                                     <input type="text" class="form-control"
                                                     id="rolename" name="rolename" placeholder="Role Name"
-                                                    >
+                                                   required >
 
                                             </div>
 
@@ -220,8 +220,10 @@
                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                     </button>
                                                     <input type="hidden" id="save_update" name="save_update">
+                                                    @if($val->deleteright==1)
                                                     <button type="button" class="btn btn-danger">Delete
                                                             </button>
+                                                            @endif
                                         </div>
 
 

@@ -12,6 +12,7 @@ $(document).ready(function() {
         $('.edittb').show();
         $('.lbldata').hide();
         getallmenu();
+        form_clear();
 
     });
     /*---------login-----------------*/
@@ -26,6 +27,7 @@ $(document).ready(function() {
         $('#editperson').hide();
         $('.edittb').show();
         $('.lbldata').hide();
+        form_clear();
 
 
     });
@@ -324,6 +326,9 @@ $(document).ready(function() {
                     if (delrt == 1) {
                         html += '<button name = "delete" value = "Delete" class = "delete_data btn btn-xs btn-danger" id = ' + data[i].id + '><i class="fa fa-trash"></i></button>';
                     }
+                    if (delrt == 0 && editrt == 0) {
+                        html += "N/A";
+                    }
                     html += '</td>' +
                         '</tr>';
 
@@ -466,6 +471,12 @@ $(document).ready(function() {
 
     $(document).on('click', '.delete_data', function() {
         var id1 = $(this).attr('id');
+        if (id1 > 0) {
+
+        } else {
+            id1 = $('#save_update').val();
+        }
+
 
         if (id1 != "") {
             swal({

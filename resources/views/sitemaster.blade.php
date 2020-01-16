@@ -63,7 +63,7 @@
                                         @if($val->createright==1)
                                     <button class="btn btn-success  btnhideshow"
                                         style="background-color:#00B050;">
-                                        Add Detail</button>
+                                        <i class="fa fa-plus"></i>Add Site</button>
                                         <button class="btn btn-danger  closehideshow"
                                         style="display:none;">
                                         Close</button>
@@ -122,39 +122,39 @@
                                     <div class="form-row" style="margin-top:10px;">
 
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Site Name</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Site Name*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
                                                 <input type="text" class="form-control"
                                                     id="sitename" name="sitename" placeholder="Site Name"
-                                                    >
+                                                   required >
                                             </div>
                                             <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress">Area Name</label>
+                                                    <label for="feEmailAddress">Area Name*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
                                                     <input type="text" class="form-control"
                                                         id="areaname" name="areaname" placeholder="Area Name"
-                                                        >
+                                                        required >
                                                 </div>
                                     </div>
                                     <div class="form-row">
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress">Total No Of Plots</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress">Total No Of Plots*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
                                                 <input type="number" class="form-control"
                                                     id="noofploats" name="noofploats" placeholder="Total No Of Ploats"
-                                                    >
+                                                    required >
                                             </div>
                                             <div class="form-group col-md-2">
-                                                    <label for="feEmailAddress">Total Area Of Plots</label>
+                                                    <label for="feEmailAddress">Total Area Of Plots*</label>
 
                                                 </div>
 
@@ -162,7 +162,7 @@
 
                                                     <input type="number" class="form-control"
                                                         id="totalarea" name="totalarea" placeholder="Total Area Of Ploats"
-                                                        >
+                                                        required>
                                                 </div>
                                     </div>
                                     <div class="card-header border-bottom">
@@ -170,7 +170,7 @@
                                         </div>
                                     <div class="form-row">
                                         <input type="hidden" id="doc_row_id" name="doc_row_id" value="0">
-                                            <table  class="table table-bordered table-striped" id="docupload">
+                                            <table style="margin-right:5px;margin-left:5px;" class="table  table-bordered table-striped" id="docupload">
                                                     <thead>
                                                         <tr>
                                                           <th>SR No</th>
@@ -189,8 +189,10 @@
                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                     </button>
                                                     <input type="hidden" id="save_update" name="save_update" value="">
+                                                    @if($val->deleteright==1)
                                                     <button type="button" class="btn btn-danger">Delete
                                                             </button>
+                                                            @endif
                                         </div>
 
                                         {{-- <div class="col-sm-12 col-md-6 col-xl-4">

@@ -66,7 +66,7 @@
                                     @if($val->createright==1)
                                     <button class="btn btn-success  btnhideshow"
                                         style="background-color:#00B050;">
-                                        Add Detail</button>
+                                        <i class="fa fa-plus"></i> Add Customer</button>
                                         <button class="btn btn-danger  closehideshow"
                                         style="display:none;" >
                                         Close</button>
@@ -211,8 +211,8 @@
                                                                     <td colspan="2"><div class="progress-wrapper">
 
                                                                             <div class="progress progress-sm">
-                                                                              <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 74%;">
-                                                                                <span class="progress-value">74%</span>
+                                                                              <div class="progress-bar bg-primary" id="paymentbar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                                                                                <span class="progress-value">80%</span>
                                                                               </div>
                                                                             </div>
                                                                           </div></td>
@@ -244,8 +244,8 @@
                                                             </tr>
                                                             <tr>
                                                                     <th ></th>
-                                                                    <td ></td>
-                                                                    {{-- <td  class="edittb"><input class="btn btn-success" type="button" id="btnsave" name="btnsave" value="Ok"></td> --}}
+                                                                    <td class="lbldata"></td>
+                                                                    <td  class="edittb"><input class="btn btn-success pull-right" type="button" id="btnsaveinfo" name="btnsaveinfo" value="Save"></td>
                                                             </tr>
                                                         </tbody></table>
 
@@ -325,15 +325,15 @@
                                                                 </div>
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-12">
-                                                                    <label for="feEmailAddress">Name</label>
+                                                                    <label for="feEmailAddress">Name*</label>
                                                                     <input type="text" class="form-control"
                                                                         id="relativenm" name="relativenm" placeholder="Relative Detalis"
-                                                                        >
+                                                                       required >
                                                                 </div>
                                                                 <div class="form-group col-md-12">
-                                                                    <label for="fePassword">Mobile No</label>
+                                                                    <label for="fePassword">Mobile No*</label>
                                                                     <input type="number" class="form-control"
-                                                                        id="mobileno" name="mobileno" placeholder="Mobile No">
+                                                                        id="mobileno" name="mobileno" placeholder="Mobile No" required>
                                                                 </div>
                                                                 <div class="form-group col-md-12">
                                                                         <label for="feInputAddress">Address</label>
@@ -343,8 +343,10 @@
                                                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                                                     </button>
                                                                                     <input type="hidden" id="save_update" name="save_update" value="">
-                                                                                    <button type="button" class="btn btn-danger">Delete
+                                                                                    @if($val->deleteright==1)
+                                                                                    <button type="button" class="btn delete_data btn-danger">Delete
                                                                                             </button>
+                                                                                            @endif
                                                                         </div>
                                                             </div>
 
@@ -481,6 +483,8 @@ headers: {
     var imgurl="<?php  echo url('/') ?>";
     var editrt="<?php  echo $editright; ?>";
     var delrt="<?php  echo $deleteright; ?>";
+    var updatecust="{{url('updatecustomerinfo')}}";
+    var getpaymentdata="{{url('getpaymentinfo')}}";
 
 
 

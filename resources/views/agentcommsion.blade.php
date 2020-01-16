@@ -19,7 +19,11 @@
 
 
 
-
+        <?php
+        $editright=0;
+        $deleteright=0;
+        $createright=0;
+        ?>
 
 
 
@@ -33,6 +37,13 @@
 
             @foreach($sidebar as $val)
             @if(($val->menuid==2  && $val->submenuid==5) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
+            <?php
+
+            $editright=$val->editright;
+        $deleteright=$val->deleteright;
+        $createright=$val->createright;
+                  ?>
+
             <div class="app-main__outer">
                 <div class="app-main__inner ">
                     <div class="app-page-title">
@@ -109,8 +120,105 @@
                                             <h6 class="m-0">Agent Commission
                                                 </h6>
                                         </div>
+                                        <div class="row" style="margin-top:5px;">
+                                            <!--agent allocation details-->
+                                            <div class="col-md-6">
+                                                    <div class="form-row">
 
-                                    <div class="form-row">
+                                                            <div class="form-group col-md-4">
+                                                                    <label style="margin-left:10%;" for="feEmailAddress">Agent Name*</label>
+
+                                                                </div>
+                                                            <div class="form-group col-md-8">
+
+                                                                    <select id="agentname" class="form-control select2" required>
+                                                                            <option selected disabled>Select</option>
+                                                                            {{-- <option value="1">Customer 1</option>
+                                                                            <option value="2">Customer 2</option>
+                                                                            <option value="3">Customer 3</option> --}}
+                                                                        </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+
+                                                                <div class="form-group col-md-4">
+                                                                        <label style="margin-left:10%;" for="feEmailAddress">Site Name*</label>
+
+                                                                    </div>
+                                                                <div class="form-group col-md-8">
+
+                                                                        <select id="sitename" class="form-control select2" required>
+                                                                                <option selected disabled>Select</option>
+                                                                                {{-- <option value="1">Site 1</option>
+                                                                                <option value="2">Site 2</option>
+                                                                                <option value="3">Site 3</option> --}}
+                                                                            </select>
+                                                                    </div>
+
+                                                        </div>
+                                                        <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                        <label style="margin-left:10%;" for="feEmailAddress"> Plot*</label>
+
+                                                                    </div>
+                                                                <div class="form-group col-md-8">
+
+                                                                        <select id="ploats" class="form-control select2" required>
+                                                                                <option selected disabled>Select</option>
+                                                                                {{-- <option value="1">Ploats 1</option>
+                                                                                <option value="2">Ploats 2</option>
+                                                                                <option value="3">Ploats 3</option> --}}
+                                                                            </select>
+                                                                </div>
+                                                        </div>
+
+                                            </div>
+                                            <!--payment allocation details-->
+                                            <div class="col-md-6">
+                                                    <div class="form-row">
+                                                            <div class="form-group col-md-4">
+                                                                    <label style="margin-left:10%;" for="feEmailAddress">Opening Balance</label>
+
+                                                                </div>
+
+                                                                    <div class="form-group col-md-8">
+                                                                            <input class="form-control" type="number" id="openingbalance" name="openingbalance" value="Amount" disabled>
+
+                                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="form-row">
+                                                            <div class="form-group col-md-2">
+                                                                    <label style="margin-left:10%;" for="feEmailAddress"> Paid*</label>
+
+                                                                </div>
+                                                            <div class="form-group col-md-2">
+                                                                    <input  style="margin-left:10%;" class="crradio" type="radio" id="credit" name="amtinfo" value="cr"> Credit
+
+                                                                </div>
+                                                                <div class="form-group col-md-2">
+                                                                        <input type="radio" id="debit" class="crradio" name="amtinfo" value="dr"> Debit
+
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                            <input class="form-control amtdata"  type="number" id="amt" name="amt" value="Amount" <?php if($val->createright==0){echo "disabled"; }?> >
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-row">
+                                                                            <div class="form-group col-md-4">
+                                                                                    <label style="margin-left:10%;" for="feEmailAddress">Ramain Amount*</label>
+
+                                                                                </div>
+                                                                            <div class="form-group col-md-8">
+                                                                                    <input class="form-control" type="number" id="remainamt" name="remainamt" value="Amount" disabled>
+
+                                                                            </div>
+                                                                    </div>
+                                                </div>
+                                        </div>
+                                   <!-- <div class="form-row">
 
                                             <div class="form-group col-md-2">
                                                     <label style="margin-left:10%;" for="feEmailAddress">Agent Name*</label>
@@ -120,9 +228,9 @@
 
                                                     <select id="agentname" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
-                                                            <option value="1">Customer 1</option>
+                                                            {{-- <option value="1">Customer 1</option>
                                                             <option value="2">Customer 2</option>
-                                                            <option value="3">Customer 3</option>
+                                                            <option value="3">Customer 3</option> --}}
                                                         </select>
                                             </div>
                                             <div class="form-group col-md-2">
@@ -133,26 +241,26 @@
 
                                                     <select id="sitename" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
-                                                            <option value="1">Site 1</option>
+                                                            {{-- <option value="1">Site 1</option>
                                                             <option value="2">Site 2</option>
-                                                            <option value="3">Site 3</option>
+                                                            <option value="3">Site 3</option> --}}
                                                         </select>
                                                 </div>
 
-                                    </div>
+                                    </div>-->
 
-                                    <div class="form-row">
+                                   <!-- <div class="form-row">
                                             <div class="form-group col-md-2">
-                                                    <label style="margin-left:10%;" for="feEmailAddress"> Ploats*</label>
+                                                    <label style="margin-left:10%;" for="feEmailAddress"> Plot*</label>
 
                                                 </div>
                                             <div class="form-group col-md-4">
 
                                                     <select id="ploats" class="form-control select2" required>
                                                             <option selected disabled>Select</option>
-                                                            <option value="1">Ploats 1</option>
+                                                            {{-- <option value="1">Ploats 1</option>
                                                             <option value="2">Ploats 2</option>
-                                                            <option value="3">Ploats 3</option>
+                                                            <option value="3">Ploats 3</option> --}}
                                                         </select>
                                             </div>
                                             <div class="form-group col-md-2">
@@ -189,14 +297,14 @@
 
                                                         </div>
 
-                                    </div>
+                                    </div>-->
 
                                     <div class="card-header border-bottom">
                                             <h6 class="m-0">History </h6>
                                         </div>
                                     <div class="form-row">
                                         <input type="hidden" id="doc_row_id" name="doc_row_id" value="0">
-                                            <table  class="table table-bordered table-striped" id="docupload">
+                                            <table style="margin-right:5px;margin-left:5px;"  class="table table-bordered table-striped" id="docupload">
                                                     <thead>
                                                         <tr>
                                                           <th>Date</th>
@@ -223,11 +331,11 @@
 
 
                                     <div class="form-group col-md-12" align="right">
-                                            <button type="submit"  id="btnsavedata" class="btn btn-success">Save
+                                            <button type="submit"  id="btnsavedata" class="btn btn-success" <?php if($val->createright==0){echo "disabled"; }?>>Save
                                                     </button>
                                                     <input type="hidden" name="save_update" id="save_update" value="">
-                                                    <button type="button" class="btn btn-danger">Delete
-                                                            </button>
+                                                    {{-- <button type="button" class="btn btn-danger">Delete
+                                                            </button> --}}
                                         </div>
 
 
@@ -286,6 +394,10 @@ headers: {
     var getalldata="{{url('getagentcommssioninfo')}}";
     var getcommssioninfo="{{url('getagentallcommssion')}}";
     var getcommssiondata="{{url('getagenthistory')}}";
+    var editrt="<?php  echo $editright; ?>";
+    var delrt="<?php  echo $deleteright; ?>";
+    var creatert="<?php  echo $createright; ?>";
+    var delete_data="{{url('deleteagentcommsion')}}";
 
 </script>
 <script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/agentcommssion.js') }}"></script>

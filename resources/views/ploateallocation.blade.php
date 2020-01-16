@@ -67,7 +67,8 @@
                                         @if($val->createright==1)
                                     <button class="btn btn-success  btnhideshow"
                                         style="background-color:#00B050;">
-                                        Add Detail</button>
+                                        <i class="fa fa-plus"></i>Add Plot Allocation
+                                    </button>
                                         <button class="btn btn-danger  closehideshow"
                                         style="display:none;">
                                         Close</button>
@@ -388,8 +389,10 @@
                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                     </button>
                                                     <input type="hidden" id="save_update" name="save_update" value="">
-                                                    <button type="button" class="btn btn-danger">Delete
+                                                    @if($val->deleteright==1)
+                                                    <button type="button" class="btn delete_data btn-danger">Delete
                                                             </button>
+                                                            @endif
                                         </div>
 
 

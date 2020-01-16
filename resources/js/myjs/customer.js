@@ -13,6 +13,8 @@ $(document).ready(function() {
         $('#editperson').hide();
         $('.edittb').show();
         $('.lbldata').hide();
+        $('#btnsaveinfo').hide();
+        form_clear();
 
 
     });
@@ -29,6 +31,9 @@ $(document).ready(function() {
         $('#editperson').hide();
         $('.edittb').show();
         $('.lbldata').hide();
+        $('#btnsaveinfo').hide();
+        form_clear();
+
 
     });
     $('.edittb').hide();
@@ -366,6 +371,9 @@ $(document).ready(function() {
                     if (delrt == 1) {
                         html += '<button name = "delete" value = "Delete" class = "delete_data btn btn-xs btn-danger" id = ' + data[i].id + '><i class="fa fa-trash"></i></button>';
                     }
+                    if (delrt == 0 && editrt == 0) {
+                        html += "N/A";
+                    }
                     html += '</td>' +
                         '</tr>';
 
@@ -388,6 +396,10 @@ $(document).ready(function() {
             $('.tablehideshow').hide();
         }
         $('#save_update').val(id);
+        $('#btnsaveinfo').show();
+        $('.lbldata').show();
+        $('.edittb').hide();
+        $('#editperson').show();
         $.ajax({
             data: {
                 id: id,
@@ -399,19 +411,37 @@ $(document).ready(function() {
             // async: false,
             success: function(data) {
 
+
+
+
+
                 $('#firstname').val(data[0].first_name);
+                $('#flable').text(data[0].first_name);
                 $('#lastname').val(data[0].last_name);
+                $('#llable').text(data[0].last_name);
                 $('#email').val(data[0].email);
+                $('#elable').text(data[0].email);
+
                 $('#city').val(data[0].city);
+                $('#clable').text(data[0].city);
+
                 $('#state').val(data[0].state);
+                $('#slable').text(data[0].state);
                 $('#contry').val(data[0].contry);
+                $('#conlable').text(data[0].contry);
+
                 $('#pincode').val(data[0].pincode);
+                $('#pinlable').text(data[0].pincode);
+
                 $('#relativenm').val(data[0].relativename);
+
                 $('#mobileno').val(data[0].mobileno);
                 $('#address').val(data[0].address);
                 if (data[0].cust_profile != null) {
                     $('#doc_msgid').html(data[0].cust_profile);
                     $('#doc_file_hidden').val(data[0].cust_profile);
+
+                    $('#uploadpic').text(data[0].cust_profile);
                     $('#infoimages').attr('src', imgurl + '/profile/' + data[0].cust_profile);
                 }
             }
@@ -445,6 +475,30 @@ $(document).ready(function() {
             }
         });
 
+        $.ajax({
+            data: {
+                id: id,
+
+            },
+            url: getpaymentdata,
+            type: "POST",
+            dataType: 'json',
+            // async: false,
+            success: function(data) {
+
+                var per = data + "%";
+
+                if (data > 0) {
+                    $('#paymentbar').css('width', per);
+                    $('.progress-value').text(per);
+                } else {
+                    $('#paymentbar').css('width', per);
+                    $('.progress-value').text(per);
+                }
+
+            }
+        });
+
 
     });
 
@@ -460,7 +514,7 @@ $(document).ready(function() {
         $('#mobileno').val('');
         $('#address').val('');
         $("#doctbody").html('');
-
+        $('#infoimages').attr('src', imgurl + '/resources/sass/images/userpic.jpg');
         $('#save_update').val('');
     }
 
@@ -468,6 +522,11 @@ $(document).ready(function() {
 
     $(document).on('click', '.delete_data', function() {
         var id1 = $(this).attr('id');
+        if (id1 > 0) {
+
+        } else {
+            id1 = $('#save_update').val();
+        }
 
         if (id1 != "") {
             swal({
@@ -504,6 +563,45 @@ $(document).ready(function() {
                     return false;
                 });
         }
+    });
+
+    $(document).on('click', "#btnsaveinfo", function(e) {
+        e.preventDefault();
+
+
+        var firstname = $('#firstname').val();
+        var lastname = $('#lastname').val();
+        var email = $('#email').val();
+        var city = $('#city').val();
+        var state = $('#state').val();
+        var contry = $('#contry').val();
+        var pincode = $('#pincode').val();
+        var profileimg = $('#doc_file_hidden').val();
+
+        var save_update = $('#save_update').val();
+
+        $.ajax({
+            data: {
+                save_update: save_update,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                city: city,
+                state: state,
+                contry: contry,
+                pincode: pincode,
+                profileimg: profileimg,
+            },
+            url: updatecust,
+            type: "POST",
+            dataType: 'json',
+            // async: false,
+            success: function(data) {
+
+                successTost("Opration Save Success fully!!!");
+            }
+        });
+
     });
 
 });

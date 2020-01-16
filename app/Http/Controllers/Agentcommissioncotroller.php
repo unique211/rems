@@ -127,7 +127,7 @@ class Agentcommissioncotroller extends Controller
         $cridt=0;
         $debit=0;
         $remain=0;
-      $data = DB::table('agent_commision_master')->where('agent_id',$agent)->where('site_id',$sitename)->where('ploats_id',$ploatid)->where('amtinfo','cr')->get();
+      $data = DB::table('agent_commision_master')->where('agent_id',$agent)->where('site_id',$sitename)->where('ploats_id',$ploatid)->where('amtinfo','cr')->where('status',1)->get();
     $count=count($data);
     if($count >0){
         foreach($data as $agentc){
@@ -136,7 +136,7 @@ class Agentcommissioncotroller extends Controller
          }
     }
 
-    $data = DB::table('agent_commision_master')->where('agent_id',$agent)->where('site_id',$sitename)->where('ploats_id',$ploatid)->where('amtinfo','dr')->get();
+    $data = DB::table('agent_commision_master')->where('agent_id',$agent)->where('site_id',$sitename)->where('ploats_id',$ploatid)->where('amtinfo','dr')->where('status',1)->get();
     $count=count($data);
     if($count >0){
         foreach($data as $agentc){
@@ -152,7 +152,14 @@ class Agentcommissioncotroller extends Controller
         $ploatid=$request->id;
         $agent=$request->agent;
         $sitename=$request->sitename;
-        $data = DB::table('agent_commision_master')->where('agent_id',$agent)->where('site_id',$sitename)->where('ploats_id',$ploatid)->get();
+        $data = DB::table('agent_commision_master')->where('agent_id',$agent)->where('site_id',$sitename)->where('ploats_id',$ploatid)->where('status',1)->get();
+        return $data;
+    }
+    public function deleteagentcommsion($id){
+       $data= DB::table('agent_commision_master')
+        ->where('id', $id)  // find your user by their email
+        ->update(array('status' => 0));
+
         return $data;
     }
 }

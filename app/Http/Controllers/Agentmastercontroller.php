@@ -78,4 +78,55 @@ class Agentmastercontroller extends Controller
         return $filename;
 
     }
+    public function updateagentinfo(Request $request){
+        $updatecust = array(
+            'first_name' => $request->firstname,
+            'last_name' =>  $request->lastname,
+            'email' =>  $request->email,
+            'city' =>  $request->city,
+            'state' =>  $request->state,
+            'contry' =>  $request->contry,
+            'pincode' =>  $request->pincode,
+            'profilepicture' =>  $request->profileimg,
+
+        );
+       $data= DB::table('agent_master')->where('id', $request->save_update)->update($updatecust);
+       return $data;
+    }
+    public function getagentpayment(Request $request){
+        $agentid=$request->id;
+        $crsum=0;
+        $drsum=0;
+        $per=0;
+        $perinfo=0;
+        $data= DB::table('agent_commision_master')->where('agent_id', $agentid)->where('amtinfo', 'cr')->where('status', '1')->get();
+        $count=count($data);
+        if($count >0){
+            foreach($data as $cramountinfo){
+                $amt=$cramountinfo->amount;
+                $crsum= $crsum+$amt;
+            }
+        }
+
+        $data1= DB::table('agent_commision_master')->where('agent_id', $agentid)->where('amtinfo', 'dr')->where('status', '1')->get();
+        $count1=count($data1);
+        if($count1 >0){
+            foreach($data1 as $cramountinfo){
+                $amt=$cramountinfo->amount;
+                $drsum= $drsum+$amt;
+            }
+        }
+
+        if($drsum >0 && $crsum >0){
+
+            $perinfo=round(($drsum*100)/$crsum);
+
+        }else if($drsum==0 && $crsum >0){
+            $perinfo=100;
+        }else if($drsum==0 && $crsum==0){
+            $perinfo=0;
+        }
+
+        return $perinfo;
+    }
 }

@@ -30,12 +30,15 @@ Route::post('login_check', 'LoginController@check_login');
 
 Route::resource('dashboard', 'DashboardController');
 
+//for Customer
+
 Route::resource('customer', 'Customermasetcontroller');
 Route::get('getallcustomer', 'Customermasetcontroller@getallcustomer');
 Route::post('editcustomer', 'Customermasetcontroller@editcustomer');
 Route::post('editdoccustomer', 'Customermasetcontroller@editdoccustomer');
 Route::get('deletecustomer/{id}', 'Customermasetcontroller@deletecustomer');
-
+Route::post('updatecustomerinfo', 'Customermasetcontroller@updatecustomerinfo');
+Route::post('getpaymentinfo', 'Customermasetcontroller@getpaymentinfo');
 
 //for agent
 
@@ -45,7 +48,8 @@ Route::get('deleteagent/{id}', 'Agentmastercontroller@deleteagent');
 Route::post('editagent', 'Agentmastercontroller@editagent');
 Route::match(['get','post'], 'uplaodprofieagent', 'Agentmastercontroller@uplaodprofieagent');
 Route::match(['get','post'], 'uploadingcustfile', 'Customermasetcontroller@uploadingcustfile');
-
+Route::post('updateagentinfo', 'Agentmastercontroller@updateagentinfo');
+Route::post('getagentpayment', 'Agentmastercontroller@getagentpayment');
 
 
 //for sitemanagement
@@ -67,6 +71,8 @@ Route::get('deleteploatalocate/{id}', 'Ploateallocationcontroller@deleteploatalo
 
 Route::resource('ploatallocation', 'Ploateallocationcontroller');
 
+
+
 Route::resource('agentcommission', 'Agentcommissioncotroller');
 Route::get('getdropagentcommission', 'Agentcommissioncotroller@getdropagentcommission');
 Route::get('getagentcommssioninfo', 'Agentcommissioncotroller@getagentcommssioninfo');
@@ -74,7 +80,7 @@ Route::post('getagentsite', 'Agentcommissioncotroller@getagentsite');
 Route::post('getagentsiteploat', 'Agentcommissioncotroller@getagentsiteploat');
 Route::post('getagentallcommssion', 'Agentcommissioncotroller@getagentallcommssion');
 Route::post('getagenthistory', 'Agentcommissioncotroller@getagenthistory');
-
+Route::get('deleteagentcommsion/{id}', 'Agentcommissioncotroller@deleteagentcommsion');
 
 
 

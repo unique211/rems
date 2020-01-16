@@ -117,4 +117,45 @@ class Customermasetcontroller extends Controller
 
         return $filename;
     }
+    public function updatecustomerinfo(Request $request){
+        $updatecust = array(
+            'first_name' => $request->firstname,
+            'last_name' =>  $request->lastname,
+            'email' =>  $request->email,
+            'city' =>  $request->city,
+            'state' =>  $request->state,
+            'contry' =>  $request->contry,
+            'pincode' =>  $request->pincode,
+            'cust_profile' =>  $request->profileimg,
+
+        );
+       $data= DB::table('customer_master')->where('id', $request->save_update)->update($updatecust);
+       return $data;
+    }
+    public function getpaymentinfo(Request $request){
+        $id=$request->id;
+        $sum=0;
+        $paytotal=0;
+        $perinfo=0;
+        $data= DB::table("ploaalocation_master")->where('c_id',$id)->get();
+        foreach($data as $ploatal){
+            $amt=$ploatal->amt;
+            $sum= $sum+$amt;
+            $id=$ploatal->id;
+
+            $data1= DB::table("customer_payment")->where('p_a_id',$id)->get();
+            foreach($data1 as $customerp){
+                $amt=$customerp->amount;
+                $paytotal=$paytotal+$amt;
+            }
+        }
+        if($ploatal >0 &&   $sum >0){
+             $perinfo=round(($paytotal*100)/ $sum);
+        }
+
+        return $perinfo;
+
+
+
+    }
 }

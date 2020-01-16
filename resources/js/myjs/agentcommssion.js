@@ -317,9 +317,20 @@ $(document).ready(function() {
                         '<td  id="acamount_' + data[i].id + '">' + data[i].amount + '</td>' +
                         '<td id="creditamt_' + data[i].id + '">' + credit + '</td>' +
                         '<td id="remainamt_' + data[i].id + '">' + remain + '</td>' +
-                        '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
-                        data[i].id +
-                        '><i class="fa fa-edit"></i></button>&nbsp;</td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
+                            data[i].id +
+                            '><i class="fa fa-edit"></i></button>&nbsp;';
+                    }
+                    if (delrt == 1) {
+                        html += '<button name = "delete" value = "Delete" class = "delete_data btn btn-xs btn-danger" id = ' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    if (delrt == 0 && editrt == 0) {
+                        html += "N/A";
+                    }
+
+                    html += '</td>' +
                         '</tr>';
 
                     opening = remain;
@@ -348,6 +359,11 @@ $(document).ready(function() {
         var acamount_ = $('#acamount_' + id).html();
         var remainamt_ = $('#remainamt_' + id).html();
         var amtinfo_ = $('#creditamt_' + id).html();
+
+        if (creatert == 0) {
+            $('#btnsavedata').prop("disabled", false);
+            $('#amt').prop("disabled", false);
+        }
 
 
         if (amtinfo_ == "Credit") {
@@ -380,8 +396,8 @@ $(document).ready(function() {
         var openingbalance = $('#openingbalance').val();
         var amt = $('#amt').val();
         var remain = 0;
-        if (amt > 0 && openingbalance > 0)
-            if (crdr == "Credit") {
+        if (amt > 0 && openingbalance >= 0)
+            if (crdr == "cr") {
                 remain = parseFloat(openingbalance) + parseFloat(amt);
             } else {
                 remain = parseFloat(openingbalance) - parseFloat(amt);
@@ -396,7 +412,7 @@ $(document).ready(function() {
         var openingbalance = $('#openingbalance').val();
         var amt = $('#amt').val();
         var remain = 0;
-        if (amt > 0 && openingbalance > 0)
+        if (amt > 0 && openingbalance >= 0)
             if (crdr == "cr") {
                 remain = parseFloat(openingbalance) + parseFloat(amt);
             } else {
@@ -443,7 +459,10 @@ $(document).ready(function() {
                 getcommsioninformation();
                 successTost("Opration Save Success fully!!!");
 
-
+                if (creatert == 0) {
+                    $('#btnsavedata').prop("disabled", true);
+                    $('#amt').prop("disabled", true);
+                }
                 form_clear();
             }
         });
@@ -536,10 +555,12 @@ $(document).ready(function() {
         $('#amount').val('');
         $('#ploats').val('').trigger('change');
         $('#agent').val('').trigger('change');
-        $('#openingbalance').val('');
+        $('#openingbalance').val('0');
+        $('#amt').val('0');
+        //$('#remainamt').val('0');
 
         $('#payamount').val('');
-        $('#remainamt').val('');
+
         $('#paymentmode').val('');
         $('#remark').val('');
         $('#bankname').val('');
@@ -550,6 +571,48 @@ $(document).ready(function() {
         $('#tnote').val('');
 
     }
+
+    //Delete  Button Code Strat  Here------
+
+    $(document).on('click', '.delete_data', function() {
+        var id1 = $(this).attr('id');
+
+        if (id1 != "") {
+            swal({
+                    title: "Are you sure to delete ?",
+                    text: "You will not be able to recover this Data !!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it !!",
+                    closeOnConfirm: false
+                },
+                function() {
+                    $.ajax({
+                        type: "GET",
+                        url: delete_data + '/' + id1,
+                        success: function(data) {
+
+                            if (data == true) {
+                                swal("Deleted !!", "Hey, your Data has been deleted !!", "success");
+                                $('.closehideshow').trigger('click');
+                                $('#save_update').val("");
+                                getcommsioninformation(); //call function show all data
+                            } else {
+                                errorTost("Data Delete Failed");
+                            }
+
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+
+
+                    return false;
+                });
+        }
+    });
 
 
 

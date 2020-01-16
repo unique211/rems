@@ -488,7 +488,7 @@
                                         <div class="widget-subheading" id="totalclient"> </div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div class="widget-numbers text-white" ><span id="customerpay">$ 568</span></div>
+                                        <div class="widget-numbers text-white" ><span id="customerpay"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -498,10 +498,10 @@
                                 <div class="widget-content-wrapper text-white">
                                     <div class="widget-content-left">
                                         <div class="widget-heading">Agent</div>
-                                        <div class="widget-subheading" id="agenttotal">People Interested</div>
+                                        <div class="widget-subheading" id="agenttotal"></div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div class="widget-numbers text-white"><span id="agentpr">46%</span></div>
+                                        <div class="widget-numbers text-white"><span id="agentpr"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -529,10 +529,10 @@
                                         Report
                                     </div>
                                     <ul class="nav">
-                                        <li class="nav-item"><a href="javascript:void(0);"
+                                        {{-- <li class="nav-item"><a href="javascript:void(0);"
                                                 class="active nav-link">Last</a></li>
                                         <li class="nav-item"><a href="javascript:void(0);"
-                                                class="nav-link second-tab-toggle">Current</a></li>
+                                                class="nav-link second-tab-toggle">Current</a></li> --}}
                                     </ul>
                                 </div>
                                 <div class="card-body">

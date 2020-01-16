@@ -52,7 +52,7 @@ $(document).ready(function() {
                         '<small class="opacity-5 pr-1">₹</small>' +
                         '<span>' + data[i].agensum + '</span>' +
                         '<small class="text-danger pl-2">' +
-                        '<i class="fa fa-angle-down"></i>' +
+
                         '</small>' +
                         '</div>' +
                         '</div>' +

@@ -13,6 +13,7 @@ class Ploateallocationcontroller extends Controller
   public  function index(Request $request)
     {
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        $data['activemenu'] ='ploatal';
         return view('ploateallocation',$data);
     }
     public function getdropcustomer(){

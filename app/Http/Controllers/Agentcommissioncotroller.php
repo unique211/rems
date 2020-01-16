@@ -16,6 +16,7 @@ class Agentcommissioncotroller extends Controller
     {
 
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        $data['activemenu'] ='agentcomm';
         return view('agentcommsion',$data);
     }
     public function getdropagentcommission(){

@@ -15,6 +15,7 @@ class Customermasetcontroller extends Controller
 
        // $title['activemenu'] = "c";
        $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+       $data['activemenu'] ='customer';
         return view('customermaster',$data);
     }
    public function uploadingfile(Request $request){
@@ -149,7 +150,7 @@ class Customermasetcontroller extends Controller
                 $paytotal=$paytotal+$amt;
             }
         }
-        if($ploatal >0 &&   $sum >0){
+        if($paytotal >0 &&   $sum >0){
              $perinfo=round(($paytotal*100)/ $sum);
         }
 

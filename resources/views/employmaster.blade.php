@@ -327,7 +327,7 @@ headers: {
 });
     $('#customermaster').DataTable({});
     var profileupload1="{{url('uploadingcustfile')}}";
-    var adddata="{{route('employ.store')}}";
+    var adddata="{{route('employee.store')}}";
     var imgurl="<?php  echo url('/') ?>";
     var getalldata="{{url('getallemployee')}}";
     var editurl="{{url('editlogin')}}";

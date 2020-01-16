@@ -13,6 +13,7 @@ class Agentmastercontroller extends Controller
     {
 
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        $data['activemenu'] ='agenti';
         return view('agentmaster',$data);
     }
     public function store(Request $request)//For insert or Update Record Of class Master --

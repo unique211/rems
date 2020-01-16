@@ -193,7 +193,8 @@ $(document).ready(function() {
         $('#ifsccode').val('');
         $('#accountholder').val('');
         $('#infoimages').attr('src', imgurl + '/resources/sass/images/userpic.jpg');
-
+        $('#paymentbar').css('width', '0%');
+        $('.progress-value').text('0%');
         $('#save_update').val('');
     }
 

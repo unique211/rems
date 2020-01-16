@@ -94,7 +94,7 @@ Route::post('getuserright', 'Rolemanagementcontroller@getuserright');
 
 
 
-Route::resource('employ', 'Employmaster');
+Route::resource('employee', 'Employmaster');
 Route::get('getallemployee', 'Employmaster@getallemployee');
 Route::get('deleteemp/{id}', 'Employmaster@deleteemp');
 Route::post('editlogin', 'Employmaster@editlogin');

@@ -27,9 +27,10 @@
                 <div class="h-100 no-gutters row">
                     <div class="d-none d-lg-block col-lg-4">
                         <div class="slider-light">
-                            <div class="slick-slider slick-initialized slick-dotted"><button
+                            <div class="slick-slider slick-initialized slick-dotted">
+                                {{-- <button
                                     class="slick-prev slick-arrow" aria-label="Previous" type="button"
-                                    style="">Previous</button>
+                                    style="">Previous</button> --}}
                                 <div class="slick-list draggable">
                                     <div class="slick-track"
                                         style="opacity: 1; width: 3171px; transform: translate3d(-906px, 0px, 0px);">
@@ -167,10 +168,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div><button class="slick-next slick-arrow" aria-label="Next" type="button"
-                                    style="">Next</button>
+                                </div>
+                                {{-- <button class="slick-next slick-arrow" aria-label="Next" type="button"
+                                    style="">Next</button> --}}
                                 <ul class="slick-dots" style="" role="tablist">
-                                    <li class="" role="presentation"><button type="button" role="tab"
+                                    {{-- <li class="" role="presentation"><button type="button" role="tab"
                                             id="slick-slide-control00" aria-controls="slick-slide00" aria-label="1 of 3"
                                             tabindex="-1">1</button></li>
                                     <li role="presentation" class="slick-active"><button type="button" role="tab"
@@ -178,7 +180,7 @@
                                             tabindex="0" aria-selected="true">2</button></li>
                                     <li role="presentation"><button type="button" role="tab" id="slick-slide-control02"
                                             aria-controls="slick-slide02" aria-label="3 of 3" tabindex="-1">3</button>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </div>

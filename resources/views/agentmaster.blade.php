@@ -215,23 +215,23 @@
 
                                                                     </tr>
                                                                  <tr>
-                                                                    <th>City</th>
+                                                                    <th>City*</th>
 
                                                                     <td class="lbldata"><label id="clable">City*</label></td>
                                                                     <td class="edittb"><input class="form-control" type="text" id="city" name="city" placeholder="City" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                        <th>State</th>
+                                                                        <th>State*</th>
                                                                         <td class="lbldata"><label id="slable">State*</label></td>
                                                                         <td class="edittb"><input class="form-control" type="text" id="state" name="state" placeholder="State" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                        <th>Contry</th>
+                                                                        <th>Contry*</th>
                                                                         <td class="lbldata"><label id="conlable">Contry*</label></td>
                                                                         <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Pin code</th>
+                                                                    <th>Pin code*</th>
                                                                     <td class="lbldata"><label id="pinlable">Pin Code*</label></td>
                                                                     <td class="edittb"><input class="form-control" type="text" id="pincode" name="pincode" placeholder="Pincode" required> </td>
                                                             </tr>

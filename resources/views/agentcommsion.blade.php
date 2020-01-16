@@ -304,7 +304,7 @@
                                         </div>
                                     <div class="form-row">
                                         <input type="hidden" id="doc_row_id" name="doc_row_id" value="0">
-                                            <table style="margin-right:5px;margin-left:5px;"  class="table table-bordered table-striped" id="docupload">
+                                            <table style="margin-right:5px;margin-left:5px;"  class="table table-bordered table-striped" id="commssiontb">
                                                     <thead>
                                                         <tr>
                                                           <th>Date</th>

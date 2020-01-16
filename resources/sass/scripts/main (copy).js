@@ -12156,7 +12156,7 @@
         a = (n(205), function() { return Math.round(100 * Math.random()) }),
         o = r.a.helpers.color,
         l = (o(window.chartColors.red).alpha(.5).rgbString(), window.chartColors.red, a(), a(), a(), a(), a(), a(), a(), o(window.chartColors.blue).alpha(.5).rgbString(), window.chartColors.blue, a(), a(), a(), a(), a(), a(), a()),
-        s = { type: "pie", data: { datasets: [{ data: [a(), a(), a(), a(), a()], backgroundColor: [window.chartColors.red, window.chartColors.orange, window.chartColors.yellow, window.chartColors.green, window.chartColors.blue], label: "Dataset 1" }], labels: ["Orange", "Yellow", "Green", "Blue"] }, options: { responsive: !0 } },
+        s = { type: "pie", data: { datasets: [{ data: [a(), a(), a(), a(), a()], backgroundColor: [window.chartColors.red, window.chartColors.orange, window.chartColors.yellow, window.chartColors.green, window.chartColors.blue], label: "Dataset 1" }], labels: ["Red", "Orange", "Yellow", "Green", "Blue"] }, options: { responsive: !0 } },
         d = (l = { labels: ["January", "February", "March", "April", "May", "June", "July"], datasets: [{ label: "Dataset 1", backgroundColor: window.chartColors.red, data: [a(), a(), a(), a(), a(), a(), a()] }, { label: "Dataset 2", backgroundColor: window.chartColors.blue, data: [a(), a(), a(), a(), a(), a(), a()] }, { label: "Dataset 3", backgroundColor: window.chartColors.green, data: [a(), a(), a(), a(), a(), a(), a()] }] }, {
             type: "radar",
             data: {

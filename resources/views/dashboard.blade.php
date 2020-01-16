@@ -471,11 +471,11 @@
                             <div class="card mb-3 widget-content bg-midnight-bloom">
                                 <div class="widget-content-wrapper text-white">
                                     <div class="widget-content-left">
-                                        <div class="widget-heading">Total Orders</div>
-                                        <div class="widget-subheading">Last year expenses</div>
+                                        <div class="widget-heading">Total Plot Sale</div>
+                                        <div class="widget-subheading"></div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div class="widget-numbers text-white"><span>1896</span></div>
+                                        <div class="widget-numbers text-white"><span id="totalploat"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -484,11 +484,11 @@
                             <div class="card mb-3 widget-content bg-arielle-smile">
                                 <div class="widget-content-wrapper text-white">
                                     <div class="widget-content-left">
-                                        <div class="widget-heading">Clients</div>
-                                        <div class="widget-subheading">Total Clients Profit</div>
+                                        <div class="widget-heading">Customer</div>
+                                        <div class="widget-subheading" id="totalclient"> </div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div class="widget-numbers text-white"><span>$ 568</span></div>
+                                        <div class="widget-numbers text-white" ><span id="customerpay">$ 568</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -497,11 +497,11 @@
                             <div class="card mb-3 widget-content bg-grow-early">
                                 <div class="widget-content-wrapper text-white">
                                     <div class="widget-content-left">
-                                        <div class="widget-heading">Followers</div>
-                                        <div class="widget-subheading">People Interested</div>
+                                        <div class="widget-heading">Agent</div>
+                                        <div class="widget-subheading" id="agenttotal">People Interested</div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div class="widget-numbers text-white"><span>46%</span></div>
+                                        <div class="widget-numbers text-white"><span id="agentpr">46%</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -521,7 +521,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <div class="mb-3 card">
                                 <div class="card-header-tab card-header-tab-animation card-header">
                                     <div class="card-header-title">
@@ -542,15 +542,16 @@
                                                 <div class="widget-chat-wrapper-outer">
                                                     <div
                                                         class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
-                                                        <canvas id="canvas"></canvas>
+                                                        {{-- <canvas id="canvas"></canvas> --}}
+                                                        <canvas id="myChart" width="978" height="489" class="chartjs-render-monitor" style="display: block; width: 978px; height: 489px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
                                             <h6
                                                 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
-                                                Top Authors</h6>
+                                                Top Agent</h6>
                                             <div class="scroll-area-sm">
-                                                <div class="scrollbar-container">
+                                                <div class="scrollbar-container" id="divagentinfo">
                                                     <ul
                                                         class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
                                                         <li class="list-group-item">
@@ -824,7 +825,7 @@
                             </div>
                         </div> --}}
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6 col-xl-4">
                             <div class="card mb-3 widget-content">
                                 <div class="widget-content-outer">
@@ -895,8 +896,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div> --}}
+                    <!-- <div class="row">
                         <div class="col-md-12">
                             <div class="main-card mb-3 card">
                                 <div class="card-header">Active Users
@@ -1040,8 +1041,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div> -->
+
+                    <!--<div class="row">
                         <div class="col-md-6 col-lg-3">
                             <div class="card-shadow-danger mb-3 widget-chart widget-chart2 text-left card">
                                 <div class="widget-content">
@@ -1134,7 +1136,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
 
 
@@ -1152,7 +1154,28 @@
 
     {{-- END SCRIPTS --}}
 
+    <script>
+            $(document).ready(function () {
 
+      $.ajaxSetup({
+      headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+      });
+
+
+      });
+      </script>
 </body>
+<script>
+      var getdashboard="{{url('getdashboarddata')}}";
+      var getagentinfo="{{url('getagentinfo')}}";
+      var imgurl="<?php  echo url('/') ?>";
+      var getsalesdata="{{url('getagentploatsale')}}";
+</script>
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/dashboard.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>
+<script src="{{ URL::asset('resources/sass/js/chart.js') }}"></script>
+
 </html>
+

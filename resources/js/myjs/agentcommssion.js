@@ -299,6 +299,9 @@ $(document).ready(function() {
                 var opening = 0;
                 var credit = '';
                 $('#paymenttabletbody').html('');
+                // if ($.fn.DataTable.isDataTable('#commssiontb')) {
+                //     $('#commssiontb').DataTable().destroy();
+                // }
 
                 for (var i = 0; i < data.length; i++) {
 
@@ -338,6 +341,8 @@ $(document).ready(function() {
                     $('#paymenttabletbody').append(html);
 
                 }
+                // $('#commssiontb').DataTable({});
+
 
 
 

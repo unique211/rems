@@ -11,6 +11,7 @@ class DashboardController extends Controller
     function index(Request $request)
     {
     $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
-          return view('dashboard',$data);
+    $data['activemenu'] ='dashm';
+    return view('dashboard',$data);
     }
 }

@@ -14,6 +14,7 @@ class Sitemastercontroller extends Controller
     {
 
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        $data['activemenu'] ='sitem';
         return view('sitemaster',$data);
     }
 

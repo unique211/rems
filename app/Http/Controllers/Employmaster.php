@@ -15,6 +15,7 @@ class Employmaster extends Controller
     {
 
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
+        $data['activemenu'] ='employd';
         return view('employmaster',$data);
     }
     public function store(Request $request)

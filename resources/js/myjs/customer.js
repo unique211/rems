@@ -516,6 +516,8 @@ $(document).ready(function() {
         $("#doctbody").html('');
         $('#infoimages').attr('src', imgurl + '/resources/sass/images/userpic.jpg');
         $('#save_update').val('');
+        $('#paymentbar').css('width', '0%');
+        $('.progress-value').text('0%');
     }
 
     //Delete  Button Code Strat  Here------

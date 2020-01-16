@@ -682,7 +682,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12 col-lg-6">
                             <div class="mb-3 card">
                                 <div class="card-header-tab card-header">
                                     <div class="card-header-title">
@@ -822,7 +822,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-xl-4">

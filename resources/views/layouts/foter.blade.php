@@ -69,10 +69,10 @@
 </script>
 <script src="{{ URL::asset('resources/sass/select2/select2.full.min.js') }}"></script>
 
-// <!-- Sweet Alert -->
+ <!-- Sweet Alert -->
 <script type='text/javascript' src="{{ URL::asset('/resources/sass/sweetalert/sweetalert.min.js')}}"></script>
 
-// <!-- tost msg -->
+ <!-- tost msg -->
 <script type='text/javascript' src="{{ URL::asset('/resources/sass/toastr/toastr.min.js')}}"></script>
 
 <script type='text/javascript' src="{{ URL::asset('/resources/sass/toastr/tost.js')}}"></script>

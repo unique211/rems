@@ -27,8 +27,12 @@ Route::get('/logout', function (Request $request) {
 
 Route::post('login_check', 'LoginController@check_login');
 
-
+//for dashboard
 Route::resource('dashboard', 'DashboardController');
+Route::post('getdashboarddata', 'DashboardController@getdashboarddata');
+Route::post('getagentinfo', 'DashboardController@getagentinfo');
+Route::post('getagentploatsale', 'DashboardController@getagentploatsale');
+
 
 //for Customer
 
@@ -102,4 +106,6 @@ Route::get('getdroprole', 'Employmaster@getdroprole');
 
 
 Route::match(['get','post'], 'uploadingfile', 'Customermasetcontroller@uploadingfile');
+
+
 

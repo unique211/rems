@@ -70,11 +70,11 @@ $(document).ready(function() {
             var save_update = $('#doc_save_update').val();
             var dlt = 0;
 
-            var r1 = $('table#docupload').find('tbody').find('tr');
+            var r1 = $('table#documenttb').find('tbody').find('tr');
             var r = r1.length;
             for (var i = 0; i < r; i++) {
 
-                var profid = $(r1[i]).find('td:eq(1)').html();
+                var profid = $(r1[i]).find('td:eq(0)').html();
 
                 if (save_update == "") {
                     if (profid == profdoc) {
@@ -96,7 +96,7 @@ $(document).ready(function() {
                 $('#profdocname_' + save_update).html(profdocname);
                 $('#file_' + save_update).html(file);
                 $('#doc_save_update').val('');
-
+                $('#docimages_' + save_update).attr('src', imgurl + '/uploads/' + file);
 
             } else {
 
@@ -106,7 +106,8 @@ $(document).ready(function() {
                     '<td  style="display:none;" id="profdoctype_' + row_id + '">' + profdoc + '</td>' +
                     '<td  id="profdocname_' + row_id + '">' + profdocname + '</td>' +
 
-                    '<td  id="file_' + row_id + '">' + file + '</td>' +
+                    '<td style="display:none;" id="file_' + row_id + '">' + file + '</td>' +
+                    '<td id="fileimgupload_' + row_id + '"> <img  id="docimages_' + row_id + '"  src="' + imgurl + '/uploads/' + file + '"  width="50px;" height="50px;"></td>' +
                     //'<td><button  class="doc_edit_data1 btn btn-sm btn-primary"   id="' + row_id + '"  >Edit</button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  >delete</button>' +
                     '<td><button  class="doc_edit_data1 btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>' +
                     '</tr>';
@@ -465,6 +466,8 @@ $(document).ready(function() {
                         '<td  id="profdocname_' + row_id + '">' + data[i].customer_doc + '</td>' +
 
                         '<td  id="file_' + row_id + '">' + data[i].file + '</td>' +
+
+                        '<td id="fileimgupload_' + row_id + '"> <img  id="docimages_' + row_id + '"  src="' + imgurl + '/uploads/' + data[i].file + '"  width="50px;" height="50px;"></td>' +
                         //'<td><button  class="doc_edit_data1 btn btn-sm btn-primary"   id="' + row_id + '"  >Edit</button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  >delete</button>' +
                         '<td><button  class="doc_edit_data1 btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>' +
                         '</tr>';

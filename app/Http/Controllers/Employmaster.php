@@ -126,7 +126,10 @@ class Employmaster extends Controller
         }
     }
     public function getallemployee(){
-        $data = DB::table('employ_master')->get();
+        $data = DB::table('employ_master')
+        ->join('role_master', 'role_master.id', '=', 'employ_master.role')
+        ->select('employ_master.*', 'role_master.rolename as rolename')
+        ->get();
         return response()->json($data);
     }
     public function editlogin(Request $request){

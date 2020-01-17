@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/logout', function (Request $request) {
 
-
+    $request->session()->flush();
         return redirect('/');
 
 });
@@ -32,6 +32,7 @@ Route::resource('dashboard', 'DashboardController');
 Route::post('getdashboarddata', 'DashboardController@getdashboarddata');
 Route::post('getagentinfo', 'DashboardController@getagentinfo');
 Route::post('getagentploatsale', 'DashboardController@getagentploatsale');
+Route::post('getagentploatsaleinfo', 'DashboardController@getagentploatsaleinfo');
 
 
 //for Customer

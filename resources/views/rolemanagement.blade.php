@@ -154,7 +154,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbd_user_rights">
-                                                            <tr>
+                                                            {{-- <tr>
                                                                     <th  bgcolor="#00FF00" colspan="6" ><input type="checkbox" name="master" id="master"> Master</th>
 
                                                              </tr>
@@ -207,7 +207,7 @@
                                                                     <td><input type="checkbox" name="sitecreate" id="sitecreate"></td>
                                                                     <td><input type="checkbox" name="siteedit" id="siteedit"></td>
                                                                     <td><input type="checkbox" name="sitedel" id="sitedel"></td>
-                                                             </tr>
+                                                             </tr> --}}
 
 
                                                     </tbody>

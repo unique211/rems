@@ -131,6 +131,7 @@ $(document).ready(function() {
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Email</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Mobile NO</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px; " >Role</th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none;" >Role</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Role</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Action</th>' +
                     '</tr>' +
@@ -145,7 +146,8 @@ $(document).ready(function() {
                         '<td  id="lastname_' + data[i].id + '">' + data[i].last_name + '</td>' +
                         '<td id="email_' + data[i].id + '">' + data[i].email + '</td>' +
                         '<td id="mobile_no_' + data[i].id + '">' + data[i].mobile_no + '</td>' +
-                        '<td id="role_' + data[i].id + '">' + data[i].role + '</td>' +
+                        '<td id="rolename_' + data[i].id + '">' + data[i].rolename + '</td>' +
+                        '<td  style="display:none;" id="role_' + data[i].id + '">' + data[i].role + '</td>' +
                         '<td style="display:none;" id="profilepic_' + data[i].id + '">' + data[i].profile_pic + '</td>' +
                         '<td class="not-export-column" >';
                     // <button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +

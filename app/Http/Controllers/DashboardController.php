@@ -120,67 +120,96 @@ class DashboardController extends Controller
         return $result;
 
     }
-    public function getagentploatsale(Request $request){
+    // public function getagentploatsale(Request $request){
 
 
-        $result=array();
+    //     $result=array();
 
-        function getWeekDates($date, $start_date, $end_date) {
-            $week = date('W', strtotime($date));
-            $year = date('Y', strtotime($date));
-            $from = date("Y-m-d", strtotime("{$year}-W{$week}+1"));
+    //     function getWeekDates($date, $start_date, $end_date) {
+    //         $week = date('W', strtotime($date));
+    //         $year = date('Y', strtotime($date));
+    //         $from = date("Y-m-d", strtotime("{$year}-W{$week}+1"));
 
-            if ($from < $start_date)
-                $from = $start_date;
+    //         if ($from < $start_date)
+    //             $from = $start_date;
 
-            $to = date("Y-m-d", strtotime("{$year}-W{$week}-7"));
-            if ($to > $end_date)
-                $to = $end_date;
+    //         $to = date("Y-m-d", strtotime("{$year}-W{$week}-7"));
+    //         if ($to > $end_date)
+    //             $to = $end_date;
 
-            $array1 = array(
-                "ssdate" => $from,
-                "eedate" => $to,
-            );
+    //         $array1 = array(
+    //             "ssdate" => $from,
+    //             "eedate" => $to,
+    //         );
 
-            return $array1;
-        }
+    //         return $array1;
+    //     }
 
-        $mm = date('m');
-        $yy = date('y');
-        $startdate = date($yy . "-" . $mm . "-01");
-        $current_date = date('Y-m-t');
-        $ld = cal_days_in_month(CAL_GREGORIAN, $mm, $yy);
-        $lastday = $yy . '-' . $mm . '-' . $ld;
-        $start_date = date('Y-m-d', strtotime($startdate));
-        $end_date = date('Y-m-d', strtotime($lastday));
-        $end_date1 = date('Y-m-d', strtotime($lastday . " + 7 days"));
-        $count_week = 0;
-        $week_array = array();
+    //     $mm = date('m');
+    //     $yy = date('y');
+    //     $startdate = date($yy . "-" . $mm . "-01");
+    //     $current_date = date('Y-m-t');
+    //     $ld = cal_days_in_month(CAL_GREGORIAN, $mm, $yy);
+    //     $lastday = $yy . '-' . $mm . '-' . $ld;
+    //     $start_date = date('Y-m-d', strtotime($startdate));
+    //     $end_date = date('Y-m-d', strtotime($lastday));
+    //     $end_date1 = date('Y-m-d', strtotime($lastday . " + 7 days"));
+    //     $count_week = 0;
+    //     $week_array = array();
 
-        // for ($date = $start_date; $date < $end_date1; $date = date('Y-m-d', strtotime($date . ' + 7 days'))) {
-        //     $getarray = getWeekDates($date, $start_date, $end_date);
-        //     $week_array[] = $getarray;
-        //     $count_week++;
-        // }
-
-        for ($date = $start_date; $date <= $end_date1; $date = date('Y-m-d', strtotime($date . ' + 7 days'))) {
-            $getarray = getWeekDates($date, $start_date, $end_date);
-            if(count($getarray))
-            {
-              $week_array[] = $getarray;
-              $count_week++;
-            }
+    //     // for ($date = $start_date; $date < $end_date1; $date = date('Y-m-d', strtotime($date . ' + 7 days'))) {
+    //     //     $getarray = getWeekDates($date, $start_date, $end_date);
+    //     //     $week_array[] = $getarray;
+    //     //     $count_week++;
+    //     // }
 
 
-        }
+    //     for ($date = $start_date; $date <= $end_date1; $date = date('Y-m-d', strtotime($date . ' + 7 days'))) {
+    //         $getarray = getWeekDates($date, $start_date, $end_date);
+    //         if(count($getarray))
+    //         {
+    //           $week_array[] = $getarray;
+    //           $count_week++;
+    //         }
+
+
+    //     }
+    //     $createdarray = array();
+    //     $firstarray=array();
+    //     $secondarray=array();
+
+    //     foreach($week_array as $weekinfo){
+    //         $data5= DB::table('ploaalocation_master')->whereDate('created_at', '>=', $weekinfo['ssdate'])->whereDate('created_at', '<=', $weekinfo['eedate'])->sum('amt');
+
+    //         $data6= DB::table('customer_payment')->whereDate('create_at', '>=', $weekinfo['ssdate'])->whereDate('create_at', '<=', $weekinfo['eedate'])->sum('amount');
+
+    //        // array_push($firstarray,$data5);
+    //         $firstarray[]=array(
+    //             'sum1'=>$data5,
+
+    //         );
+    //         $secondarray[]=array(
+    //             'sum2'=>$data6,
+    //         );
+
+    //     }
+
+    //     $result[]=array(
+    //         'firstar'=>$firstarray,
+    //         'secondarr'=>$secondarray,
+    //         'week_array'=>$week_array,
+    //     );
+    //     return $result;
+    // }
+    public function getagentploatsaleinfo(Request $request){
+        $urdata=$request->weekinfo;
         $createdarray = array();
         $firstarray=array();
         $secondarray=array();
+        foreach ($urdata as $value) {
+            $data5= DB::table('ploaalocation_master')->whereDate('created_at', '>=', $value['start'])->whereDate('created_at', '<=', $value['end'])->sum('amt');
 
-        foreach($week_array as $weekinfo){
-            $data5= DB::table('ploaalocation_master')->whereDate('created_at', '>=', $weekinfo['ssdate'])->whereDate('created_at', '<=', $weekinfo['eedate'])->sum('amt');
-
-            $data6= DB::table('customer_payment')->whereDate('create_at', '>=', $weekinfo['ssdate'])->whereDate('create_at', '<=', $weekinfo['eedate'])->sum('amount');
+            $data6= DB::table('customer_payment')->whereDate('create_at', '>=', $value['start'])->whereDate('create_at', '<=', $value['start'])->sum('amount');
 
            // array_push($firstarray,$data5);
             $firstarray[]=array(
@@ -190,16 +219,20 @@ class DashboardController extends Controller
             $secondarray[]=array(
                 'sum2'=>$data6,
             );
+            $createdarray[]=array(
+                'stratdate'=>$value['start']."-".$value['end'],
+            );
+
 
         }
-
         $result[]=array(
             'firstar'=>$firstarray,
             'secondarr'=>$secondarray,
-            'week_array'=>$week_array,
+            'week_array'=>$createdarray,
         );
         return $result;
     }
+
 
 
 }

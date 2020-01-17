@@ -125,24 +125,70 @@ $(document).ready(function() {
     //     }
     // });
 
+    // $.ajax({
+    //     data: {
+
+
+    //     },
+    //     url: getsalesdata,
+    //     type: "POST",
+    //     dataType: 'json',
+    //     // async: false,
+    //     success: function(data) {
+
+
+    //         var result = [];
+    //         var fresult = [];
+    //         var sresult = [];
+    //         for (i = 0; i < data.length; i++) {
+    //             for (j = 0; j < data[i].week_array.length; j++) {
+    //                 var result1 = data[i].week_array[j].ssdate;
+    //                 result.push(result1);
+    //             }
+    //             for (j = 0; j < data[i].firstar.length; j++) {
+    //                 var result2 = data[i].firstar[j].sum1;
+
+    //                 fresult.push(result2);
+    //             }
+    //             for (k = 0; k < data[i].secondarr.length; k++) {
+
+    //                 var result3 = data[i].secondarr[k].sum2;
+
+    //                 sresult.push(result3);
+    //             }
+    //         }
+    //         console.log("result" + result + "fresult" + fresult + "sresult" + sresult);
+
+
+    //     }
+    // });
+
+    var weekinfo = [];
+    var d = new Date();
+
+    var n = d.getMonth();
+
+    var y = d.getFullYear();
+    weekinfo = getWeeksStartAndEndInMonth(n, y, 2);
+
+
     $.ajax({
         data: {
-
+            weekinfo: weekinfo,
 
         },
-        url: getsalesdata,
+        url: getsalesdata1,
         type: "POST",
         dataType: 'json',
         // async: false,
         success: function(data) {
-
-            var ctx = document.getElementById("myChart").getContext("2d");
             var result = [];
             var fresult = [];
             var sresult = [];
+            var ctx = document.getElementById("myChart").getContext("2d");
             for (i = 0; i < data.length; i++) {
                 for (j = 0; j < data[i].week_array.length; j++) {
-                    var result1 = data[i].week_array[j].ssdate;
+                    var result1 = data[i].week_array[j].stratdate;
                     result.push(result1);
                 }
                 for (j = 0; j < data[i].firstar.length; j++) {
@@ -158,7 +204,6 @@ $(document).ready(function() {
                 }
             }
             console.log("result" + result + "fresult" + fresult + "sresult" + sresult);
-
             var data = {
                 labels: result,
                 datasets: [{
@@ -192,6 +237,55 @@ $(document).ready(function() {
 
         }
     });
+
+
+
+
+
+
+
+    function endFirstWeek(firstDate, firstDay) {
+        if (!firstDay) {
+            return 6 - firstDate.getDay();
+        }
+        if (firstDate.getDay() < firstDay) {
+            return firstDay - firstDate.getDay();
+        } else {
+            return 6 - firstDate.getDay() + firstDay;
+        }
+    }
+
+    function getWeeksStartAndEndInMonth(month, year, start) {
+        var weeks = [],
+            firstDate = new Date(year, month, 1),
+            lastDate = new Date(year, month + 1, 0),
+            numDays = lastDate.getDate();
+
+        var start = 1;
+        var end = endFirstWeek(firstDate, 2);
+        while (start <= numDays) {
+            var cmonth = 0;
+            if (month < 9) {
+                cmonth = '0' + (month + 1);
+            } else {
+                cmonth = (month + 1);
+            }
+            var stratdate = year + "-" + (cmonth) + "-" + start;
+            var enddate = year + "-" + (cmonth) + "-" + end;
+
+            weeks.push({
+                start: stratdate,
+                end: enddate
+            });
+            start = end + 1;
+            end = end + 7;
+            end = start === 1 && end === 8 ? 1 : end;
+            if (end > numDays) {
+                end = numDays;
+            }
+        }
+        return weeks;
+    }
 
 
 });

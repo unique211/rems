@@ -66,7 +66,7 @@ $(document).ready(function() {
 
                     if (data[i].submenudata.length > 0) {
 
-                        table += '<tr class="main_menu">' +
+                        table += '<tr class="app-sidebar__heading">' +
                             '<td><span ><input type="checkbox"   class="main_chk"  id="_' + data[i].menuid + '" name="' + data[i].menuid + '" value="1"></span>' + data[i].menu_name + '</td>' +
                             '<td></td>' +
                             '<td></td>' +
@@ -84,7 +84,7 @@ $(document).ready(function() {
                         }
 
                     } else {
-                        table += '<tr class="main_menu">' +
+                        table += '<tr class="app-sidebar__heading">' +
                             '<td><span ><input type="checkbox"   class="main_chk"  id="_' + data[i].menuid + '" name="' + data[i].menuid + '" value="1"></span>' + data[i].menu_name + '</td>' +
                             '<td><input type="checkbox" class="submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="mview_' + data[i].menuid + '" value="0" /></td>' +
                             '<td><input type="checkbox" class="submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="mcreate_' + data[i].menuid + '"  value="0" /></td>' +

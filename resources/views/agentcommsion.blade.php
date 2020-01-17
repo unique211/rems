@@ -182,7 +182,7 @@
                                                                 </div>
 
                                                                     <div class="form-group col-md-8">
-                                                                            <input class="form-control" type="number" id="openingbalance" name="openingbalance" value="Amount" disabled>
+                                                                            <input class="form-control" type="number" id="openingbalance" name="openingbalance" value="Amount" style="margin-left:-3%;" disabled>
 
                                                                         </div>
 
@@ -202,7 +202,7 @@
 
                                                                     </div>
                                                                     <div class="form-group col-md-6">
-                                                                            <input class="form-control amtdata"  type="number" id="amt" name="amt" value="Amount" <?php if($val->createright==0){echo "disabled"; }?> >
+                                                                            <input class="form-control amtdata"  type="number" id="amt" name="amt" value="Amount" style="margin-left:-3%;" <?php if($val->createright==0){echo "disabled"; }?> >
 
                                                                         </div>
                                                                     </div>
@@ -212,7 +212,7 @@
 
                                                                                 </div>
                                                                             <div class="form-group col-md-8">
-                                                                                    <input class="form-control" type="number" id="remainamt" name="remainamt" value="Amount" disabled>
+                                                                                    <input class="form-control" type="number" id="remainamt" name="remainamt" style="margin-left:-3%;" value="Amount" disabled>
 
                                                                             </div>
                                                                     </div>

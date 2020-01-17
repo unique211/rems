@@ -552,7 +552,7 @@
                                                 Top Agent</h6>
                                             <div class="scroll-area-sm">
                                                 <div class="scrollbar-container" id="divagentinfo">
-                                                    <ul
+                                                    {{-- <ul
                                                         class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
                                                         <li class="list-group-item">
                                                             <div class="widget-content p-0">
@@ -675,7 +675,7 @@
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                    </ul>
+                                                    </ul> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -1172,6 +1172,7 @@
       var getagentinfo="{{url('getagentinfo')}}";
       var imgurl="<?php  echo url('/') ?>";
       var getsalesdata="{{url('getagentploatsale')}}";
+      var getsalesdata1="{{url('getagentploatsaleinfo')}}";
 </script>
 <script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/dashboard.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

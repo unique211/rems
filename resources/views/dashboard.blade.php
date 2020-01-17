@@ -1175,7 +1175,7 @@
 </script>
 <script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/dashboard.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>
-<script src="{{ URL::asset('resources/sass/js/chart.js') }}"></script>
+{{-- <script src="{{ URL::asset('resources/js/chart.js') }}"></script> --}}
 
 </html>
 

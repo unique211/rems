@@ -92,7 +92,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1"
+                                        {{-- <div class="slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1"
                                             role="tabpanel" id="slick-slide02" aria-describedby="slick-slide-control02"
                                             style="width: 453px;">
                                             <div>
@@ -110,8 +110,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true"
+                                        </div> --}}
+                                        {{-- <div class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true"
                                             tabindex="-1" style="width: 453px;">
                                             <div>
                                                 <div style="width: 100%; display: inline-block;">
@@ -129,8 +129,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="slick-slide slick-cloned" data-slick-index="4" aria-hidden="true"
+                                        </div> --}}
+                                        {{-- <div class="slick-slide slick-cloned" data-slick-index="4" aria-hidden="true"
                                             tabindex="-1" style="width: 453px;">
                                             <div>
                                                 <div style="width: 100%; display: inline-block;">
@@ -148,8 +148,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="slick-slide slick-cloned" data-slick-index="5" aria-hidden="true"
+                                        </div> --}}
+                                        {{-- <div class="slick-slide slick-cloned" data-slick-index="5" aria-hidden="true"
                                             tabindex="-1" style="width: 453px;">
                                             <div>
                                                 <div style="width: 100%; display: inline-block;">
@@ -166,7 +166,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 {{-- <button class="slick-next slick-arrow" aria-label="Next" type="button"

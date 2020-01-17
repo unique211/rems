@@ -157,6 +157,7 @@ $(document).ready(function() {
                     sresult.push(result3);
                 }
             }
+            console.log("result" + result + "fresult" + fresult + "sresult" + sresult);
 
             var data = {
                 labels: result,

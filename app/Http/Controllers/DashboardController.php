@@ -173,7 +173,7 @@ class DashboardController extends Controller
 
 
         }
-
+        $createdarray = array();
         $firstarray=array();
         $secondarray=array();
 
@@ -185,6 +185,7 @@ class DashboardController extends Controller
            // array_push($firstarray,$data5);
             $firstarray[]=array(
                 'sum1'=>$data5,
+
             );
             $secondarray[]=array(
                 'sum2'=>$data6,

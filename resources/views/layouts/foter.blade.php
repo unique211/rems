@@ -82,10 +82,10 @@
 <script type='text/javascript' src="{{ URL::asset('/resources/sass/datepicker/bootstrap-datepicker.js') }}"></script>
 
 {{-- new datetime --}}
-<script type='text/javascript' src="{{ URL::asset('/resources/sass/js/moment.js')}}"></script>
+<script type='text/javascript' src="{{ URL::asset('/resources/js/moment.js')}}"></script>
 
-<script type='text/javascript' src="{{ URL::asset('/resources/sass/js/bootstrap-datetimepicker.min.js') }}"></script>
-<script src="{{ URL::asset('/resources/sass/js/bootstrap-datetimepicker.js') }}"></script>
+<script type='text/javascript' src="{{ URL::asset('/resources/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="{{ URL::asset('/resources/js/bootstrap-datetimepicker.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.js" type="text/javascript">
 </script>
 <!-- date formate file -->

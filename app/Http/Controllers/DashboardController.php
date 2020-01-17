@@ -108,11 +108,14 @@ class DashboardController extends Controller
         }
         $agensum= $crsum- $drsum;
 
+        $data6= DB::table('ploaalocation_master')->where('agent_id',$agentid)->where('status', '1')->sum('amt');
+
+
         $result[]=array(
             'first_name'=>$first_name,
             'last_name'=>$last_name,
             'email'=>$email,
-            'agensum'=>$agensum,
+            'agensum'=>$data6,
             'profilepicture'=>$profilepicture,
         );
             //last changes

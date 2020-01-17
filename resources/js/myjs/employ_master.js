@@ -140,6 +140,7 @@ $(document).ready(function() {
 
                 for (var i = 0; i < data.length; i++) {
                     sr = sr + 1;
+
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
                         '<td  id="first_name_' + data[i].id + '">' + data[i].firstname + '</td>' +

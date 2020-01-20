@@ -10,11 +10,15 @@ class Agentmastercontroller extends Controller
 {
     //
   public  function index(Request $request)
-    {
+    { if (!$request->session()->exists('userid')) {
+        // user value cannot be found in session
+        return redirect('/');
+    }else{
 
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
         $data['activemenu'] ='agenti';
         return view('agentmaster',$data);
+    }
     }
     public function store(Request $request)//For insert or Update Record Of class Master --
     {
@@ -24,6 +28,7 @@ class Agentmastercontroller extends Controller
 
                 ['id' => $ID],
                 [
+                    'advisor_id'        =>  $request->advisor_id,
                     'first_name'        =>  $request->firstname,
                     'last_name'        =>  $request->lastname,
                     'email'        =>  $request->email,

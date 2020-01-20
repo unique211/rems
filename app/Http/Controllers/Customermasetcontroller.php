@@ -13,10 +13,16 @@ class Customermasetcontroller extends Controller
     public function index(Request $request)
     {
 
+
        // $title['activemenu'] = "c";
+       if (!$request->session()->exists('userid')) {
+        // user value cannot be found in session
+        return redirect('/');
+    }else{
        $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
        $data['activemenu'] ='customer';
         return view('customermaster',$data);
+    }
     }
    public function uploadingfile(Request $request){
 

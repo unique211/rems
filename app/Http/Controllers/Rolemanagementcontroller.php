@@ -11,10 +11,14 @@ class Rolemanagementcontroller extends Controller
     //
     function index(Request $request)
     {
-
+        if (!$request->session()->exists('userid')) {
+            // user value cannot be found in session
+            return redirect('/');
+        }else{
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
         $data['activemenu'] ='rolem';
         return view('rolemanagement',$data);
+        }
     }
     public function getallmenu(){
         $result=array();

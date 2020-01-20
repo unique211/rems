@@ -11,7 +11,7 @@ $(document).ready(function() {
         $('.btnhideshow').hide();
         $('#btnsavedata').text('Save');
         form_clear();
-
+        $('.paymenthistb').hide();
 
     });
     /*---------login-----------------*/
@@ -24,7 +24,7 @@ $(document).ready(function() {
         $('.closehideshow').hide();
         $('.btnhideshow').show();
         form_clear();
-
+        $('.paymenthistb').hide();
     });
     $('.edittb').hide();
     $(document).on("click", "#editperson", function(e) {
@@ -268,9 +268,11 @@ $(document).ready(function() {
             dataType: 'json',
             // async: false,
             success: function(data) {
+                if (data.length > 0) {
+                    $('#amount').val(data[0].cost);
+                    $('#totalarea').val(data[0].area_insqft);
+                }
 
-                $('#amount').val(data[0].cost);
-                $('#totalarea').val(data[0].area_insqft);
 
                 if (saveid == "") {
                     $('#openingbalance').val(data[0].cost);
@@ -469,6 +471,7 @@ $(document).ready(function() {
             $('.tablehideshow').hide();
         }
 
+        $('.paymenthistb').show();
         var id = $(this).attr("id");
         $('#save_update').val(id);
 
@@ -536,8 +539,7 @@ $(document).ready(function() {
         });
 
 
-
-
+        $('#paymentmode').val('Cash').trigger('change');
 
     });
 
@@ -553,7 +555,7 @@ $(document).ready(function() {
 
         $('#payamount').val('');
         $('#remainamt').val('');
-        $('#paymentmode').val('');
+        $('#paymentmode').val('Cash').trigger('change');
         $('#remark').val('');
         $('#bankname').val('');
         $('#branch').val('');

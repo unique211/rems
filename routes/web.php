@@ -11,9 +11,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('loginnew');
-});
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // });
@@ -24,10 +22,17 @@ Route::get('/logout', function (Request $request) {
         return redirect('/');
 
 });
+Route::get('/', function () {
+    return view('loginnew');
+});
 
 Route::post('login_check', 'LoginController@check_login');
 
 //for dashboard
+Route::group(['middleware' => 'prevent-back-history'],function(){
+
+    Auth::routes();
+
 Route::resource('dashboard', 'DashboardController');
 Route::post('getdashboarddata', 'DashboardController@getdashboarddata');
 Route::post('getagentinfo', 'DashboardController@getagentinfo');
@@ -109,4 +114,5 @@ Route::get('getdroprole', 'Employmaster@getdroprole');
 Route::match(['get','post'], 'uploadingfile', 'Customermasetcontroller@uploadingfile');
 
 
+});
 

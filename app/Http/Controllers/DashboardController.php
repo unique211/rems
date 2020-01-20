@@ -10,9 +10,14 @@ class DashboardController extends Controller
     //
     function index(Request $request)
     {
+        if (!$request->session()->exists('userid')) {
+            // user value cannot be found in session
+            return redirect('/');
+        }else{
     $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
     $data['activemenu'] ='dashm';
     return view('dashboard',$data);
+    }
     }
     public function getdashboarddata(){
         $result=array();
@@ -34,8 +39,15 @@ class DashboardController extends Controller
         $drsum=0;
         $per=0;
         $perinfo=0;
-        $data4= DB::table('agent_commision_master')->where('amtinfo', 'cr')->where('status', '1')->get();
-        $count4=count($data4);
+
+        if($count >0){
+            $data5= DB::table('ploaalocation_master')->where('status', '1')->distinct('agent_id')->get();
+            $count=count($data5);
+            foreach($data5 as $ploatdata){
+                $agentid=$ploatdata->agent_id;
+                $ploat_id=$ploatdata->ploat_id;
+                $data4= DB::table('agent_commision_master')->where('agent_id', $agentid)->where('amtinfo', 'cr')->where('status', '1')->get();
+             $count4=count($data4);
         if($count4 >0){
             foreach($data4 as $cramountinfo){
                 $amt=$cramountinfo->amount;
@@ -43,7 +55,7 @@ class DashboardController extends Controller
             }
         }
 
-        $data5= DB::table('agent_commision_master')->where('amtinfo', 'dr')->where('status', '1')->get();
+        $data5= DB::table('agent_commision_master')->where('agent_id', $agentid)->where('amtinfo', 'dr')->where('status', '1')->get();
         $count5=count($data5);
         if($count5 >0){
             foreach($data5 as $cramountinfo){
@@ -51,6 +63,10 @@ class DashboardController extends Controller
                 $drsum= $drsum+$amt;
             }
         }
+            }
+
+
+    }
 
         // if($drsum >0 && $crsum >0){
 
@@ -210,7 +226,7 @@ class DashboardController extends Controller
         $firstarray=array();
         $secondarray=array();
         foreach ($urdata as $value) {
-            $data5= DB::table('ploaalocation_master')->whereDate('created_at', '>=', $value['start'])->whereDate('created_at', '<=', $value['end'])->sum('amt');
+            $data5= DB::table('ploaalocation_master')->whereDate('created_at', '>=', $value['start'])->whereDate('created_at', '<=', $value['end'])->where('status', '1')->sum('amt');
 
             $data6= DB::table('customer_payment')->whereDate('create_at', '>=', $value['start'])->whereDate('create_at', '<=', $value['start'])->sum('amount');
 

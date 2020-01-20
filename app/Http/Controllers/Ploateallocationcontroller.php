@@ -12,9 +12,14 @@ class Ploateallocationcontroller extends Controller
     //
   public  function index(Request $request)
     {
+        if (!$request->session()->exists('userid')) {
+            // user value cannot be found in session
+            return redirect('/');
+        }else{
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
         $data['activemenu'] ='ploatal';
         return view('ploateallocation',$data);
+        }
     }
     public function getdropcustomer(){
         $data = DB::table('customer_master')->get();
@@ -63,6 +68,11 @@ class Ploateallocationcontroller extends Controller
                 $data = DB::table('ploaalocation_master')->where('ploat_id','!=',$plotsid)->get();
                 $count=count($data);
                 if($count >0){
+                    $result[]=array(
+                        'id'=>$plotsid,
+                        'plots_no'=>$plots_no,
+                    );
+                }else{
                     $result[]=array(
                         'id'=>$plotsid,
                         'plots_no'=>$plots_no,
@@ -198,7 +208,7 @@ class Ploateallocationcontroller extends Controller
         return response()->json($data3);
     }
     public function deleteploatalocate($id){
-        DB::table('customer_payment')->where('p_a_id', $id)->get();
+        DB::table('customer_payment')->where('p_a_id', $id)->delete();
         $data = DB::table('ploaalocation_master')->where('id',$id)->delete();
         return $data;
     }

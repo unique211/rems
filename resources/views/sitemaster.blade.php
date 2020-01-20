@@ -92,7 +92,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr>
+                                            {{-- <tr>
                                                     <th class="text-center">1</th>
                                                     <th>Site 1</th>
                                                     <th>Area 1</th>
@@ -100,7 +100,7 @@
                                                     <th class="text-center">10</th>
 
                                                     <td><button  class="edit btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>
-                                                </tr>
+                                                </tr> --}}
 
                                     </tbody>
                                 </table>
@@ -176,6 +176,7 @@
                                                           <th>SR No</th>
                                                           <th>Plot No</th>
                                                           <th>Area(in sqft)</th>
+                                                          <th>Per Sqft Rate</th>
                                                           <th>Cost</th>
                                                         </tr>
                                                     </thead>

@@ -50,21 +50,40 @@ class Agentcommissioncotroller extends Controller
     public function getagentsite(Request $request){
         $agent=$request->id;
         $result=array();
-        $data1 = DB::table('ploaalocation_master')->where('agent_id',$agent)->get();
+        $data1=array();
+
+        $data1 = DB::table('ploaalocation_master')->where('agent_id',$agent)->groupby('s_id')->get();
         foreach($data1 as $ploatdata){
             $sietid=$ploatdata->s_id;
             $sitename='';
-         $data=DB::table('site_master')->where('id',$sietid)->get();
-         foreach($data as $sitedata){
-            $sitename=$sitedata->site_name;
-         }
-         $result[]=array(
-            'id'=> $sietid,
-            'site_name'=> $sitename,
-         );
+            //$data1=array($sietid);
+            //array_push($data1,$sietid);
+            $data=DB::table('site_master')->where('id',$sietid)->get();
+            foreach($data as $sitedata){
+                $sitename=$sitedata->site_name;
+                $result[]=array(
+                    'id'=> $sietid,
+                    'site_name'=> $sitename,
+                 );
+            }
 
 
         }
+       // $data=DB::table('site_master')->whereIn('id',$data1)->get();
+        // foreach($data as $sitedata){
+        //    $sitename=$sitedata->site_name;
+        // }
+        // $result[]=array(
+        //    'id'=> $sietid,
+        //    'site_name'=> $sitename,
+        // );
+        // $result=DB::table('tablename')
+        // ->whereIn('id',function ($query) {
+        //                 $query->select('s_id')->from('ploaalocation_master')
+        //                 ->Where('agent_id','=',".$agent.");
+
+        //             })
+        // ->get();
         return $result;
 
 
@@ -103,7 +122,7 @@ class Agentcommissioncotroller extends Controller
                     'amtinfo'        =>  $request->crdr,
                     'amount'        =>  $request->amount,
                     'openingbalance'        =>  $request->openingbalance,
-                    'user_id'        => 1,
+                    'user_id'        => $request->session()->get('userid'),
                 ]
 
             );

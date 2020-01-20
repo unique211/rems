@@ -114,6 +114,21 @@
 
                             @endforeach
                             @endif
+
+                            <li class="app-sidebar__heading">Report</li>
+                            <li>
+                                <a href="{{ url('agentreport') }}" @if($activemenu=="acreport") class="mm-active" @endif>
+                                    <i class="metismenu-icon fa fa-file" ></i>
+                                   Ac Statement of Agent
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('agentreport') }}" @if($activemenu=="acreport") class="mm-active" @endif>
+                                    <i class="metismenu-icon fa fa-file" ></i>
+                                   Remain Plots List
+                                </a>
+                            </li>
+                            <li>
             {{-- <li class="app-sidebar__heading">Widgets</li>
             <li>
                 <a href="dashboard-boxes.html">

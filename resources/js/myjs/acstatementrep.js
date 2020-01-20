@@ -3,80 +3,7 @@ $(document).ready(function() {
     var plotid = 0;
     var siteid = 0;
 
-    /*---------btnhideshow-----------------*/
-    $(document).on("click", ".btnhideshow", function(e) {
-        e.preventDefault();
-        $('.formhideshow').show();
-        $('.tablehideshow').hide();
-        $('.closehideshow').show();
-        $('.btnhideshow').hide();
-        $('#btnsavedata').text('Save');
-        form_clear();
 
-
-    });
-    /*---------login-----------------*/
-
-    $(document).on("click", ".closehideshow", function(e) {
-        e.preventDefault();
-        $('.formhideshow').hide();
-        $('.tablehideshow').show();
-
-        $('.closehideshow').hide();
-        $('.btnhideshow').show();
-        form_clear();
-
-    });
-    $('.edittb').hide();
-    $(document).on("click", "#editperson", function(e) {
-        e.preventDefault();
-        $('.edittb').show();
-        $('.lbldata').hide();
-
-
-    });
-
-    $(document).on("click", "#btnsave", function(e) {
-        e.preventDefault();
-        $('.edittb').hide();
-        $('.lbldata').show();
-
-
-    });
-
-
-    $(document).on('click', ".edit", function(e) {
-        e.preventDefault();
-        $('.formhideshow').show();
-        $('.tablehideshow').hide();
-        $('.closehideshow').show();
-        $('.btnhideshow').hide();
-        $('.btnhideshow').hide();
-        $('#btnsavedata').text('Update');
-
-
-
-    });
-
-
-
-
-
-    $(document).on('blur', ".areainsqf", function(e) {
-        e.preventDefault();
-        var total = 0;
-        $('.areainsqf').each(function() {
-            var val = $(this).val();
-
-
-            if (val > 0) {
-                total = parseFloat(total) + parseFloat(val);
-            }
-
-        });
-        $('#totalarea').val(total);
-
-    });
 
 
     $(document).on('change', "#paymentmode", function(e) {
@@ -170,6 +97,7 @@ $(document).ready(function() {
                         var name = '';
 
                         html += '<option selected disabled value="" >Select</option>';
+                        html += '<option selected  value="All" >All</option>';
                         //html += '<option   value="0" >N/A</option>';
 
 
@@ -183,21 +111,18 @@ $(document).ready(function() {
 
                             html += '<option value="' + id + '">' + name + '</option>';
                         }
-                        $('#sitename').html(html);
+                        $('#sitenm').html(html);
 
                     } else {
                         swal("This Agent Not Allocate Site !!!");
                     }
                 }
             });
-            if (saveid > 0) {
 
-                $('#sitename').val(siteid).trigger('change');
-            }
         }
     });
 
-    $(document).on('change', "#sitename", function(e) {
+    $(document).on('change', "#sitenm", function(e) {
         e.preventDefault();
         var id = $(this).val();
         var agent = $('#agentname').val();
@@ -219,6 +144,8 @@ $(document).ready(function() {
 
 
                         html += '<option selected disabled value="" >Select</option>';
+                        html += '<option   value="All" >All</option>';
+
 
                         for (i = 0; i < data.length; i++) {
                             var id = '';
@@ -230,7 +157,7 @@ $(document).ready(function() {
 
                             html += '<option value="' + id + '">' + name + '</option>';
                         }
-                        $('#ploats').html(html);
+                        $('#plot').html(html);
                         if (saveid > 0) {
                             $('#ploats').val(plotid).trigger('change');
                         }
@@ -244,231 +171,84 @@ $(document).ready(function() {
 
     });
 
-    $(document).on('change', "#ploats", function(e) {
-        e.preventDefault();
-        var id = $(this).val();
-        var agent = $('#agentname').val();
-        var sitename = $('#sitename').val();
-
-        var saveid = $('#save_update').val();
-
-        $.ajax({
-            data: {
-                id: id,
-                agent: agent,
-                sitename: sitename,
-            },
-            url: getcommssioninfo,
-            type: "POST",
-            dataType: 'json',
-            // async: false,
-            success: function(data) {
-
-
-
-
-                $('#openingbalance').val(data);
-
-            }
-        });
-
-        getcommsioninformation();
-
-
-    });
-
-    function getcommsioninformation() {
-        var id = $('#ploats').val();
-        var agent = $('#agentname').val();
-        var sitename = $('#sitename').val();
-
-        $.ajax({
-            data: {
-                id: id,
-                agent: agent,
-                sitename: sitename,
-            },
-            url: getcommssiondata,
-            type: "POST",
-            dataType: 'json',
-            // async: false,
-            success: function(data) {
-
-                var html = '';
-                var remain = 0;
-                var opening = 0;
-                var credit = '';
-                $('#paymenttabletbody').html('');
-                // if ($.fn.DataTable.isDataTable('#commssiontb')) {
-                //     $('#commssiontb').DataTable().destroy();
-                // }
-
-                for (var i = 0; i < data.length; i++) {
-
-                    if (data[i].amtinfo == "cr") {
-                        remain = parseFloat(opening) + parseFloat(data[i].amount);
-                        credit = 'Credit';
-                    } else {
-                        remain = parseFloat(opening) - parseFloat(data[i].amount);
-                        credit = 'Debit';
-                    }
-
-                    html = '<tr>' +
-                        '<td id="id_' + data[i].id + '">' + data[i].created_at + '</td>' +
-                        '<td  id="opening_' + data[i].id + '">' + opening + '</td>' +
-
-                        '<td  id="acamount_' + data[i].id + '">' + data[i].amount + '</td>' +
-                        '<td id="creditamt_' + data[i].id + '">' + credit + '</td>' +
-                        '<td id="remainamt_' + data[i].id + '">' + remain + '</td>' +
-                        '<td class="not-export-column" >';
-                    if (editrt == 1) {
-                        html += '<button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
-                            data[i].id +
-                            '><i class="fa fa-edit"></i></button>&nbsp;';
-                    }
-                    if (delrt == 1) {
-                        html += '<button name = "delete" value = "Delete" class = "delete_data btn btn-xs btn-danger" id = ' + data[i].id + '><i class="fa fa-trash"></i></button>';
-                    }
-                    if (delrt == 0 && editrt == 0) {
-                        html += "N/A";
-                    }
-
-                    html += '</td>' +
-                        '</tr>';
-
-                    opening = remain;
-
-                    $('#paymenttabletbody').append(html);
-
-                }
-                // $('#commssiontb').DataTable({});
 
 
 
 
 
-            }
-        });
-
-    }
-
-    $(document).on('click', ".edit_data", function(e) {
-        e.preventDefault();
-
-        $('.btnhideshow').trigger('click');
-
-        var id = $(this).attr("id");
-        $('#save_update').val(id);
-
-        var opening_ = $('#opening_' + id).html();
-        var acamount_ = $('#acamount_' + id).html();
-        var remainamt_ = $('#remainamt_' + id).html();
-        var amtinfo_ = $('#creditamt_' + id).html();
-
-        if (creatert == 0) {
-            $('#btnsavedata').prop("disabled", false);
-            $('#amt').prop("disabled", false);
-        }
 
 
-        if (amtinfo_ == "Credit") {
-            $("#credit").prop("checked", true);
-        } else {
-            $("#debit").prop("checked", true);
-        }
-        $('#openingbalance').val(opening_);
-        $('#amt').val(acamount_);
-        $('#remainamt').val(remainamt_);
 
-    });
 
-    $(document).on('blur', "#payamount", function(e) {
-        e.preventDefault();
-        var openingbalance = $('#openingbalance').val();
-        var payamount = $('#payamount').val();
-        var remainamt = 0;
 
-        if (payamount > 0 && openingbalance > 0) {
-            remainamt = parseFloat(openingbalance) - parseFloat(payamount);
-        }
-        $('#remainamt').val(remainamt);
-    });
-
-    $(document).on('change', ".crradio", function(e) {
-        e.preventDefault();
-        var crdr = $('input[name=amtinfo]:checked').val();
-
-        var openingbalance = $('#openingbalance').val();
-        var amt = $('#amt').val();
-        var remain = 0;
-        if (amt > 0 && openingbalance >= 0)
-            if (crdr == "cr") {
-                remain = parseFloat(openingbalance) + parseFloat(amt);
-            } else {
-                remain = parseFloat(openingbalance) - parseFloat(amt);
-            }
-        $('#remainamt').val(remain);
-    });
-
-    $(document).on('blur', ".amtdata", function(e) {
-        e.preventDefault();
-        var crdr = $('input[name=amtinfo]:checked').val();
-
-        var openingbalance = $('#openingbalance').val();
-        var amt = $('#amt').val();
-        var remain = 0;
-        if (amt > 0 && openingbalance >= 0)
-            if (crdr == "cr") {
-                remain = parseFloat(openingbalance) + parseFloat(amt);
-            } else {
-                remain = parseFloat(openingbalance) - parseFloat(amt);
-            }
-        $('#remainamt').val(remain);
-    });
 
     //for submite event of ploat allocation
 
-    $(document).on('submit', '#agent_commssion', function(e) {
+    $(document).on('submit', '#agentrep_form', function(e) {
         e.preventDefault();
 
         var agentname = $('#agentname').val();
-        var sitename = $('#sitename').val();
-        var ploats = $('#ploats').val();
-        var amount = $('#amt').val();
-        var openingbalance = $('#openingbalance').val();
-
-        var crdr = $('input[name=amtinfo]:checked').val();
+        var sitenm = $('#sitenm').val();
+        var plot = $('#plot').val();
 
 
 
-        var save_update = $('#save_update').val();
+        var fromdate = '';
+        var todate = '';
+        if ($('#frmdate').prop("checked") == true) {
+            var fromdate = $('#fromdate').val();
+            var todate = $('#todate').val();
+
+            var tdateAr = fromdate.split('/');
+            fromdate = tdateAr[2] + '-' + tdateAr[1] + '-' + tdateAr[0];
+            var tdateAr = todate.split('/');
+            todate = tdateAr[2] + '-' + tdateAr[1] + '-' + tdateAr[0];
+
+        } else if ($('#frmdate').prop("checked") == false) {
+            fromdate = '';
+            todate = '';
+        }
+
+
 
         $.ajax({
             data: {
 
-                save_update: save_update,
+
                 agentname: agentname,
-                sitename: sitename,
-                amount: amount,
-                crdr: crdr,
-                ploats: ploats,
-                openingbalance: openingbalance,
+                sitenm: sitenm,
+                plot: plot,
+                fromdate: fromdate,
+                todate: todate,
 
             },
-            url: add_data,
+            url: getdata,
             type: "POST",
             dataType: 'json',
             // async: false,
             success: function(data) {
+                var sr = 0;
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    sr = sr + 1;
+                    // var fdateslt = data[i].date.split('-');
+                    // var time = fdateslt[2].split(' ');
+                    // var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
+                    html += '<tr>' +
+                        '<td id="id_' + data[i].id + '">' + sr + '</td>' +
+                        '<td  id="c_name_' + data[i].id + '">' + data[i].date + '</td>' +
 
-                getcommsioninformation();
-                successTost("Opration Save Success fully!!!");
-
-                if (creatert == 0) {
-                    $('#btnsavedata').prop("disabled", true);
-                    $('#amt').prop("disabled", true);
+                        '<td  id="lastname_' + data[i].id + '">' + data[i].site_name + "-" + data[i].plots_no + '</td>' +
+                        // '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].cramt + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].amtinfo + '</td>' +
+                        '<td id="balance' + data[i].id + '">' + data[i].balance + '</td>' +
+                        '</tr>'
                 }
-                form_clear();
+                $('#categorytbody').html(html);
+                //$('#myTable').DataTable({});
+
+
             }
         });
 
@@ -515,13 +295,17 @@ $(document).ready(function() {
                     sr = sr + 1;
 
 
+
+
+
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
-                        '<td  id="c_name_' + data[i].id + '">' + data[i].firstname + "" + data[i].lastname + '</td>' +
+                        '<td  id="c_name_' + data[i].id + '">' + checkouttime + '</td>' +
 
-                        '<td  id="lastname_' + data[i].id + '">' + data[i].site_name + '</td>' +
+                        '<td  id="lastname_' + data[i].id + '">' + data[i].site_name + "-" + data[i].plots_no + '</td>' +
                         '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].amount + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].crtoamt + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].amtinfo + '</td>' +
 
 
                         '<td style="display:none;" id="agent_id_' + data[i].id + '">' + data[i].agent_id + '</td>' +
@@ -574,7 +358,6 @@ $(document).ready(function() {
         $('#checktime').val('');
         $('#accountno').val('');
         $('#tnote').val('');
-        $('#remainamt').val('');
 
     }
 

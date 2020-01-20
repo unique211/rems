@@ -113,6 +113,13 @@ Route::get('getdroprole', 'Employmaster@getdroprole');
 
 Route::match(['get','post'], 'uploadingfile', 'Customermasetcontroller@uploadingfile');
 
+//for report
+Route::resource('agentreport', 'Acstatementcontroller');
+Route::post('getagentrepdata', 'Acstatementcontroller@getagentrepdata');
+
+//for remina ploats
+Route::resource('remainploats', 'Remainploatscontroller');
+Route::post('getremainploatsdata', 'Remainploatscontroller@getremainploatsdata');
 
 });
 

@@ -163,15 +163,26 @@ $(document).ready(function() {
         var noofploats = $('#noofploats').val();
         // var l1 = $('table#docupload').find('tbody').find('tr');
         // var r = l1.length;
-
-
-        if (noofploats > 0) {
-            $('#doc_row_id').val(0);
-            for (i = 0; i < noofploats; i++) {
-                addploat();
+        var id = $('#save_update').val();
+        if (id > 0) {
+            if (noofploats > 0) {
+                var docid = $('#doc_row_id').val();
+                var ploats = parseFloat(noofploats) - parseFloat(docid);
+                for (i = 0; i < ploats; i++) {
+                    addploat();
+                }
             }
+        } else {
+            if (noofploats > 0) {
+                $('#ploattabletbody').html('');
+                $('#doc_row_id').val(0);
+                for (i = 0; i < noofploats; i++) {
+                    addploat();
+                }
 
+            }
         }
+
 
 
 
@@ -184,17 +195,26 @@ $(document).ready(function() {
         var html = '<tr  class="proffinfodata"  id="proffinfo_' + row_id + '" >' +
             '<td>' + row_id + '</td>' +
 
+            '<td style="display:none;">' +
+            '<input type="text"  id="srpid_' + row_id + '" name="srid_' + row_id + '" value="0" class="form-control" placeholder="Plot No">' +
+
+            '</td>' +
+
             '<td>' +
             '<input type="text" id="ploatno_' + row_id + '" name="ploatno_' + row_id + '" class="form-control" placeholder="Plot No">' +
 
             '</td>' +
 
             '<td>' +
-            '<input type="number" id="areainsqft_' + row_id + '" name="areainsqft_' + row_id + '" class="areainsqf form-control" placeholder="Area (in sqft)">' +
+            '<input type="number" id="areainsqft_' + row_id + '" name="areainsqft_' + row_id + '" value="0" class="areainsqf sumplotcost form-control" placeholder="Area (in sqft)">' +
             '</td>' +
 
             '<td>' +
-            '<input type="number" id="cost_' + row_id + '" name="cost_' + row_id + '" class="form-control" placeholder="Cost">' +
+            '<input type="number" id="persqftrate_' + row_id + '" name="persqftrate_' + row_id + '" value="0"   class="sumplotcost form-control" placeholder="Per Sqft Rate">' +
+            '</td>' +
+
+            '<td>' +
+            '<input type="number" id="cost_' + row_id + '" name="cost_' + row_id + '" class="form-control" value="0"  placeholder="Cost" disabled>' +
 
             '</td>' +
 
@@ -207,6 +227,25 @@ $(document).ready(function() {
 
 
     }
+
+    $(document).on('blur', ".sumplotcost", function(e) {
+        e.preventDefault();
+        var id = $(this).attr('id');
+        id = id.split("_");
+
+
+        var area = $('#areainsqft_' + id[1]).val();
+        var rate = $('#persqftrate_' + id[1]).val();
+
+        console.log("area" + area + "rate" + rate);
+
+        var tamt = parseFloat(area) * parseFloat(rate);
+        $('#cost_' + id[1]).val(tamt);
+
+
+
+    });
+
     $(document).on('blur', ".areainsqf", function(e) {
         e.preventDefault();
         var total = 0;
@@ -244,16 +283,34 @@ $(document).ready(function() {
 
 
             student = {};
-
+            var srpid = '';
             var ploatno = $('#ploatno_' + id1[1]).val();
             var areainsqft = $('#areainsqft_' + id1[1]).val();
+            var persqftrate = $('#persqftrate_' + id1[1]).val();
             var cost = $('#cost_' + id1[1]).val();
+            if (save_update > 0) {
+                srpid_ = $('#srpid_' + id1[1]).val();
+                if (srpid_ == "") {
+                    srpid_ = 0;
+                }
+            }
 
             if (ploatno != "" && areainsqft != "" && cost != "") {
+                if (save_update > 0) {
+                    student["ploatno"] = ploatno;
+                    student["areainsqft"] = areainsqft;
+                    student["persqftrate"] = persqftrate;
+                    student["cost"] = cost;
+                    student["srpid"] = srpid_;
+                } else {
+                    student["ploatno"] = ploatno;
+                    student["areainsqft"] = areainsqft;
+                    student["persqftrate"] = persqftrate;
+                    student["cost"] = cost;
+                }
 
-                student["ploatno"] = ploatno;
-                student["areainsqft"] = areainsqft;
-                student["cost"] = cost;
+
+
 
                 for (var i = 0; i < studejsonObj.length; i++) {
 
@@ -420,11 +477,17 @@ $(document).ready(function() {
             // async: false,
             success: function(data) {
                 var row_id = 0;
+                var cost = 0;
                 for (i = 0; i < data.length; i++) {
                     row_id = row_id + 1;
-
+                    cost = parseFloat(data[i].area_insqft) * parseFloat(data[i].persqftrate);
                     var html = '<tr  class="proffinfodata"  id="proffinfo_' + row_id + '" >' +
                         '<td>' + row_id + '</td>' +
+
+                        '<td style="display:none;">' +
+                        '<input type="text"  id="srpid_' + row_id + '" name="srid_' + row_id + '" value="' + data[i].id + '" class="form-control" placeholder="Plot No">' +
+
+                        '</td>' +
 
                         '<td>' +
                         '<input type="text" id="ploatno_' + row_id + '" name="ploatno_' + row_id + '" value="' + data[i].plots_no + '" class="form-control" placeholder="Plot No">' +
@@ -432,11 +495,15 @@ $(document).ready(function() {
                         '</td>' +
 
                         '<td>' +
-                        '<input type="number" id="areainsqft_' + row_id + '" name="areainsqft_' + row_id + '" value="' + data[i].area_insqft + '"  class="areainsqf form-control" placeholder="Area (in sqft)">' +
+                        '<input type="number" id="areainsqft_' + row_id + '" name="areainsqft_' + row_id + '" value="' + data[i].area_insqft + '"  class="sumplotcost areainsqf form-control" placeholder="Area (in sqft)">' +
                         '</td>' +
 
                         '<td>' +
-                        '<input type="number" id="cost_' + row_id + '" name="cost_' + row_id + '" value="' + data[i].cost + '" class="form-control" placeholder="Cost">' +
+                        '<input type="number" id="persqftrate_' + row_id + '" name="persqftrate_' + row_id + '" value="' + data[i].persqftrate + '"   class="sumplotcost form-control" placeholder="Per Sqft Rate">' +
+                        '</td>' +
+
+                        '<td>' +
+                        '<input type="number" id="cost_' + row_id + '" name="cost_' + row_id + '" value="' + cost + '" class="form-control" placeholder="Cost">' +
 
                         '</td>' +
 

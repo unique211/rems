@@ -18,8 +18,6 @@
         {{-- PAGE CONTENT --}}
 
 
-
-
         <?php
         $editright=0;
         $deleteright=0;
@@ -27,32 +25,35 @@
 
 
 
+
         <div class="app-main">
             @include('layouts.sidebar')
+
+
             @if(is_null($sidebar))
 
             @else
 
 
             @foreach($sidebar as $val)
-            @if(($val->menuid==2  && $val->submenuid==2) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
-
+            @if(($val->menuid==2  && $val->submenuid==6) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
             <?php
 
             $editright=$val->editright;
         $deleteright=$val->deleteright;
                   ?>
+
             <div class="app-main__outer">
                 <div class="app-main__inner ">
                     <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
-                                         <i class="fa fa-user-circle-o icon-gradient bg-mean-fruit">
+                                         <i class="fa fa-user-circle icon-gradient bg-mean-fruit">
                                         </i>
                                     </div>
                                 <div>
-                                    Agent Master
+                                     Employee Master
                                 </div>
                             </div>
                             <div class="page-title-actions">
@@ -61,10 +62,10 @@
                                             <i class="fa fa-star"></i>
                                         </button> --}}
                                 <div class="page-title-actions">
-                                    @if($val->createright==1)
+                                        @if($val->createright==1)
                                     <button class="btn btn-success  btnhideshow"
                                         style="background-color:#00B050;">
-                                       <i class="fa fa-plus"></i> Add Agent</button>
+                                        <i class="fa fa-plus"></i>Add Employee</button>
                                         <button class="btn btn-danger  closehideshow"
                                         style="display:none;">
                                         Close</button>
@@ -80,7 +81,7 @@
 
                         <div class="col-md-12">
                             <div class="table-responsive" id="show_master">
-                                {{-- <table id="customermaster"
+                                <table id="customermaster"
                                     class="table table-hover table-striped  table-bordered dataTable dtr-inline" style="width:100%">
                                     <thead>
                                         <tr>
@@ -88,24 +89,24 @@
                                             <th>First  Name</th>
                                             <th>Last  Name</th>
                                             <th class="text-center">Email</th>
-                                            <th class="text-center">City</th>
-                                            <th class="text-center">State</th>
+                                            <th class="text-center">Mobile NO</th>
+
                                             <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                             <tr>
                                                     <th class="text-center">1</th>
-                                                    <th>Agent 1</th>
-                                                    <th>Agent</th>
-                                                    <th class="text-center">agent@gmail.com</th>
-                                                    <th class="text-center">Rajkot</th>
-                                                    <th class="text-center">Gujrat</th>
+                                                    <th>Employ  1</th>
+                                                    <th>Employ</th>
+                                                    <th class="text-center">Employ@gmail.com</th>
+                                                    <th class="text-center">9874563210</th>
+
                                                     <td><button  class="edit btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>
                                                 </tr>
 
                                     </tbody>
-                                </table> --}}
+                                </table>
                             </div>
 
 
@@ -114,7 +115,7 @@
 
                     <div class="row formhideshow" style="display:none;">
                         <div class="col-md-12">
-                            <form id="agent_form" name="agent_form">
+                            <form id="employee_form" name="employee_form">
                             <div class="row">
 
                                         {{-- <div class="col-sm-12 col-md-6 col-xl-4">
@@ -161,7 +162,7 @@
 
                                                     <div class="card-header"  align="right">
 
-                                                        <button id="editperson" class=" btn btn-info">Edit</button>
+                                                        <button id="editperson" class="btn btn-info">Edit</button>
 
                                                     </div>
                                                     <div class="card-content">
@@ -172,79 +173,44 @@
                                                            <div class="card-content-languages">
                                                     <div class="card-content-languages-group"></div>
                                                             <div class="card-content-languages-group">
-                                                               <table class="table table-hover" width="100%">
+                                                               <table class="table table-hover table-striped table-bordered dataTable dtr-inline" width="100%">
 
                                                                 <tbody>
                                                                         <tr>
                                                                                 <th>Upload Images</th>
-                                                                                <td class="lbldata"><label id="uploadimg">Upload Img*</label> </td>
-                                                                                <td class="edittb"><input	form="document_data" class="form-control input-sm " type="file" id="docupload" name="docupload" >
+                                                                                <td class="lbldata"><label id="flable">Sagar</label> </td>
+                                                                                <td class="edittb"><input	 class="form-control input-sm " type="file" id="docupload" name="docupload" >
                                                                                     <input type="hidden" id="file_hidden" value="">
                                                                                     <div id="msgid"></div>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <th>Advisor id*</th>
-                                                                                <td class="lbldata"><label id="advidlable"></label> </td>
-                                                                                <td class="edittb"><input  class="form-control" type="text" id="advisor_id" name="advisor_id" placeholder="Advisor id" required> </td>
-                                                                            </tr>
-
                                                                     <tr>
                                                                     <th>First Name*</th>
                                                                     <td class="lbldata"><label id="flable">Sagar</label> </td>
                                                                     <td class="edittb"><input  class="form-control" type="text" id="firstname" name="firstname" placeholder="Firstname" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Last Name*</th>
+                                                                    <th>Last Name</th>
                                                                     <td class="lbldata"><label id="llable">Sagar</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="lastname" name="lastname" placeholder="Last name" required> </td>
+                                                                    <td class="edittb"><input class="form-control" type="text" id="lastname" name="lastname" placeholder="Lastname" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Email*</th>
+                                                                    <th>Email</th>
                                                                     <td class="lbldata"><label id="elable">Email</label></td>
                                                                     <td class="edittb"><input class="form-control" type="email" id="email" name="email" placeholder="Email" required> </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <th >Payment</th>
-                                                                    <td colspan="2"><div class="progress-wrapper">
 
-                                                                            <div class="progress progress-sm">
-                                                                              <div class="progress-bar bg-primary" id="paymentbar" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 74%;">
-                                                                                <span class="progress-value">74%</span>
-                                                                              </div>
-                                                                            </div>
-                                                                          </div></td>
-                                                                </tr>
-                                                                <tr>
-                                                                        <th colspan="3">Address</th>
 
-                                                                    </tr>
-                                                                 <tr>
-                                                                    <th>City*</th>
-
-                                                                    <td class="lbldata"><label id="clable">City*</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="city" name="city" placeholder="City" required> </td>
-                                                                </tr>
                                                                 <tr>
-                                                                        <th>State*</th>
-                                                                        <td class="lbldata"><label id="slable">State*</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="state" name="state" placeholder="State" required> </td>
+                                                                        <th>Mobile No</th>
+                                                                        <td class="lbldata"><label id="pinlable">7896541230</label></td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="mobileno" name="mobileno" placeholder="Mobile No" required> </td>
                                                                 </tr>
-                                                                <tr>
-                                                                        <th>Contry*</th>
-                                                                        <td class="lbldata"><label id="conlable">Contry*</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry" required> </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Pin code*</th>
-                                                                    <td class="lbldata"><label id="pinlable">Pin Code*</label></td>
-                                                                    <td class="edittb"><input class="form-control" type="text" id="pincode" name="pincode" placeholder="Pincode" required> </td>
-                                                            </tr>
                                                             <tr>
                                                                     <th ></th>
-                                                                    <td class="lbldata"></td>
-
-                                                                    <td  class="edittb"><input class="btn btn-success pull-right" type="button" id="btnsaveinfo" name="btnsaveinfo" value="Save"></td>
+                                                                    <td ></td>
+                                                                    <td ></td>
+                                                                    {{-- <td  class="edittb"><input class="btn btn-success" type="button" id="btnsave" name="btnsave" value="Ok"></td> --}}
                                                             </tr>
                                                         </tbody></table>
 
@@ -264,7 +230,7 @@
                                 <div class="col-lg-8">
                                     <div class="card card-small mb-4">
                                         <div class="card-header border-bottom">
-                                            <h6 class="m-0">Bank Detalis</h6>
+                                            <h6 class="m-0">Usre Detalis</h6>
                                         </div>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item p-3">
@@ -272,45 +238,41 @@
                                                     <div class="col">
 
 
-
                                                             <div class="form-row">
-                                                                <div class="form-group col-md-12">
-                                                                    <label for="feEmailAddress">Bank Name*</label>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="feEmailAddress">User Name</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="bankname" name="bankname" placeholder="Bank Name" required
-                                                                        >
+                                                                        id="username" name="username" placeholder="User Name"
+                                                                        required>
                                                                 </div>
-                                                                <div class="form-group col-md-12">
-                                                                    <label for="fePassword">Branch*</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="branch" name="branch" placeholder="Branch" required>
+                                                                <div class="form-group col-md-6" id="passhide">
+                                                                        <label for="feEmailAddress">Password</label>
+                                                                        <input type="password" class="form-control"
+                                                                            id="password" name="password" placeholder="Password"
+                                                                            required >
+                                                                    </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="fePassword">Role</label>
+                                                                    <select id="role" name="role" class="form-control select2" required>
+                                                                            <option selected disabled>Select</option>
+                                                                            <option value="1">Admin</option>
+                                                                            <option value="2">User</option>
+
+                                                                        </select>
                                                                 </div>
-                                                                <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">Account No*</label>
-                                                                        <input type="text" class="form-control"
-                                                                        id="accno" name="accno" placeholder="Account No" required>
-                                                                  </div>
-                                                                  <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">IFSC Code*</label>
-                                                                        <input type="text" class="form-control"
-                                                                        id="ifsccode" name="ifsccode" placeholder="IFSC Code" required>
-                                                                  </div>
-                                                                  <div class="form-group col-md-12">
-                                                                        <label for="feInputAddress">Account Holder Name*</label>
-                                                                        <input type="text" class="form-control"
-                                                                        id="accountholder" name="accountholder" placeholder="Account Holder Name" required>
-                                                                  </div>
+
+
                                                                     <div class="form-group col-md-12" align="right">
+
                                                                             <button type="submit"  id="btnsavedata" class="btn btn-success">Save
                                                                                     </button>
-                                                                                    <input type="hidden" id="save_update" name="save_update" value="">
+                                                                                    <input type="hidden" name="save_update" id="save_update">
                                                                                     @if($val->deleteright==1)
-                                                                                    <button type="button" class="btn delete_data delete btn-danger">Delete
+                                                                                    <button type="button" class="btn delete_data btn-danger">Delete
                                                                                             </button>
                                                                                             @endif
                                                                         </div>
                                                             </div>
-
 
 
 
@@ -338,6 +300,7 @@
 
             @endforeach
             @endif
+
         </div>
     </div>
     {{-- END PAGE CONTAINER --}}
@@ -363,18 +326,15 @@ headers: {
 
 });
     $('#customermaster').DataTable({});
-
-    var add_data="{{route('agent.store') }}";
-    var profileupload1="{{url('uplaodprofieagent')}}";
-    var getalldata="{{url('getallagent')}}";
-    var editurl="{{url('editagent')}}";
-    var delete_data="{{url('deleteagent')}}";
+    var profileupload1="{{url('uploadingcustfile')}}";
+    var adddata="{{route('employee.store')}}";
     var imgurl="<?php  echo url('/') ?>";
+    var getalldata="{{url('getallemployee')}}";
+    var editurl="{{url('editlogin')}}";
+    var delete_data="{{url('deleteemp')}}";
     var editrt="<?php  echo $editright; ?>";
     var delrt="<?php  echo $deleteright; ?>";
-    var updateagent="{{url('updateagentinfo')}}";
-    var getpaymentdata="{{url('getagentpayment')}}"
 
 </script>
-<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/agentmaster.js') }}"></script>
+<script type='text/javascript' src="{{ URL::asset('/resources/js/myjs/employ_master.js') }}"></script>
 <script src="{{ URL::asset('resources/sass/scripts/main.js') }}"></script>

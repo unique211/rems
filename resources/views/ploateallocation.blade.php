@@ -261,7 +261,7 @@
                                             <div class="form-group col-md-4">
 
                                                     <select id="paymentmode" class="form-control select2" required>
-                                                            <option selected disabled>Select</option>
+                                                            <option  disabled>Select</option>
                                                             <option selected value="Cash">Cash</option>
                                                             <option value="Cheque">Cheque</option>
                                                             <option value="NEFT">NEFT </option>
@@ -357,12 +357,12 @@
 
                                     </div>
 
-                                    <div class="card-header border-bottom" >
+                                    <div class="card-header border-bottom "  style="display: none;">
                                             <h6 class="m-0">Payment History</h6>
                                         </div>
                                     <div class="form-row">
-                                        <input type="hidden" id="doc_row_id" name="doc_row_id" value="0">
-                                            <table  class="table table-bordered table-striped" id="docupload">
+                                        <input  type="hidden" id="doc_row_id" name="doc_row_id" value="0">
+                                            <table   class="table table-bordered table-striped paymenthistb" id="docupload">
                                                     <thead>
                                                         <tr>
                                                           <th>Date</th>
@@ -373,13 +373,13 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="paymenttabletbody">
-                                                            <tr>
+                                                            {{-- <tr>
                                                                     <th>10/01/2020</th>
                                                                     <th>Cash</th>
                                                                     <th>100</th>
                                                                     <th>50</th>
                                                                     <th>50</th>
-                                                                  </tr>
+                                                                  </tr> --}}
 
                                                     </tbody>
                                             </table>

@@ -13,10 +13,13 @@ class Employmaster extends Controller
     //
     function index(Request $request)
     {
-
+        if (!$request->session()->exists('userid')) {
+            // user value cannot be found in session
+            return redirect('/');
+        }else{
         $data['sidebar'] = DB::table('user_permission')->where('uid',session('role'))->get();
         $data['activemenu'] ='employd';
-        return view('employmaster',$data);
+        return view('employmaster',$data);}
     }
     public function store(Request $request)
     {

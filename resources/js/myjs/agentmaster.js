@@ -55,6 +55,7 @@ $(document).ready(function() {
         e.preventDefault();
 
 
+        var advisor_id = $('#advisor_id').val();
         var firstname = $('#firstname').val();
         var lastname = $('#lastname').val();
         var email = $('#email').val();
@@ -73,7 +74,7 @@ $(document).ready(function() {
 
         $.ajax({
             data: {
-
+                advisor_id: advisor_id,
                 firstname: firstname,
                 lastname: lastname,
                 email: email,
@@ -132,6 +133,7 @@ $(document).ready(function() {
                     '<thead>' +
                     '<tr>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" ># </th>' +
+                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Advisor id</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >First Name</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;"  >Last Name</th>' +
                     '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Email</th>' +
@@ -146,6 +148,7 @@ $(document).ready(function() {
                     sr = sr + 1;
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
+                        '<td  id="advisorid_' + data[i].id + '">' + data[i].advisor_id + '</td>' +
                         '<td  id="first_name_' + data[i].id + '">' + data[i].first_name + '</td>' +
                         '<td  id="lastname_' + data[i].id + '">' + data[i].last_name + '</td>' +
                         '<td id="email_' + data[i].id + '">' + data[i].email + '</td>' +
@@ -180,6 +183,7 @@ $(document).ready(function() {
 
 
     function form_clear() {
+        $('#advisor_id').val('');
         $('#firstname').val('');
         $('#lastname').val('');
         $('#email').val('');
@@ -287,6 +291,9 @@ $(document).ready(function() {
 
                 $('#state').val(data[0].state);
                 $('#slable').text(data[0].state);
+
+                $('#advisor_id').val(data[0].advisor_id);
+                $('#advidlable').text(data[0].advisor_id);
 
 
                 $('#contry').val(data[0].contry);

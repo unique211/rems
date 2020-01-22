@@ -245,7 +245,7 @@
                                                                 <tr>
                                                                         <th>Country*</th>
                                                                         <td class="lbldata"><label id="conlable">Contry</label></td>
-                                                                        <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry" required> </td>
+                                                                        <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Country" required> </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Pin code*</th>

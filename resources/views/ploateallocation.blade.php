@@ -98,7 +98,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr>
+                                            {{-- <tr>
                                                     <th class="text-center">1</th>
                                                     <th>Customer 1</th>
                                                     <th>Site 1</th>
@@ -107,7 +107,7 @@
                                                     <th class="text-center">Agent 1</th>
 
                                                     <td><button  class="edit btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>
-                                                </tr>
+                                                </tr> --}}
 
                                     </tbody>
                                 </table>

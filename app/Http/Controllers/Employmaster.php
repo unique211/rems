@@ -53,7 +53,7 @@ class Employmaster extends Controller
                             'profile_pic'        =>  $request->profilepic,
                             'role'        => $request->role,
                             'status'        => 1,
-                            'user_id'        => 1,
+                            'user_id'        => $request->session()->get('userid'),
                         ]
 
                     );

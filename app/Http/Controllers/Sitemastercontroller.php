@@ -38,7 +38,7 @@ class Sitemastercontroller extends Controller
                     'area_name'        =>  $request->areaname,
                     'total_ploat'        =>  $request->noofploats,
                     'total_areaof_ploats'=> $request->totalarea,
-                    'user_id'        => 1,
+                    'user_id'        => $request->session()->get('userid'),
                 ]
 
             );

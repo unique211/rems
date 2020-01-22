@@ -42,7 +42,7 @@ class Agentmastercontroller extends Controller
                     'ifsc_code'        =>  $request->ifsccode,
                     'account_holder_name'        =>  $request->accountholder,
                     'profilepicture'        =>  $request->profileimg,
-                    'userid'        => 1,
+                    'userid'        => $request->session()->get('userid'),
                 ]
 
             );

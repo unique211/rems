@@ -112,8 +112,37 @@
                             </li>
                             @endif
 
-                            @endforeach
+
+                            @if($val->menuid==3 && $val->submenuid==0)
+                            <li class="app-sidebar__heading">Report</li>
                             @endif
+                            @if(($val->submenuid==8) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
+                            <li>
+                                <a href="{{ url('agentreport') }}" @if($activemenu=="acreport") class="mm-active" @endif>
+                                    <i class="metismenu-icon fa fa-file" ></i>
+                                   Ac Statement of Agent
+                                </a>
+                            </li>
+                            @endif
+                            @if(($val->submenuid==9) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
+                            <li>
+                                <a href="{{ url('remainplots') }}" @if($activemenu=="remainreport") class="mm-active" @endif>
+                                    <i class="metismenu-icon fa fa-file" ></i>
+                                   Remain Plots List
+                                </a>
+                            </li>
+                            @endif
+                            @if(($val->submenuid==9) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
+                            <li>
+                                    <a href="{{ url('soldplots') }}" @if($activemenu=="soldreport") class="mm-active" @endif>
+                                            <i class="metismenu-icon fa fa-file" ></i>
+                                           Sold Plots List
+                                        </a>
+                                    </li>
+                                    @endif
+
+                                    @endforeach
+                                    @endif
             {{-- <li class="app-sidebar__heading">Widgets</li>
             <li>
                 <a href="dashboard-boxes.html">

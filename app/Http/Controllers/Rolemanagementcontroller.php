@@ -72,7 +72,7 @@ class Rolemanagementcontroller extends Controller
             ['id' => $ID],
             [
                 'rolename'        =>  $request->rolename,
-                'user_id'        => 1,
+                'user_id'        => $request->session()->get('userid'),
             ]
 
         );

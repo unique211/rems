@@ -306,15 +306,19 @@ $(document).ready(function() {
                 dataType: 'json',
                 // async: false,
                 success: function(data) {
-                    form_clear();
+                    if (data == 0) {
+                        swal('Email Already Exists !!');
+                    } else {
+                        form_clear();
 
-                    successTost("Opration Save Success fully!!!");
-                    $('.closehideshow').trigger('click');
-                    if (editrt == 1) {
-                        $('.formhideshow').hide();
-                        $('.tablehideshow').show();
+                        successTost("Opration Save Success fully!!!");
+                        $('.closehideshow').trigger('click');
+                        if (editrt == 1) {
+                            $('.formhideshow').hide();
+                            $('.tablehideshow').show();
+                        }
+                        datashow();
                     }
-                    datashow();
                 }
             });
         } else {

@@ -243,7 +243,7 @@
                                                                         <td class="edittb"><input class="form-control" type="text" id="state" name="state" placeholder="State" required> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                        <th>Contry*</th>
+                                                                        <th>Country*</th>
                                                                         <td class="lbldata"><label id="conlable">Contry</label></td>
                                                                         <td class="edittb"><input class="form-control" type="text" id="contry" name="contry" placeholder="Contry" required> </td>
                                                                 </tr>

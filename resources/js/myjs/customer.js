@@ -526,6 +526,8 @@ $(document).ready(function() {
         $('#save_update').val('');
         $('#paymentbar').css('width', '0%');
         $('.progress-value').text('0%');
+        $('#doc_msgid').html('');
+        $('#doc_file_hidden').val('');
     }
 
     //Delete  Button Code Strat  Here------
@@ -607,9 +609,14 @@ $(document).ready(function() {
             dataType: 'json',
             // async: false,
             success: function(data) {
+                if (data == '100') {
+                    swal('Email Already Exists !!');
+                } else {
+                    successTost("Opration Save Success fully!!!");
+                    datashow();
+                }
 
-                successTost("Opration Save Success fully!!!");
-                datashow();
+
             }
         });
 

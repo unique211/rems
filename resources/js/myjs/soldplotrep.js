@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     function getallagent() {
         $.ajax({
-            url: "getdropagent",
+            url: "getallsites",
             type: "GET",
 
             contentType: false,
@@ -54,122 +54,26 @@ $(document).ready(function() {
                 var name = '';
 
                 html += '<option selected disabled value="" >Select</option>';
-                //html += '<option   value="0" >N/A</option>';
+                html += '<option   value="All" >All</option>';
 
 
                 for (i = 0; i < data.length; i++) {
                     var id = '';
 
-                    name = data[i].first_name + "" + data[i].last_name;
+                    name = data[i].site_name;
                     id = data[i].id;
 
 
 
                     html += '<option value="' + id + '">' + name + '</option>';
                 }
-                $('#agentname').html(html);
+                $('#sitenm').html(html);
 
             }
         });
     }
 
-    $(document).on('change', "#agentname", function(e) {
-        e.preventDefault();
-        var id = $(this).val();
-        var saveid = $('#save_update').val();
 
-        if (id > 0) {
-
-            $.ajax({
-                data: {
-                    id: id,
-
-                },
-                url: getallsite,
-                type: "POST",
-                dataType: 'json',
-                // async: false,
-                success: function(data) {
-
-
-                    var html = '';
-                    if (data.length > 0) {
-                        var name = '';
-
-                        html += '<option selected disabled value="" >Select</option>';
-                        html += '<option selected  value="All" >All</option>';
-                        //html += '<option   value="0" >N/A</option>';
-
-
-                        for (i = 0; i < data.length; i++) {
-                            var id = '';
-
-                            name = data[i].site_name;
-                            id = data[i].id;
-
-
-
-                            html += '<option value="' + id + '">' + name + '</option>';
-                        }
-                        $('#sitenm').html(html);
-
-                    } else {
-                        swal("This Agent Not Allocate Site !!!");
-                    }
-                }
-            });
-
-        }
-    });
-
-    $(document).on('change', "#sitenm", function(e) {
-        e.preventDefault();
-        var id = $(this).val();
-        var agent = $('#agentname').val();
-        var saveid = $('#save_update').val();
-        if (id > 0) {
-            $.ajax({
-                data: {
-                    id: id,
-                    agent: agent,
-                },
-                url: getsiteploat,
-                type: "POST",
-                dataType: 'json',
-                // async: false,
-                success: function(data) {
-                    html = '';
-                    if (data.length > 0) {
-                        var name = '';
-
-
-                        html += '<option selected disabled value="" >Select</option>';
-                        html += '<option   value="All" >All</option>';
-
-
-                        for (i = 0; i < data.length; i++) {
-                            var id = '';
-
-                            name = data[i].plots_no;
-                            id = data[i].id;
-
-
-
-                            html += '<option value="' + id + '">' + name + '</option>';
-                        }
-                        $('#plot').html(html);
-                        if (saveid > 0) {
-                            $('#ploats').val(plotid).trigger('change');
-                        }
-
-                    } else {
-                        swal("This Site  Not Allocate Plot To This Agent !!!");
-                    }
-                }
-            });
-        }
-
-    });
 
 
 
@@ -187,27 +91,10 @@ $(document).ready(function() {
     $(document).on('submit', '#agentrep_form', function(e) {
         e.preventDefault();
 
-        var agentname = $('#agentname').val();
+
         var sitenm = $('#sitenm').val();
-        var plot = $('#plot').val();
 
 
-
-        var fromdate = '';
-        var todate = '';
-        if ($('#frmdate').prop("checked") == true) {
-            var fromdate = $('#fromdate').val();
-            var todate = $('#todate').val();
-
-            var tdateAr = fromdate.split('/');
-            fromdate = tdateAr[2] + '-' + tdateAr[1] + '-' + tdateAr[0];
-            var tdateAr = todate.split('/');
-            todate = tdateAr[2] + '-' + tdateAr[1] + '-' + tdateAr[0];
-
-        } else if ($('#frmdate').prop("checked") == false) {
-            fromdate = '';
-            todate = '';
-        }
 
 
 
@@ -215,11 +102,8 @@ $(document).ready(function() {
             data: {
 
 
-                agentname: agentname,
+
                 sitenm: sitenm,
-                plot: plot,
-                fromdate: fromdate,
-                todate: todate,
 
             },
             url: getdata,
@@ -232,18 +116,22 @@ $(document).ready(function() {
                 $('#categorytbody').html('');
                 for (var i = 0; i < data.length; i++) {
                     sr = sr + 1;
-                    // var fdateslt = data[i].date.split('-');
-                    // var time = fdateslt[2].split(' ');
-                    // var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
+                    var fdateslt = data[i].allocatedate.split('-');
+                    var time = fdateslt[2].split(' ');
+                    var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
-                        '<td  id="c_name_' + data[i].id + '">' + data[i].date + '</td>' +
+                        '<td  id="c_name_' + data[i].id + '">' + data[i].sitename + '</td>' +
+                        '<td  id="c_name_' + data[i].id + '">' + data[i].plots_no + '</td>' +
 
-                        '<td  id="lastname_' + data[i].id + '">' + data[i].site_name + "-" + data[i].plots_no + '</td>' +
+                        '<td  id="lastname_' + data[i].id + '">' + data[i].area_insqft + '</td>' +
                         // '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].cramt + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].amtinfo + '</td>' +
-                        '<td id="balance' + data[i].id + '">' + data[i].balance + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].persqftrate + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].cost + '</td>' +
+                        '<td id="balance' + data[i].id + '">' + data[i].afname + ' ' + data[i].alname + '</td>' +
+                        '<td id="balance' + data[i].id + '">' + data[i].cfname + ' ' + data[i].cfname + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].pstatus + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + checkouttime + '</td>' +
                         '</tr>'
                 }
                 $('#categorytbody').html(html);

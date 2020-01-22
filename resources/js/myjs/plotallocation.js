@@ -217,6 +217,7 @@ $(document).ready(function() {
         e.preventDefault();
         var id = $(this).val();
         var saveid = $('#save_update').val();
+
         $.ajax({
             data: {
                 id: id,
@@ -271,12 +272,14 @@ $(document).ready(function() {
                 if (data.length > 0) {
                     $('#amount').val(data[0].cost);
                     $('#totalarea').val(data[0].area_insqft);
+
+                    if (saveid == "") {
+                        $('#openingbalance').val(data[0].cost);
+                    }
                 }
 
 
-                if (saveid == "") {
-                    $('#openingbalance').val(data[0].cost);
-                }
+
             }
         });
     });
@@ -491,8 +494,8 @@ $(document).ready(function() {
         $('#amount').val(amt_);
 
         $('#agent').val(agent_id).trigger('change');
-
-
+        $('#ploats').val(ploat_id).trigger('change');
+        //  $('#agent').val(agent_id).trigger('change');
         $.ajax({
             data: {
                 id: id,

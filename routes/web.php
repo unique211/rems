@@ -118,8 +118,13 @@ Route::resource('agentreport', 'Acstatementcontroller');
 Route::post('getagentrepdata', 'Acstatementcontroller@getagentrepdata');
 
 //for remina ploats
-Route::resource('remainploats', 'Remainploatscontroller');
+Route::resource('remainplots', 'Remainploatscontroller');
 Route::post('getremainploatsdata', 'Remainploatscontroller@getremainploatsdata');
+
+//for sold report
+Route::resource('soldplots', 'Soldplotcontroller');
+Route::post('getsoldloatsdata', 'Soldplotcontroller@getsoldloatsdata');
+
 
 });
 

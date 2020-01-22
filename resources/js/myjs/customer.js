@@ -15,7 +15,7 @@ $(document).ready(function() {
         $('.lbldata').hide();
         $('#btnsaveinfo').hide();
         form_clear();
-
+        $('#wait1').hide();
 
     });
     /*---------login-----------------*/
@@ -33,6 +33,7 @@ $(document).ready(function() {
         $('.lbldata').hide();
         $('#btnsaveinfo').hide();
         form_clear();
+        $('#wait1').hide();
 
 
     });
@@ -163,7 +164,7 @@ $(document).ready(function() {
 
         if ($(this).val() != '') {
             profileupload1(this);
-
+            $('#wait1').show();
         }
     });
 
@@ -182,7 +183,7 @@ $(document).ready(function() {
             processData: false,
             success: function(data) {
 
-
+                $('#wait1').hide();
                 $('#doc_msgid').html(data);
                 $('#doc_file_hidden').val(data);
                 $('#infoimages').attr('src', imgurl + '/profile/' + data);
@@ -337,7 +338,7 @@ $(document).ready(function() {
             processData: false,
             dataType: "json",
             success: function(data) {
-
+                $('#wait').hide();
                 var html = '';
                 var sr = 0;
                 html += '<table id="myTable" class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">' +
@@ -604,6 +605,7 @@ $(document).ready(function() {
             success: function(data) {
 
                 successTost("Opration Save Success fully!!!");
+                datashow();
             }
         });
 

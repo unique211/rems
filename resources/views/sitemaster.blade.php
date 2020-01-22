@@ -75,7 +75,11 @@
 
                     </div>
                     <div class="row tablehideshow card">
-
+                            <div id="wait" style="width:100px;height:100px;position:absolute;top:;left:45%;padding:2px;"><img src="<?php  echo url('/resources/sass/images/loader.gif'); ?>" width="100" height="100" /><br>
+                                <center>
+                                    <h5>Please Wait...</h5>
+                                </center>
+                            </div>
 
                         <div class="col-md-12">
                             <div class="table-responsive" id="show_master">

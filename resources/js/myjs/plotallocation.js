@@ -217,40 +217,42 @@ $(document).ready(function() {
         e.preventDefault();
         var id = $(this).val();
         var saveid = $('#save_update').val();
-
-        $.ajax({
-            data: {
-                id: id,
-                saveid: saveid,
-            },
-            url: getsiteploat,
-            type: "POST",
-            dataType: 'json',
-            // async: false,
-            success: function(data) {
-                html = '';
-                var name = '';
-
-
-                html += '<option selected disabled value="" >Select</option>';
-
-                for (i = 0; i < data.length; i++) {
-                    var id = '';
-
-                    name = data[i].plots_no;
-                    id = data[i].id;
+        console.log("id" + id + "saveid" + saveid);
+        if (id > 0) {
+            $.ajax({
+                data: {
+                    id: id,
+                    saveid: saveid,
+                },
+                url: getsiteploat,
+                type: "POST",
+                dataType: 'json',
+                // async: false,
+                success: function(data) {
+                    html = '';
+                    var name = '';
 
 
+                    html += '<option selected disabled value="" >Select</option>';
 
-                    html += '<option value="' + id + '">' + name + '</option>';
+                    for (i = 0; i < data.length; i++) {
+                        var id = '';
+
+                        name = data[i].plots_no;
+                        id = data[i].id;
+
+
+
+                        html += '<option value="' + id + '">' + name + '</option>';
+                    }
+                    $('#ploats').html(html);
+                    if (saveid > 0) {
+                        $('#ploats').val(plotid).trigger('change');
+                    }
+
                 }
-                $('#ploats').html(html);
-                if (saveid > 0) {
-                    $('#ploats').val(plotid).trigger('change');
-                }
-
-            }
-        });
+            });
+        }
 
     });
 
@@ -390,6 +392,7 @@ $(document).ready(function() {
             processData: false,
             dataType: "json",
             success: function(data) {
+                $('#wait').hide();
                 var html = '';
                 var sr = 0;
                 var agent = "";
@@ -525,10 +528,10 @@ $(document).ready(function() {
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + checkouttime + '</td>' +
                         '<td id="amt_' + data[i].id + '">' + data[i].payment_mode + '</td>' +
-                        '<td  id="c_name_' + data[i].id + '">' + intial + '</td>' +
+                        '<td style="text-align:right;"  id="c_name_' + data[i].id + '">' + intial + '</td>' +
 
-                        '<td  id="lastname_' + data[i].id + '">' + paidamt + '</td>' +
-                        '<td id="email_' + data[i].id + '">' + remainamt + '</td>' +
+                        '<td style="text-align:right;" id="lastname_' + data[i].id + '">' + paidamt + '</td>' +
+                        '<td style="text-align:right;" id="email_' + data[i].id + '">' + remainamt + '</td>' +
 
                         '</tr>';
 

@@ -132,7 +132,7 @@
                                 </a>
                             </li>
                             @endif
-                            @if(($val->submenuid==9) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
+                            @if(($val->submenuid==10) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
                             <li>
                                     <a href="{{ url('soldplots') }}" @if($activemenu=="soldreport") class="mm-active" @endif>
                                             <i class="metismenu-icon fa fa-file" ></i>

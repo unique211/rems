@@ -235,15 +235,18 @@ $(document).ready(function() {
                     // var fdateslt = data[i].date.split('-');
                     // var time = fdateslt[2].split(' ');
                     // var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
+                    var fdateslt = data[i].date.split('-');
+                    var time = fdateslt[2].split(' ');
+                    var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
-                        '<td  id="c_name_' + data[i].id + '">' + data[i].date + '</td>' +
+                        '<td  id="c_name_' + data[i].id + '">' + checkouttime + '' + time[1] + '</td>' +
 
                         '<td  id="lastname_' + data[i].id + '">' + data[i].site_name + "-" + data[i].plots_no + '</td>' +
                         // '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].cramt + '</td>' +
+                        '<td style="text-align:right;" id="amt_' + data[i].id + '">' + data[i].cramt + '</td>' +
                         '<td id="amt_' + data[i].id + '">' + data[i].amtinfo + '</td>' +
-                        '<td id="balance' + data[i].id + '">' + data[i].balance + '</td>' +
+                        '<td style="text-align:right;" id="balance' + data[i].id + '">' + data[i].balance + '</td>' +
                         '</tr>'
                 }
                 $('#categorytbody').html(html);
@@ -404,6 +407,31 @@ $(document).ready(function() {
         }
     });
 
+    $(document).on('change', '.dateinfo', function() {
+
+        var minbooktime = DateCheck();
+
+        if (minbooktime == 1) {
+            swal('From Date Less Than To Time ');
+            $('#btnsavedata').attr('disabled', true);
+        } else {
+            $('#btnsavedata').attr('disabled', false);
+        }
+    });
+
+    function DateCheck() {
+        var StartDate = $('#fromdate').val();
+
+        var EndDate = $('#todate').val();
+        if (Date.parse(StartDate) <= Date.parse(EndDate)) {
+            return 0;
+        } else {
+            return 1;
+        }
+
+
+
+    }
 
 
 

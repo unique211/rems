@@ -44,9 +44,65 @@ class Customermasetcontroller extends Controller
         $ID = $request->save_update;
 
         if($ID >0){
-            DB::table('customrt_doc')->where('customer_id', $ID)->delete();
-        }
 
+            $data = DB::table('customer_master')->where('id', '!=', $ID)->where('email',$request->email)->get();
+            $count = count($data);
+            if($count >0){
+                return '0';
+            }else{
+                DB::table('customrt_doc')->where('customer_id', $ID)->delete();
+
+                $customer   =   Customermodel::updateOrCreate(
+
+                    ['id' => $ID],
+                    [
+                        'first_name'        =>  $request->firstname,
+                        'last_name'        =>  $request->lastname,
+                        'email'        =>  $request->email,
+                        'city'        =>  $request->city,
+                        'state'        =>  $request->state,
+                        'contry'        =>  $request->contry,
+                        'pincode'        =>  $request->pincode,
+                        'relativename'        =>  $request->relativenm,
+                        'mobileno'        =>  $request->mobileno,
+                        'address'        =>  $request->address,
+                        'cust_profile'        =>  $request->profileimg,
+                        'status'        => 1,
+                        'user_id'        => $request->session()->get('userid'),
+                    ]
+
+                );
+                $ref_id = $customer->id;
+                $urdata = $request->studejsonObj;
+
+                foreach ($urdata as $value) {
+
+
+                    $u_rights = array(
+                        'customer_id' => $ref_id,
+                        'customer_doc' => $value["doctype"],
+                        'file' => $value["file"],
+
+                    );
+
+                        $result =  DB::table('customrt_doc')
+                        ->Insert($u_rights);
+                }
+
+                $urdata = $request->studejsonObj;
+
+                return $ref_id;
+            }
+
+
+
+        }else{
+
+            $data = DB::table('customer_master')->where('email',$request->email)->get();
+            $count = count($data);
+            if($count >0){
+                return '0';
+            }else{
             $customer   =   Customermodel::updateOrCreate(
 
                 ['id' => $ID],
@@ -87,6 +143,12 @@ class Customermasetcontroller extends Controller
             $urdata = $request->studejsonObj;
 
             return $ref_id;
+        }
+
+    }
+
+
+
 
     }
    public function getallcustomer(){

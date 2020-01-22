@@ -293,7 +293,7 @@ $(document).ready(function() {
             processData: false,
             dataType: "json",
             success: function(data) {
-
+                $('#wait').hide();
                 var html = '';
                 var sr = 0;
                 html += '<table id="myTable" class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">' +

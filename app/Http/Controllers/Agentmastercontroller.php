@@ -24,6 +24,12 @@ class Agentmastercontroller extends Controller
     {
         $ID = $request->save_update;
 
+        if($ID >0){
+            $data = DB::table('agent_master')->where('id', '!=', $ID)->where('advisor_id',$request->advisor_id)->get();
+            $count = count($data);
+            if($count >0){
+                return '0';
+            }else{
             $customer   =   Agenmastermodel::updateOrCreate(
 
                 ['id' => $ID],
@@ -49,6 +55,42 @@ class Agentmastercontroller extends Controller
             $ref_id = $customer->id;
 
             return $ref_id;
+        }
+
+        }else{
+
+            $data = DB::table('agent_master')->where('advisor_id',$request->advisor_id)->get();
+            $count = count($data);
+            if($count >0){
+                return '0';
+            }else{
+            $customer   =   Agenmastermodel::updateOrCreate(
+
+                ['id' => $ID],
+                [
+                    'advisor_id'        =>  $request->advisor_id,
+                    'first_name'        =>  $request->firstname,
+                    'last_name'        =>  $request->lastname,
+                    'email'        =>  $request->email,
+                    'city'        =>  $request->city,
+                    'state'        =>  $request->state,
+                    'contry'        =>  $request->contry,
+                    'pincode'        =>  $request->pincode,
+                    'bankname'        =>  $request->bankname,
+                    'branch_name'        =>  $request->branch,
+                    'account_no'        =>  $request->accno,
+                    'ifsc_code'        =>  $request->ifsccode,
+                    'account_holder_name'        =>  $request->accountholder,
+                    'profilepicture'        =>  $request->profileimg,
+                    'userid'        => $request->session()->get('userid'),
+                ]
+
+            );
+            $ref_id = $customer->id;
+
+            return $ref_id;
+        }
+        }
 
     }
     public function getallagent(){
@@ -85,6 +127,12 @@ class Agentmastercontroller extends Controller
 
     }
     public function updateagentinfo(Request $request){
+        $data = DB::table('agent_master')->where('id', '!=', $request->save_update)->where('advisor_id',$request->advisor_id)->get();
+        $count = count($data);
+        if($count >0){
+            return '100';
+        }else{
+
         $updatecust = array(
             'first_name' => $request->firstname,
             'last_name' =>  $request->lastname,
@@ -94,10 +142,12 @@ class Agentmastercontroller extends Controller
             'contry' =>  $request->contry,
             'pincode' =>  $request->pincode,
             'profilepicture' =>  $request->profileimg,
+            'advisor_id' =>  $request->advisor_id,
 
         );
        $data= DB::table('agent_master')->where('id', $request->save_update)->update($updatecust);
        return $data;
+    }
     }
     public function getagentpayment(Request $request){
         $agentid=$request->id;

@@ -15,6 +15,7 @@ $(document).ready(function() {
         $('#passhide').show();
         $('#password').prop('required', true);
         form_clear();
+        $('#wait1').hide();
 
     });
     /*---------login-----------------*/
@@ -32,6 +33,7 @@ $(document).ready(function() {
         $('#passhide').show();
         $('#password').prop('required', true);
         form_clear();
+        $('#wait1').hide();
 
 
     });
@@ -120,6 +122,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
 
+                $('#wait').hide();
                 var html = '';
                 var sr = 0;
                 html += '<table id="myTable" class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">' +
@@ -200,7 +203,7 @@ $(document).ready(function() {
 
         if ($(this).val() != '') {
             profileupload(this);
-
+            $('#wait1').show();
         }
     });
 
@@ -217,7 +220,7 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(data) {;
-
+                $('#wait1').hide();
                 $('#msgid').html(data);
                 $('#file_hidden').val(data);
 

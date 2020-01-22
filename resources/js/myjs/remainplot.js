@@ -54,7 +54,7 @@ $(document).ready(function() {
                 var name = '';
 
                 html += '<option selected disabled value="" >Select</option>';
-                html += '<option   value="All" >All</option>';
+                html += '<option selected   value="All" >All</option>';
 
 
                 for (i = 0; i < data.length; i++) {
@@ -68,9 +68,10 @@ $(document).ready(function() {
                     html += '<option value="' + id + '">' + name + '</option>';
                 }
                 $('#sitenm').html(html);
-
+                $('#btnsavedata').trigger('click');
             }
         });
+
     }
 
 
@@ -122,10 +123,10 @@ $(document).ready(function() {
                         '<td  id="c_name_' + data[i].id + '">' + data[i].sitename + '</td>' +
                         '<td  id="c_name_' + data[i].id + '">' + data[i].plots_no + '</td>' +
 
-                        '<td  id="lastname_' + data[i].id + '">' + data[i].area_insqft + '</td>' +
+                        '<td style="text-align:right;"  id="lastname_' + data[i].id + '">' + data[i].area_insqft + '</td>' +
                         // '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].persqftrate + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].cost + '</td>' +
+                        '<td style="text-align:right;" id="amt_' + data[i].id + '">' + data[i].persqftrate + '</td>' +
+                        '<td  style="text-align:right;" id="amt_' + data[i].id + '">' + data[i].cost + '</td>' +
                         '<td id="balance' + data[i].id + '">' + data[i].firstname + ' ' + data[i].last_name + '</td>' +
                         '</tr>'
                 }
@@ -138,6 +139,8 @@ $(document).ready(function() {
 
 
     });
+
+
 
     // datashow()
 

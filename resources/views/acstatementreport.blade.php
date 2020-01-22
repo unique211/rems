@@ -124,7 +124,7 @@
                                             </div>
                                             <div class="form-group col-md-3" style="margin-left:-10px">
                                                 <div class='input-group date' id='datetimepicker2'>
-                                                    <input type='text' class="form-control" style="width:100%"
+                                                    <input type='text' class="form-control dateinfo" style="width:100%"
                                                         id="fromdate" name="fromdate"  />
                                                     <div class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -137,7 +137,7 @@
                                             </div>
                                             <div class="form-group col-md-3" style="margin-left:-10px">
                                                 <div class='input-group date' id='datetimepicker2'>
-                                                    <input type='text' class="form-control" style="width:100%"
+                                                    <input type='text' class="form-control dateinfo" style="width:100%"
                                                         id="todate" name="todate"  />
                                                     <div class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"></span>

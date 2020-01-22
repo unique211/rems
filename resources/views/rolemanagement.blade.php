@@ -84,7 +84,11 @@
                     </div>
                     <div class="row tablehideshow card">
 
-
+                            <div id="wait" style="width:100px;height:100px;position:absolute;top:;left:45%;padding:2px;"><img src="<?php  echo url('/resources/sass/images/loader.gif'); ?>" width="100" height="100" /><br>
+                                <center>
+                                    <h5>Please Wait...</h5>
+                                </center>
+                            </div>
                         <div class="col-md-12" style="width:100%">
                             <div class="table-responsive" id="show_master" >
                                 <table id="customermaster"
@@ -99,13 +103,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr>
+                                            {{-- <tr>
                                                     <th class="text-center">1</th>
                                                     <th>Agent 1</th>
 
 
                                                     <td><button  class="edit btn btn-sm btn-primary"   id="' + row_id + '"  ><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button  class="regional_delete_data1 btn btn-sm btn-danger"   id="del_' + row_id + '"  ><i class="fa fa-trash"> </i></button></td>
-                                                </tr>
+                                                </tr> --}}
 
                                     </tbody>
                                 </table>

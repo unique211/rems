@@ -82,6 +82,11 @@
 
                         <div class="col-sm-12">
                             <div class="table-responsive" id="show_master">
+                                    <div id="wait" style="width:100px;height:100px;position:absolute;top:;left:45%;padding:2px;"><img src="<?php  echo url('/resources/sass/images/loader.gif'); ?>" width="100" height="100" /><br>
+                                        <center>
+                                            <h5>Please Wait...</h5>
+                                        </center>
+                                    </div>
                                 {{-- <table style="width: 100%;" id="customermaster"
                                 class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info" style="width:100%">
                                     <thead>
@@ -185,10 +190,15 @@
                                                                     <tr>
                                                                             <th>Upload Img*</th>
                                                                         <td class="lbldata"><label id="uploadpic">Upload Img*</label> </td>
-                                                                        <td class="edittb"><input	 class="form-control input-sm " type="file" id="uploadimg" name="uploadimg" >
+                                                                        <td class="edittb"><input	 class="form-control input-sm " type="file" id="uploadimg" name="uploadimg" accept="image/*">
                                                                             <input type="hidden" id="doc_file_hidden" value="">
                                                                             <div id="doc_msgid"></div>
                                                                         </td>
+                                                                        <div id="wait1" style="width:100px;height:100px;position:absolute;top:;left:45%;padding:2px;"><img src="<?php  echo url('/resources/sass/images/loader.gif'); ?>" width="100" height="100" /><br>
+                                                                            <center>
+                                                                                <h5>Please Wait...</h5>
+                                                                            </center>
+                                                                        </div>
                                                                     </tr>
 
                                                                     <tr>

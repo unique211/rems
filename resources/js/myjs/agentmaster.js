@@ -14,6 +14,7 @@ $(document).ready(function() {
         $('.lbldata').hide();
         $('#btnsaveinfo').hide();
         form_clear();
+        $('#wait1').hide();
 
     });
     /*---------login-----------------*/
@@ -30,6 +31,7 @@ $(document).ready(function() {
         $('.lbldata').hide();
         $('#btnsaveinfo').hide();
         form_clear();
+        $('#wait1').hide();
 
 
     });
@@ -96,15 +98,19 @@ $(document).ready(function() {
             dataType: 'json',
             // async: false,
             success: function(data) {
-                form_clear();
 
-                successTost("Opration Save Success fully!!!");
-                $('.closehideshow').trigger('click');
-                if (editrt == 1) {
-                    $('.formhideshow').hide();
-                    $('.tablehideshow').show();
+                if (data == "0") {
+                    swal("Agent Advisor id is Exists !");
+                } else {
+                    form_clear();
+                    successTost("Opration Save Success fully!!!");
+                    $('.closehideshow').trigger('click');
+                    if (editrt == 1) {
+                        $('.formhideshow').hide();
+                        $('.tablehideshow').show();
+                    }
+                    datashow();
                 }
-                datashow();
             }
         });
     });
@@ -126,7 +132,7 @@ $(document).ready(function() {
             processData: false,
             dataType: "json",
             success: function(data) {
-
+                $('#wait').hide();
                 var html = '';
                 var sr = 0;
                 html += '<table id="myTable" class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">' +
@@ -200,6 +206,7 @@ $(document).ready(function() {
         $('#paymentbar').css('width', '0%');
         $('.progress-value').text('0%');
         $('#save_update').val('');
+        $('#msgid').html('');
     }
 
 
@@ -207,6 +214,7 @@ $(document).ready(function() {
 
         if ($(this).val() != '') {
             profileupload(this);
+            $('#wait1').show();
 
         }
     });
@@ -224,7 +232,7 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(data) {;
-
+                $('#wait1').hide();
                 $('#msgid').html(data);
                 $('#file_hidden').val(data);
 
@@ -403,6 +411,8 @@ $(document).ready(function() {
         var state = $('#state').val();
         var contry = $('#contry').val();
         var pincode = $('#pincode').val();
+        var advisor_id = $('#advisor_id').val();
+
         var profileimg = $('#file_hidden').val();
 
         var save_update = $('#save_update').val();
@@ -418,14 +428,20 @@ $(document).ready(function() {
                 contry: contry,
                 pincode: pincode,
                 profileimg: profileimg,
+                advisor_id: advisor_id,
             },
             url: updateagent,
             type: "POST",
             dataType: 'json',
             // async: false,
             success: function(data) {
+                if (data == '100') {
+                    swal("Agent Advisor id is Exists !");
+                } else {
+                    successTost("Opration Save Success fully!!!");
+                    datashow();
+                }
 
-                successTost("Opration Save Success fully!!!");
             }
         });
 

@@ -168,9 +168,31 @@ $(document).ready(function() {
             if (noofploats > 0) {
                 var docid = $('#doc_row_id').val();
                 var ploats = parseFloat(noofploats) - parseFloat(docid);
-                for (i = 0; i < ploats; i++) {
-                    addploat();
+                if (ploats > 0) {
+                    for (i = 0; i < ploats; i++) {
+                        addploat();
+                    }
+                } else {
+
+                    for (i = ploats; i < 0; i++) {
+
+
+                        $('#ploattabletbody tr:last').remove();
+
+                        var total = 0;
+                        $('.areainsqf').each(function() {
+                            var val = $(this).val();
+
+
+                            if (val > 0) {
+                                total = parseFloat(total) + parseFloat(val);
+                            }
+
+                        });
+                        $('#totalarea').val(total);
+                    }
                 }
+
             }
         } else {
             if (noofploats > 0) {
@@ -395,7 +417,7 @@ $(document).ready(function() {
             processData: false,
             dataType: "json",
             success: function(data) {
-
+                $('#wait').hide();
                 var html = '';
                 var sr = 0;
                 html += '<table id="myTable" class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">' +

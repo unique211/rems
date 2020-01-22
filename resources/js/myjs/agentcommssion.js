@@ -12,7 +12,7 @@ $(document).ready(function() {
         $('.btnhideshow').hide();
         $('#btnsavedata').text('Save');
         form_clear();
-
+        $("#credit").prop("checked", true);
 
     });
     /*---------login-----------------*/
@@ -25,6 +25,7 @@ $(document).ready(function() {
         $('.closehideshow').hide();
         $('.btnhideshow').show();
         form_clear();
+        $("#credit").prop("checked", true);
 
     });
     $('.edittb').hide();
@@ -43,7 +44,7 @@ $(document).ready(function() {
 
 
     });
-
+    $("#credit").prop("checked", true);
 
     $(document).on('click', ".edit", function(e) {
         e.preventDefault();
@@ -313,13 +314,16 @@ $(document).ready(function() {
                         credit = 'Debit';
                     }
 
+                    var fdateslt = data[i].created_at.split('-');
+                    var time = fdateslt[2].split(' ');
+                    var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
                     html = '<tr>' +
-                        '<td id="id_' + data[i].id + '">' + data[i].created_at + '</td>' +
-                        '<td  id="opening_' + data[i].id + '">' + opening + '</td>' +
+                        '<td id="id_' + data[i].id + '">' + checkouttime + ' ' + time[1] + '</td>' +
+                        '<td style="text-align:right;"  id="opening_' + data[i].id + '">' + opening + '</td>' +
 
-                        '<td  id="acamount_' + data[i].id + '">' + data[i].amount + '</td>' +
-                        '<td id="creditamt_' + data[i].id + '">' + credit + '</td>' +
-                        '<td id="remainamt_' + data[i].id + '">' + remain + '</td>' +
+                        '<td style="text-align:right;"  id="acamount_' + data[i].id + '">' + data[i].amount + '</td>' +
+                        '<td  id="creditamt_' + data[i].id + '">' + credit + '</td>' +
+                        '<td style="text-align:right;"  id="remainamt_' + data[i].id + '">' + remain + '</td>' +
                         '<td class="not-export-column" >';
                     if (editrt == 1) {
                         html += '<button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +

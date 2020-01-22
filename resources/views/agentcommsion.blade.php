@@ -78,6 +78,7 @@
                     <div class="row tablehideshow card">
 
 
+
                         <div class="col-md-12" style="width:100%">
                             <div class="table-responsive" id="show_master">
                                 {{-- <table id="customermaster"
@@ -298,6 +299,13 @@
                                                         </div>
 
                                     </div>-->
+                                    <div class="form-group col-md-12" align="right">
+                                            <button type="submit"  id="btnsavedata" class="btn btn-success" <?php if($val->createright==0){echo "disabled"; }?>>Save
+                                                    </button>
+                                                    <input type="hidden" name="save_update" id="save_update" value="">
+                                                    {{-- <button type="button" class="btn btn-danger">Delete
+                                                            </button> --}}
+                                        </div>
 
                                     <div class="card-header border-bottom">
                                             <h6 class="m-0">History </h6>
@@ -330,13 +338,7 @@
 
 
 
-                                    <div class="form-group col-md-12" align="right">
-                                            <button type="submit"  id="btnsavedata" class="btn btn-success" <?php if($val->createright==0){echo "disabled"; }?>>Save
-                                                    </button>
-                                                    <input type="hidden" name="save_update" id="save_update" value="">
-                                                    {{-- <button type="button" class="btn btn-danger">Delete
-                                                            </button> --}}
-                                        </div>
+
 
 
 

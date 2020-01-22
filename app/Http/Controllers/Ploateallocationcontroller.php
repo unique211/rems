@@ -31,6 +31,7 @@ class Ploateallocationcontroller extends Controller
     }
     public function getsiteplots(Request $request){
         $sid=$request->saveid;
+
         if($sid > 0){
             $result=array();
         $data = DB::table('plot_detalis')->where('site_id',$request->id)->get();
@@ -38,9 +39,11 @@ class Ploateallocationcontroller extends Controller
             $plots_no=$ploatdata->plots_no;
             $plotsid=$ploatdata->id;
 
-            $data1 = DB::table('ploaalocation_master')->where('ploat_id','!=',$plotsid)->get();
+            $data1 = DB::table('ploaalocation_master')->where('ploat_id',$plotsid)->get();
                 $count=count($data1);
                 if($count >0){
+
+                }else{
                     $result[]=array(
                         'id'=>$plotsid,
                         'plots_no'=>$plots_no,
@@ -65,18 +68,19 @@ class Ploateallocationcontroller extends Controller
                 $plots_no=$ploatdata->plots_no;
                 $plotsid=$ploatdata->id;
 
-                $data = DB::table('ploaalocation_master')->where('ploat_id','!=',$plotsid)->get();
+                $data = DB::table('ploaalocation_master')->where('ploat_id',$plotsid)->get();
                 $count=count($data);
                 if($count >0){
-                    $result[]=array(
-                        'id'=>$plotsid,
-                        'plots_no'=>$plots_no,
-                    );
+
                 }else{
                     $result[]=array(
                         'id'=>$plotsid,
                         'plots_no'=>$plots_no,
                     );
+                    // $result[]=array(
+                    //     'id'=>$plotsid,
+                    //     'plots_no'=>$plots_no,
+                    // );
                 }
 
             }

@@ -207,6 +207,7 @@ $(document).ready(function() {
         $('.progress-value').text('0%');
         $('#save_update').val('');
         $('#msgid').html('');
+        $('#file_hidden').val('');
     }
 
 

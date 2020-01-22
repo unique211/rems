@@ -187,6 +187,12 @@ class Customermasetcontroller extends Controller
         return $filename;
     }
     public function updatecustomerinfo(Request $request){
+        $data = DB::table('customer_master')->where('id', '!=', $request->save_update)->where('email',$request->email)->get();
+            $count = count($data);
+            if($count >0){
+                return '100';
+            }else{
+
         $updatecust = array(
             'first_name' => $request->firstname,
             'last_name' =>  $request->lastname,
@@ -200,6 +206,7 @@ class Customermasetcontroller extends Controller
         );
        $data= DB::table('customer_master')->where('id', $request->save_update)->update($updatecust);
        return $data;
+    }
     }
     public function getpaymentinfo(Request $request){
         $id=$request->id;

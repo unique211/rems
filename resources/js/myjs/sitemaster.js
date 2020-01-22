@@ -174,6 +174,7 @@ $(document).ready(function() {
                     }
                 } else {
 
+
                     for (i = ploats; i < 0; i++) {
 
 
@@ -190,6 +191,10 @@ $(document).ready(function() {
 
                         });
                         $('#totalarea').val(total);
+
+                        var l1 = $('table#docupload').find('tbody').find('tr');
+                        var r = l1.length;
+                        $('#doc_row_id').val(r);
                     }
                 }
 

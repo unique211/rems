@@ -95,8 +95,11 @@
 
                                                 </select>
                                             </div>
-
-
+                                            <div class="form-group col-md-2">
+                                            <button type="submit" id="btnsavedata" class="btn btn-success">Generate
+                                                </button>
+                                                <input type="hidden" name="save_update" id="save_update" value="">
+                                            </div>
                                         </div>
 
 
@@ -218,9 +221,7 @@
 
 
                                     <div class="form-group col-md-12" align="right">
-                                        <button type="submit" id="btnsavedata" class="btn btn-success">Generate
-                                        </button>
-                                        <input type="hidden" name="save_update" id="save_update" value="">
+
                                         {{-- <button type="button" id="deleteinfo" class="btn delete_data btn-danger delete">Delete
                                         </button> --}}
                                     </div>

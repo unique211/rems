@@ -229,6 +229,8 @@ $(document).ready(function() {
             success: function(data) {
                 var sr = 0;
                 var html = '';
+                var table = $('#categorytb').DataTable();
+                table.destroy();
                 $('#categorytbody').html('');
                 for (var i = 0; i < data.length; i++) {
                     sr = sr + 1;
@@ -251,8 +253,19 @@ $(document).ready(function() {
                 }
                 $('#categorytbody').html(html);
                 //$('#myTable').DataTable({});
+                $('#categorytb').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
 
+                        'excelHtml5',
 
+                        'pdfHtml5'
+                    ]
+
+                });
+
+                $(".buttons-pdf").removeClass("btn")
+                $(".buttons-excel").removeClass("btn")
             }
         });
 
@@ -412,7 +425,7 @@ $(document).ready(function() {
         var minbooktime = DateCheck();
 
         if (minbooktime == 1) {
-            swal('From Date Less Than To Time ');
+            swal('From Date is Grather Than To Date ');
             $('#btnsavedata').attr('disabled', true);
         } else {
             $('#btnsavedata').attr('disabled', false);

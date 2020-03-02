@@ -140,9 +140,17 @@
                                         </a>
                                     </li>
                                     @endif
-
+                                    @if(($val->submenuid==11) && ($val->viewright==1 || $val->editright==1 || $val->deleteright==1 || $val->createright==1 ))
+                                    <li>
+                                        <a href="{{ url('commissionreport') }}" @if($activemenu=="commssionrep") class="mm-active" @endif>
+                                                <i class="metismenu-icon fa fa-file" ></i>
+                                              Agent Commission Report
+                                            </a>
+                                        </li>
+                                    @endif
                                     @endforeach
                                     @endif
+
             {{-- <li class="app-sidebar__heading">Widgets</li>
             <li>
                 <a href="dashboard-boxes.html">

@@ -125,6 +125,16 @@ Route::post('getremainploatsdata', 'Remainploatscontroller@getremainploatsdata')
 Route::resource('soldplots', 'Soldplotcontroller');
 Route::post('getsoldloatsdata', 'Soldplotcontroller@getsoldloatsdata');
 
+//for commission Report
+
+Route::resource('commissionreport', 'CommsionReportController');
+Route::post('getagentcomreport', 'CommsionReportController@getagentcomreport');
+Route::post('getagentrepcomssdata', 'CommsionReportController@getagentrepcomssdata');
+Route::post('getagentcommssionsite', 'CommsionReportController@getagentcommssionsite');
+Route::post('getsiteploats', 'CommsionReportController@getsiteploats');
+Route::get('getallagentdrop', 'CommsionReportController@getallagentdrop');
+Route::post('getploatsagentinfo', 'CommsionReportController@getploatsagentinfo');
+
 
 });
 

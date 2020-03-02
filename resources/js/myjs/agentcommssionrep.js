@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     function getallagent() {
         $.ajax({
-            url: "getdropagent",
+            url: "getallagentdrop",
             type: "GET",
 
             contentType: false,
@@ -55,12 +55,13 @@ $(document).ready(function() {
 
                 html += '<option selected disabled value="" >Select</option>';
                 //html += '<option   value="0" >N/A</option>';
+                html += '<option selected  value="All" >All</option>';
 
 
                 for (i = 0; i < data.length; i++) {
                     var id = '';
 
-                    name = data[i].first_name + "" + data[i].last_name;
+                    name = data[i].agent_name;
                     id = data[i].id;
 
 
@@ -73,67 +74,59 @@ $(document).ready(function() {
         });
     }
 
-    $(document).on('change', "#agentname", function(e) {
-        e.preventDefault();
-        var id = $(this).val();
-        var saveid = $('#save_update').val();
+    getallsiteinfo();
 
-        if (id > 0) {
-
-            $.ajax({
-                data: {
-                    id: id,
-
-                },
-                url: getallsite,
-                type: "POST",
-                dataType: 'json',
-                // async: false,
-                success: function(data) {
+    function getallsiteinfo() {
+        $.ajax({
+            data: {
 
 
-                    var html = '';
-                    if (data.length > 0) {
-                        var name = '';
+            },
+            url: getallsite,
+            type: "POST",
+            dataType: 'json',
+            // async: false,
+            success: function(data) {
 
-                        html += '<option selected disabled value="" >Select</option>';
-                        html += '<option selected  value="All" >All</option>';
-                        //html += '<option   value="0" >N/A</option>';
+
+                var html = '';
+                if (data.length > 0) {
+                    var name = '';
+
+                    html += '<option selected disabled value="" >Select</option>';
+                    html += '<option selected  value="All" >All</option>';
+                    //html += '<option   value="0" >N/A</option>';
 
 
-                        for (i = 0; i < data.length; i++) {
-                            var id = '';
+                    for (i = 0; i < data.length; i++) {
+                        var id = '';
 
-                            name = data[i].site_name;
-                            id = data[i].id;
+                        name = data[i].site_name;
+                        id = data[i].id;
 
 
 
-                            html += '<option value="' + id + '">' + name + '</option>';
-                        }
-                        $('#sitenm').html(html);
-
-                    } else {
-                        swal("This Agent Not Allocate Site !!!");
+                        html += '<option value="' + id + '">' + name + '</option>';
                     }
-                }
-            });
+                    $('#sitenm').html(html);
 
-        }
-    });
+                }
+            }
+        });
+    }
+
 
     $(document).on('change', "#sitenm", function(e) {
         e.preventDefault();
         var id = $(this).val();
-        var agent = $('#agentname').val();
-        var saveid = $('#save_update').val();
+
         if (id > 0) {
             $.ajax({
                 data: {
                     id: id,
-                    agent: agent,
+
                 },
-                url: getsiteploat,
+                url: siteploats,
                 type: "POST",
                 dataType: 'json',
                 // async: false,
@@ -158,12 +151,7 @@ $(document).ready(function() {
                             html += '<option value="' + id + '">' + name + '</option>';
                         }
                         $('#plot').html(html);
-                        if (saveid > 0) {
-                            $('#ploats').val(plotid).trigger('change');
-                        }
 
-                    } else {
-                        swal("This Site  Not Allocate Plot To This Agent !!!");
                     }
                 }
             });
@@ -174,7 +162,52 @@ $(document).ready(function() {
 
 
 
+    $(document).on('change', "#plot", function(e) {
+        e.preventDefault();
+        var id = $(this).val();
 
+        if (id > 0) {
+            $.ajax({
+                data: {
+                    id: id,
+
+                },
+                url: getploatsagent,
+                type: "POST",
+                dataType: 'json',
+                // async: false,
+                success: function(data) {
+                    html = '';
+                    $('#agentname').html('');
+                    if (data.length > 0) {
+                        var name = '';
+
+
+                        html += '<option selected disabled value="" >Select</option>';
+
+
+
+                        for (i = 0; i < data.length; i++) {
+                            var id = '';
+
+                            name = data[i].agent_name;
+                            id = data[i].id;
+
+
+
+                            html += '<option value="' + id + '">' + name + '</option>';
+                        }
+                        $('#agentname').html(html);
+
+
+                    }
+                }
+            });
+        } else {
+            getallagent();
+        }
+
+    });
 
 
 
@@ -234,23 +267,16 @@ $(document).ready(function() {
                 $('#categorytbody').html('');
                 for (var i = 0; i < data.length; i++) {
                     sr = sr + 1;
-                    // var fdateslt = data[i].date.split('-');
-                    // var time = fdateslt[2].split(' ');
-                    // var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
-                    var fdateslt = data[i].date.split('-');
-                    var time = fdateslt[2].split(' ');
-                    var checkouttime = time[0] + '/' + fdateslt[1] + '/' + fdateslt[0];
+
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
-                        '<td  id="c_name_' + data[i].id + '">' + checkouttime + '' + time[1] + '</td>' +
-
-                        '<td  id="lastname_' + data[i].id + '">' + data[i].site_name + "-" + data[i].plots_no + '</td>' +
-                        // '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].amtinfo + '</td>' +
-
-                        '<td style="text-align:right;" id="amt_' + data[i].id + '">' + data[i].cramt + '</td>' +
-                        '<td style="text-align:right;" id="balance' + data[i].id + '">' + data[i].balance + '</td>' +
-                        '</tr>'
+                        '<td  id="c_name_' + data[i].id + '">' + data[i].sitename + '</td>' +
+                        '<td  id="lastname_' + data[i].id + '">' + data[i].plots_no + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].agentnm + '</td>' +
+                        '<td style="text-align:right;" id="amt_' + data[i].id + '">' + data[i].commssion + '</td>' +
+                        '<td style="text-align:right;" id="balance' + data[i].id + '">' + data[i].paid + '</td>' +
+                        '<td style="text-align:right;" id="remain' + data[i].id + '">' + data[i].remain + '</td>' +
+                        '</tr>';
                 }
                 $('#categorytbody').html(html);
                 //$('#myTable').DataTable({});
@@ -273,12 +299,14 @@ $(document).ready(function() {
 
     });
 
-    // datashow()
+    datashow()
+
+
 
     function datashow() {
         $.ajax({
-            url: getalldata,
-            type: "GET",
+            url: getagentrep,
+            type: "POST",
             //   data: new FormData(this),
             data: {
 
@@ -290,61 +318,40 @@ $(document).ready(function() {
             success: function(data) {
                 var html = '';
                 var sr = 0;
-                var agent = "";
-                html += '<table id="myTable" class="table table-hover table-striped  table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" ># </th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Agent Name</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;"  >Site  Name</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Plot</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Amount</th>' +
-
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Agent</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Agent</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Agent</th>' +
-
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;display:none; " >Credit</th>' +
-                    '<th style="white-space:nowrap;text-align:left;padding:10px 10px;" >Action</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>';
+                var table = $('#categorytb').DataTable();
+                table.destroy();
+                $('#categorytbody').html('');
                 for (var i = 0; i < data.length; i++) {
                     sr = sr + 1;
 
-
-
-
-
                     html += '<tr>' +
                         '<td id="id_' + data[i].id + '">' + sr + '</td>' +
-                        '<td  id="c_name_' + data[i].id + '">' + checkouttime + '</td>' +
+                        '<td  id="c_name_' + data[i].id + '">' + data[i].sitename + '</td>' +
 
-                        '<td  id="lastname_' + data[i].id + '">' + data[i].site_name + "-" + data[i].plots_no + '</td>' +
-                        '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].crtoamt + '</td>' +
-                        '<td id="amt_' + data[i].id + '">' + data[i].amtinfo + '</td>' +
+                        '<td  id="lastname_' + data[i].id + '">' + data[i].plots_no + '</td>' +
+                        // '<td id="email_' + data[i].id + '">' + data[i].plots_no + '</td>' +
+                        '<td id="amt_' + data[i].id + '">' + data[i].agentnm + '</td>' +
 
-
-                        '<td style="display:none;" id="agent_id_' + data[i].id + '">' + data[i].agent_id + '</td>' +
-                        '<td style="display:none;" id="site_id_' + data[i].id + '">' + data[i].site_id + '</td>' +
-                        '<td style="display:none;" id="ploats_id_' + data[i].id + '">' + data[i].ploats_id + '</td>' +
-                        '<td style="display:none;" id="amtinfo_' + data[i].id + '">' + data[i].amtinfo + '</td>' +
-
-
-
-
-
-                        '<td class="not-export-column" ><button name="edit"  value="edit" class="edit_data btn btn-xs btn-success" id=' +
-                        data[i].id +
-                        '  status=' + data[i].status + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' +
-                        data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td style="text-align:right;" id="amt_' + data[i].id + '">' + data[i].commssion + '</td>' +
+                        '<td style="text-align:right;" id="balance' + data[i].id + '">' + data[i].paid + '</td>' +
+                        '<td style="text-align:right;" id="remain' + data[i].id + '">' + data[i].remain + '</td>' +
                         '</tr>';
 
                 }
-                $('#show_master').html(html);
-                $('#myTable').DataTable({});
+                $('#categorytbody').html(html);
+                $('#categorytb').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
 
+                        'excelHtml5',
+
+                        'pdfHtml5'
+                    ]
+
+                });
+
+                $(".buttons-pdf").removeClass("btn")
+                $(".buttons-excel").removeClass("btn")
             }
 
         });
